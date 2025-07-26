@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินโฟกราฟิกสรุปงบประมาณปี 2569</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #FFFFFF;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 600px;
+        }
+        .h-custom-card {
+             height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+            .h-custom-card {
+                height: 500px;
+            }
+        }
+        @media (min-width: 1024px) {
+             .h-custom-card {
+                height: 480px;
+            }
+        }
+    </style>
+</head>
+<body class="text-[#004369]">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#004369] mb-2">สรุปงบประมาณประจำปี 2569</h1>
+            <p class="text-lg text-[#01949A]">ภาพรวมแผนรายรับ-รายจ่ายประจำปี</p>
+        </header>
+
+        <section id="overview" class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-4 border-[#01949A] hover:scale-105 transition-transform duration-300">
+                    <h2 class="text-2xl font-bold text-[#004369] mb-2">รายรับรวม</h2>
+                    <p class="text-5xl font-bold text-[#01949A]">2,704,800.00</p>
+                    <p class="text-gray-500 mt-2">บาท</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md border-l-4 border-[#DB1F48] hover:scale-105 transition-transform duration-300">
+                    <h2 class="text-2xl font-bold text-[#004369] mb-2">รายจ่ายรวม</h2>
+                    <p class="text-5xl font-bold text-[#DB1F48]">2,704,800.00</p>
+                    <p class="text-gray-500 mt-2">บาท</p>
+                </div>
+            </div>
+            <p class="text-center mt-6 text-[#004369] text-md">งบประมาณปี 2569 ถูกจัดทำขึ้นแบบสมดุล โดยมีรายรับที่คาดการณ์ไว้เท่ากับรายจ่ายที่วางแผนไว้</p>
+        </section>
+
+        <section id="data-table" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 text-[#004369]">ตารางสรุปงบประมาณโดยละเอียด</h2>
+                <p class="text-center text-gray-600 mb-6">ตารางนี้แสดงรายละเอียดรายรับและรายจ่ายทั้งหมด รวมถึงยอดจริงในปี 2567, ยอดเงินที่ขอเบิก และยอดเงินที่ใช้ในปี 2569 พร้อมส่วนต่างที่เพิ่มขึ้นหรือลดลง (คำนวณจาก ยอดเงินที่ใช้ 2569 - ยอดจริงปี 2567)</p>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-[#004369] text-white">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">รายการ</th>
+                            <th scope="col" class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">ยอดจริงปี 2567</th>
+                            <th scope="col" class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">ยอดเงินที่ขอเบิก 2569</th>
+                            <th scope="col" class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">ยอดเงินที่ใช้ 2569</th>
+                            <th scope="col" class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">ส่วนต่าง (เพิ่ม/ลด)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 text-sm text-[#004369]">
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 font-bold" colspan="5">รายรับ</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">รายรับ-ค่าส่วนกลาง</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,535,360.36</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">225,400.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">2,704,800.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">1,169,439.64</td>
+                        </tr>
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap font-bold">รวมรายรับ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">1,535,360.36</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">225,400.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">2,704,800.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">1,169,439.64</td>
+                        </tr>
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 font-bold" colspan="5">รายจ่าย</td>
+                        </tr>
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 font-bold" colspan="5">หมวดรายจ่ายตามสัญญาบริการ</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าบริหารจัดการ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">933,081.12</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">83,460.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,001,600.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">68,518.88</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าบริการรักษาความปลอดภัย</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">876,400.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">72,760.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">873,200.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-3,200.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าบริการสวน</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">127,030.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">11,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">132,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">4,970.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าพนักงานกวาดถนน</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">288,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">24,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">288,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าเก็บขยะมูลฝอย</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">114,120.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">9,510.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">115,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">880.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าบริการตรวจสอบบัญชี</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">13,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,080.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">13,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">0.00</td>
+                        </tr>
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap font-bold">รวมรายจ่ายตามสัญญาบริการ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">2,351,631.12</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">201,810.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">2,422,800.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">71,168.88</td>
+                        </tr>
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 font-bold" colspan="5">หมวดรายจ่ายสาธารณูปโภค</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าไฟฟ้าส่วนกลาง</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">102,616.74</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">7,500.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">90,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-12,616.74</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าน้ำประปาส่วนกลาง</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">49,853.78</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">3,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">36,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-13,853.78</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าอินเตอร์เน็ต</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">7,691.16</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">640.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">7,700.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">8.84</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าโทรศัพท์-สนง. นิติบุคคล</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">5,769.44</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">480.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">5,800.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">30.56</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าโทรศัพท์-ป้อม รปภ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">3,839.16</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">320.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">3,900.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">60.84</td>
+                        </tr>
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap font-bold">รวมรายจ่ายสาธารณูปโภค</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">169,770.28</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">11,940.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">143,400.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-26,370.28</td>
+                        </tr>
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 font-bold" colspan="5">หมวดรายจ่ายค่าดำเนินการและสำนักงาน</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าวัสดุเครื่องเขียนแบบพิมพ์และอุปกรณ์สำนักงาน</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">9,815.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">500.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">6,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-3,815.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าจัดหาหมวดงานอาบ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,460.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">500.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">6,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">4,540.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าอากรแสตมป์-เบี้ยปรับ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">18,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,500.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">18,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">0.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าธรรมเนียมธนาคาร/สมุดเช็ค</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">6,390.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">300.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">3,600.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-2,790.00</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าใช้จ่ายจัดประชุมกรรมการ/ประชุมใหญ่</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">27,805.50</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">3,400.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">40,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">12,194.50</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าใช้จ่ายอื่นๆ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,183.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">1,250.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">15,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">13,817.00</td>
+                        </tr>
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap font-bold">รวมรายจ่ายค่าดำเนินการและสำนักงาน</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">64,643.50</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">7,450.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">88,600.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-red-600 font-bold">23,956.50</td>
+                        </tr>
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 font-bold" colspan="5">หมวดรายจ่ายซ่อมแซมและบำรุงรักษา</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 whitespace-nowrap">ค่าซ่อมแซมและบำรุงรักษาทรัพย์สิน</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">131,522.60</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">4,200.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right">50,000.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right text-green-600 font-bold">-81,522.60</td>
+                        </tr>
+                        <tr class="bg-[#F8F4E3] hover:bg-gray-100 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap font-bold">รวมรายจ่าย</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">2,717,567.50</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">225,400.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">2,704,800.00</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-green-600 font-bold text-right">-12,767.50</td>
+                        </tr>
+                        <tr class="bg-[#004369] text-white hover:bg-gray-700 transition-colors duration-200">
+                            <td class="px-4 py-3 whitespace-nowrap font-bold">รวมรายรับ (สูงกว่า) กว่ารายจ่ายสุทธิ</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">1,182,207.14</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">-</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">-</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-right font-bold">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="expense-breakdown" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-2 text-[#004369]">สัดส่วนรายจ่ายปี 2569</h2>
+                <p class="text-center text-gray-600 mb-6">รายจ่ายส่วนใหญ่ในปีนี้ถูกจัดสรรให้กับหมวดสัญญาบริการ ซึ่งคิดเป็นสัดส่วนเกือบ 90% ของรายจ่ายทั้งหมด</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="expenseDonutChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="service-contract-details" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md h-custom-card flex flex-col">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-2 text-[#004369]">เจาะลึกรายจ่ายตามสัญญาบริการ</h2>
+                 <p class="text-center text-gray-600 mb-6">ค่าบริหารจัดการและค่ารักษาความปลอดภัยเป็นสองรายการที่มีมูลค่าสูงสุดในหมวดนี้</p>
+                <div class="chart-container flex-grow">
+                    <canvas id="serviceContractBarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="expense-trend" class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-2 text-[#004369]">แนวโน้มรายจ่ายเทียบกับปี 2567</h2>
+                <p class="text-center text-gray-600 mb-6">งบประมาณรายจ่ายตามสัญญาบริการในปี 2569 เพิ่มขึ้นเล็กน้อยจากค่าใช้จ่ายจริงในปี 2567 ในขณะที่หมวดอื่นๆ มีการปรับลดลง</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="expenseTrendBarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 py-6 border-t border-[#E5DDC8]">
+            <p class="text-sm text-gray-500">จัดทำ ณ วันที่ 27 กรกฎาคม 2568</p>
+        </footer>
+    </div>
+
+    <script>
+        const formatLabel = (str, maxLen = 16) => {
+            if (str.length <= maxLen) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLen) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            family: "'Sarabun', sans-serif",
+                            size: 14,
+                        },
+                        color: '#004369'
+                    }
+                },
+                tooltip: {
+                    titleFont: { family: "'Sarabun', sans-serif" },
+                    bodyFont: { family: "'Sarabun', sans-serif" },
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const expenseData2569 = {
+            serviceContract: 2422800.00,
+            utilities: 143400.00,
+            operations: 88600.00,
+            maintenance: 50000.00,
+        };
+
+        const ctxDonut = document.getElementById('expenseDonutChart').getContext('2d');
+        new Chart(ctxDonut, {
+            type: 'doughnut',
+            data: {
+                labels: ['สัญญาบริการ', 'สาธารณูปโภค', 'ดำเนินการและสำนักงาน', ['ซ่อมแซมและ', 'บำรุงรักษา']],
+                datasets: [{
+                    label: 'สัดส่วนรายจ่าย',
+                    data: [
+                        expenseData2569.serviceContract,
+                        expenseData2569.utilities,
+                        expenseData2569.operations,
+                        expenseData2569.maintenance
+                    ],
+                    backgroundColor: ['#004369', '#01949A', '#7A9E9F', '#DB1F48'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                plugins: {
+                     ...commonChartOptions.plugins,
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const serviceContractData = {
+            labels: ['ค่าบริหารจัดการ', 'ค่าบริการรักษาความปลอดภัย', 'ค่าพนักงานกวาดถนน', 'ค่าบริการสวน', 'ค่าเก็บขยะมูลฝอย', 'ค่าบริการตรวจสอบบัญชี'],
+            values: [1001600.00, 873200.00, 288000.00, 132000.00, 115000.00, 13000.00]
+        };
+        const ctxServiceBar = document.getElementById('serviceContractBarChart').getContext('2d');
+        new Chart(ctxServiceBar, {
+            type: 'bar',
+            data: {
+                labels: serviceContractData.labels.map(label => formatLabel(label)),
+                datasets: [{
+                    label: 'งบประมาณปี 2569 (บาท)',
+                    data: serviceContractData.values,
+                    backgroundColor: '#01949A',
+                    borderColor: '#004369',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        ticks: {
+                            font: { family: "'Sarabun', sans-serif" },
+                            color: '#004369',
+                             callback: function(value) {
+                                return (value / 1000) + 'K';
+                            }
+                        },
+                        grid: {
+                           color: '#E5DDC8'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: { family: "'Sarabun', sans-serif", size: 12 },
+                            color: '#004369'
+                        },
+                        grid: {
+                           display: false
+                        }
+                    }
+                },
+                plugins: {
+                    ...commonChartOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const expenseTrendData = {
+            labels: ['สัญญาบริการ', 'สาธารณูปโภค', ['ดำเนินการและ', 'สำนักงาน'], ['ซ่อมแซมและ', 'บำรุงรักษา']],
+            actual2567: [2351631.12, 169770.28, 64643.50, 131522.60],
+            budget2569: [expenseData2569.serviceContract, expenseData2569.utilities, expenseData2569.operations, expenseData2569.maintenance]
+        };
+        const ctxTrendBar = document.getElementById('expenseTrendBarChart').getContext('2d');
+        new Chart(ctxTrendBar, {
+            type: 'bar',
+            data: {
+                labels: expenseTrendData.labels,
+                datasets: [
+                    {
+                        label: 'ยอดจริงปี 2567',
+                        data: expenseTrendData.actual2567,
+                        backgroundColor: '#7A9E9F',
+                    },
+                    {
+                        label: 'งบประมาณปี 2569',
+                        data: expenseTrendData.budget2569,
+                        backgroundColor: '#DB1F48',
+                    }
+                ]
+            },
+            options: {
+                ...commonChartOptions,
+                 scales: {
+                    y: {
+                        ticks: {
+                             callback: function(value) {
+                                if (value >= 1000000) {
+                                    return (value / 1000000) + 'M';
+                                }
+                                return (value / 1000) + 'K';
+                            },
+                            color: '#004369'
+                        },
+                        grid: {
+                           color: '#E5DDC8'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: { family: "'Sarabun', sans-serif", size: 12 },
+                            color: '#004369'
+                        },
+                        grid: {
+                           display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
