@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปผลการดำเนินงานและระเบียบวาระการประชุม</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2f6; /* Light gray-blue background */
+            color: #333;
+        }
+        .container-wrapper {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .tab-button {
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin-right: 0.75rem;
+            margin-bottom: 0.75rem;
+            white-space: nowrap;
+            background-color: #cbd5e1; /* Gray 300 */
+            color: #475569; /* Slate 700 */
+        }
+        .tab-button.active {
+            background-color: #1e40af; /* Blue 800 */
+            color: white;
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.4);
+            transform: translateY(-2px);
+        }
+        .tab-button:not(.active):hover {
+            background-color: #94a3b8; /* Slate 400 */
+            color: white;
+        }
+        .sub-tab-button {
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            background-color: #e0e7ff; /* Indigo 100 */
+            color: #374785; /* Darker blue for text */
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .sub-tab-button.active {
+            background-color: #4f46e5; /* Indigo 600 */
+            color: white;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+        }
+        .sub-tab-button:not(.active):hover {
+            background-color: #a5b4fc; /* Indigo 300 */
+        }
+        .content-section {
+            display: none;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* Inner shadow */
+            margin-top: 1.5rem;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .info-card {
+            background-color: #f0f9ff; /* Sky 50 */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Ensure cards are same height in a row */
+        }
+        .info-card .icon {
+            font-size: 3rem;
+            margin-bottom: 0.75rem;
+            color: #2563eb; /* Blue 700 */
+        }
+        .info-card .number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1e40af; /* Blue 800 */
+            line-height: 1;
+        }
+        .info-card .description {
+            font-size: 1.1rem;
+            color: #4a5568; /* Gray 700 */
+            margin-top: 0.5rem;
+        }
+        .detail-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .detail-card-header {
+            font-weight: 700;
+            color: #1d4ed8; /* Blue 700 */
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+        .detail-card-header .icon {
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+        }
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.6rem;
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: #475569; /* Slate 700 */
+        }
+        .list-item-bullet {
+            font-size: 0.8rem;
+            color: #10b981; /* Emerald 500 */
+            margin-right: 0.6rem;
+            margin-top: 0.3rem; /* Adjust alignment for bullet */
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            overflow: hidden; /* For rounded corners on table */
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #e0e7ff;
+            font-weight: 600;
+            color: #2563eb;
+            text-align: center;
+        }
+        .data-table td {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+        .data-table tr:nth-child(even) td {
+            background-color: #f6faff; /* Light blue for even rows */
+        }
+        .data-table tfoot td {
+            font-weight: 700;
+            background-color: #e0f2fe; /* Light blue for footer */
+        }
+
+        /* Pie chart like representation for debt status */
+        .debt-status-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            background-color: #f8fafc;
+        }
+        .debt-status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #475569;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .debt-status-item:last-child {
+            border-bottom: none;
+        }
+        .debt-status-item .percentage {
+            font-weight: 700;
+            color: #1d4ed8;
+        }
+        .debt-status-item .color-box {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 0.25rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        /* Specific colors from the pie chart image */
+        .color-box.no-debt { background-color: #2E8B99; } /* Dark teal */
+        .color-box.debt-1-3 { background-color: #61C5AD; } /* Lighter teal/green */
+        .color-box.debt-4-6 { background-color: #F8D150; } /* Yellow */
+        .color-box.blacklist { background-color: #FF7B5A; } /* Orange */
+        .color-box.debt-over-6 { background-color: #CB3E51; } /* Red */
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .tab-button {
+                width: 100%;
+                margin-right: 0;
+            }
+            .sub-tab-button {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+            .content-section {
+                padding: 1rem;
+            }
+            .info-card {
+                padding: 1rem;
+            }
+            .info-card .number {
+                font-size: 2.8rem;
+            }
+            .info-card .description {
+                font-size: 1rem;
+            }
+            .data-table th, .data-table td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8">
+    <div class="max-w-7xl mx-auto container-wrapper">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-8 sm:mb-10">รายงานผลการดำเนินงานและระเบียบวาระการประชุม</h1>
+
+        <div class="flex flex-wrap justify-center mb-8">
+            <button class="tab-button active" data-tab="agenda4">ระเบียบวาระที่ 4: เรื่องที่เสนอให้ที่ประชุมทราบ</button>
+            <button class="tab-button" data-tab="agenda5">ระเบียบวาระที่ 5: เรื่องอื่น (ถ้ามี)</button>
+        </div>
+
+        <!-- Agenda 4 Content -->
+        <div id="agenda4" class="content-section active">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">ระเบียบวาระที่ 4: เรื่องที่เสนอให้ที่ประชุมทราบ</h2>
+            <div class="flex flex-wrap justify-center mb-6">
+                <button class="sub-tab-button active" data-sub-tab="agenda4-1">4.1 ผลการดำเนินงานปี 2567 (บริษัท IRM)</button>
+                <button class="sub-tab-button" data-sub-tab="agenda4-2">4.2 ผลการดำเนินงาน เม.ย. - มิ.ย. 2568 (ไพรม์ พร็อพเพอร์ตี้กรุ๊ป)</button>
+            </div>
+
+            <!-- Agenda 4.1 Content (Data Extracted from image_d3a3e3.png) -->
+            <div id="agenda4-1" class="sub-content-section active">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">4.1 ผลการดำเนินงานปี 2567 ของบริษัทบริหารนิติบุคคลฯ บริษัท IRM</h3>
+                <div class="bg-blue-50 p-5 rounded-lg mb-6">
+                    <p class="text-blue-700 text-xl font-semibold text-center">สรุปผลการรับชำระค่าส่วนกลาง ณ วันที่ 31 ธันวาคม 2567</p>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg shadow-md">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>รอบจัดเก็บ</th>
+                                <th>ยอดเรียกเก็บ (บาท)</th>
+                                <th>ยอดรับชำระ (บาท)</th>
+                                <th>ยอดค้างชำระ (บาท)</th>
+                                <th>รับชำระ (%)</th>
+                                <th>ค้างชำระ (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>ม.ค. 66</td><td>225,400.00</td><td>181,074.20</td><td>44,325.80</td><td>80.33%</td><td>19.67%</td></tr>
+                            <tr><td>2</td><td>เม.ย. 66</td><td>225,400.00</td><td>181,206.67</td><td>44,193.33</td><td>80.39%</td><td>19.61%</td></tr>
+                            <tr><td>3</td><td>พ.ค. 66</td><td>225,400.00</td><td>179,109.68</td><td>46,290.32</td><td>79.46%</td><td>20.54%</td></tr>
+                            <tr><td>4</td><td>มิ.ย. 66</td><td>225,400.00</td><td>175,583.33</td><td>49,816.67</td><td>77.90%</td><td>22.10%</td></tr>
+                            <tr><td>5</td><td>ก.ค. 66</td><td>225,400.00</td><td>173,700.00</td><td>51,700.00</td><td>77.02%</td><td>22.98%</td></tr>
+                            <tr><td>6</td><td>ส.ค. 66</td><td>225,400.00</td><td>171,387.50</td><td>54,012.50</td><td>76.04%</td><td>23.96%</td></tr>
+                            <tr><td>7</td><td>ก.ย. 66</td><td>225,400.00</td><td>166,600.00</td><td>58,800.00</td><td>73.91%</td><td>26.09%</td></tr>
+                            <tr><td>8</td><td>ต.ค. 66</td><td>225,400.00</td><td>162,990.32</td><td>62,409.68</td><td>72.31%</td><td>27.69%</td></tr>
+                            <tr><td>9</td><td>พ.ย. 66</td><td>225,400.00</td><td>160,999.67</td><td>64,400.33</td><td>71.43%</td><td>28.57%</td></tr>
+                            <tr><td>10</td><td>ธ.ค. 66</td><td>225,400.00</td><td>158,827.61</td><td>66,572.39</td><td>70.39%</td><td>29.61%</td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">รวมทั้งสิ้น (10 หลัง)</td>
+                                <td>2,254,000.00</td>
+                                <td>1,711,202.58</td>
+                                <td>542,797.42</td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg shadow-md mt-6">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>รอบจัดเก็บ</th>
+                                <th>ยอดเรียกเก็บ (บาท)</th>
+                                <th>ยอดรับชำระ (บาท)</th>
+                                <th>ยอดค้างชำระ (บาท)</th>
+                                <th>รับชำระ (%)</th>
+                                <th>ค้างชำระ (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>ม.ค. 67</td><td>225,400.00</td><td>154,328.74</td><td>71,071.26</td><td>68.47%</td><td>31.53%</td></tr>
+                            <tr><td>2</td><td>ก.พ. 67</td><td>225,400.00</td><td>150,400.00</td><td>75,000.00</td><td>66.73%</td><td>33.27%</td></tr>
+                            <tr><td>3</td><td>มี.ค. 67</td><td>225,400.00</td><td>146,277.42</td><td>79,122.58</td><td>64.90%</td><td>35.10%</td></tr>
+                            <tr><td>4</td><td>เม.ย. 67</td><td>225,400.00</td><td>144,176.67</td><td>81,223.33</td><td>63.96%</td><td>36.04%</td></tr>
+                            <tr><td>5</td><td>พ.ค. 67</td><td>225,400.00</td><td>142,177.42</td><td>82,622.58</td><td>63.54%</td><td>36.66%</td></tr>
+                            <tr><td>6</td><td>มิ.ย. 67</td><td>225,400.00</td><td>140,700.00</td><td>84,700.00</td><td>62.42%</td><td>37.58%</td></tr>
+                            <tr><td>7</td><td>ก.ค. 67</td><td>225,400.00</td><td>137,900.00</td><td>87,500.00</td><td>61.18%</td><td>38.82%</td></tr>
+                            <tr><td>8</td><td>ส.ค. 67</td><td>225,400.00</td><td>127,680.00</td><td>97,720.00</td><td>56.65%</td><td>43.35%</td></tr>
+                            <tr><td>9</td><td>ก.ย. 67</td><td>225,400.00</td><td>120,446.67</td><td>104,953.33</td><td>53.44%</td><td>46.56%</td></tr>
+                            <tr><td>10</td><td>ต.ค. 67</td><td>225,400.00</td><td>112,700.00</td><td>112,700.00</td><td>50.00%</td><td>50.00%</td></tr>
+                            <tr><td>11</td><td>พ.ย. 67</td><td>225,400.00</td><td>96,576.67</td><td>128,823.33</td><td>42.85%</td><td>57.15%</td></tr>
+                            <tr><td>12</td><td>ธ.ค. 67</td><td>225,400.00</td><td>61,396.77</td><td>164,003.23</td><td>27.24%</td><td>72.76%</td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">รวมทั้งสิ้น (12 หลัง)</td>
+                                <td>2,704,800.00</td>
+                                <td>1,535,359.36</td>
+                                <td>1,169,439.64</td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">รวมปี 66-67</td>
+                                <td>4,958,800.00</td>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ยอดเรียกเก็บรวม</td>
+                                <td colspan="2">3,246,562.94</td>
+                                <td colspan="3">100.00%</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ยอดรับชำระ</td>
+                                <td colspan="2">1,712,237.06</td>
+                                <td colspan="3">65.47%</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">ยอดค้างชำระ</td>
+                                <td colspan="2"></td>
+                                <td colspan="3">34.53%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="detail-card mt-6">
+                    <div class="detail-card-header"><span class="icon">&#x1F4CA;</span> รายละเอียดเพิ่มเติม</div>
+                    <ul class="list-disc list-inside text-gray-600 pl-4">
+                        <li>ภาพรวมแสดงยอดเรียกเก็บ ยอดรับชำระ และยอดค้างชำระของค่าส่วนกลางในปี 2567</li>
+                        <li>ข้อมูลแสดงแนวโน้มการชำระและยอดค้างชำระตลอดทั้งปี</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Agenda 4.2 Content (Data Extracted) -->
+            <div id="agenda4-2" class="sub-content-section">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">4.2 ผลการดำเนินงานตั้งแต่ เม.ย. 2568 – มิ.ย. 2568 ของบริษัทบริหารนิติบุคคลฯ บริษัท ไพรม์ พร็อพเพอร์ตี้กรุ๊ป จำกัด</h3>
+
+                <div class="bg-indigo-50 p-5 rounded-lg mb-6">
+                    <p class="text-indigo-700 text-xl font-semibold text-center">สรุปการดำเนินงานที่สำคัญ (เมษายน - มิถุนายน 2568)</p>
+                </div>
+
+                <!-- Key Operational Summary from image_d39ca3.png -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="info-card bg-orange-50">
+                        <span class="icon">&#x1F4A1;</span>
+                        <div class="number text-orange-700">18</div>
+                        <p class="description text-orange-600">หลอดไฟส่องสว่าง เปลี่ยนใหม่ในพื้นที่ส่วนกลางเพื่อเพิ่มความปลอดภัย</p>
+                    </div>
+                    <div class="info-card bg-teal-50">
+                        <span class="icon">&#x1F50E;</span>
+                        <div class="number text-teal-700">3</div>
+                        <p class="description text-teal-600">กระจกโค้งจราจร ติดตั้งในจุดเสี่ยงเพื่อลดอุบัติเหตุ</p>
+                    </div>
+                    <div class="info-card bg-blue-50">
+                        <span class="icon">&#x1F6E1;&#xFE0F;</span>
+                        <div class="number text-blue-700">2</div>
+                        <p class="description text-blue-600">รอบ/กะ รปภ. ตรวจสอบความปลอดภัยทั่วโครงการ</p>
+                    </div>
+                </div>
+
+                <h4 class="text-lg font-bold text-gray-700 mb-4">รายละเอียดผลการดำเนินงาน</h4>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="detail-card">
+                        <div class="detail-card-header text-green-700"><span class="icon">&#x1F4C4;</span> ด้านธุรการและการเงิน</div>
+                        <ul>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ออกใบแจ้งหนี้/ใบเสร็จ และตั้งเบิกค่าใช้จ่ายประจำเดือน</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ประชาสัมพันธ์ข่าวสารต่างๆ เช่น การชำระค่าส่วนกลาง, การเก็บขยะ</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ส่งหนังสือทวงถาม (25 หลัง) และหนังสือระงับกรรมสิทธิ์ (10 หลัง)</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ติดต่อหน่วยงานภายนอกและดำเนินการด้านธนาคาร (ICASH, Up-Book)</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-card-header text-purple-700"><span class="icon">&#x1F6E0;&#xFE0F;</span> ด้านซ่อมบำรุงส่วนกลาง</div>
+                        <ul>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ประสานงาน อบต. เปลี่ยนหลอดไฟ 18 หลอด และพ่นหมอกควันไล่ยุง</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ติดตั้งกระจกโค้งจราจร 3 จุด บริเวณซอย 4, 6, 8 เพื่อความปลอดภัย</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> จัดหาบริษัทกล้องวงจรปิดเข้าเสนอราคาตรวจสอบกล้องวงจรปิด (CCTV)</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ประสานงานการไฟฟ้าเพื่อซ่อมบำรุงหม้อแปลง</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-card-header text-red-700"><span class="icon">&#x1F6A8;</span> ด้านบริการและการจัดการข้อร้องเรียน</div>
+                        <ul>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> แก้ไขท่อระบายน้ำอุดตันและให้ความช่วยเหลือสมาชิก</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> เข้าตรวจสอบอุบัติเหตุในพื้นที่ส่วนกลางด้วยความห่วงใย</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ประสานงานเก็บขยะที่ล้นบ่อและกวาดเศษขยะกิ่งไม้</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> รับข้อร้องเรียนน้ำท่วม และนำวิศวกรเข้าตรวจสอบ</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-card-header text-cyan-700"><span class="icon">&#x1F3D9;&#xFE0F;</span> ด้านดูแลทรัพย์สินส่วนกลาง</div>
+                        <ul>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> รปภ. ตรวจสอบการเข้า-ออก และขับรถตรวจตรา 2 รอบ/กะ</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> พนักงานทำความสะอาดถนนตามแผนงานประจำสัปดาห์</li>
+                            <li class="list-item"><span class="list-item-bullet">&#8226;</span> ดูแลความสะอาดและความเรียบร้อยของสวนสาธารณะ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 p-5 rounded-lg my-6">
+                    <p class="text-purple-700 text-xl font-semibold text-center">ภาพรวมสถานะการเงินและบัญชี (เมษายน - มิถุนายน 2568)</p>
+                </div>
+
+                <!-- Financial and Account Status Overview from image_d3a3e6.jpg (Cash Flow) -->
+                <h4 class="text-lg font-semibold text-gray-700 mb-2">รายรับ-รายจ่าย (เกณฑ์เงินสด) ตั้งแต่ 1 มกราคม 2568 - 30 มิถุนายน 2568 (ระยะเวลา 6 เดือน)</h4>
+                <div class="overflow-x-auto rounded-lg shadow-md mb-6">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>เดือน</th>
+                                <th>เงินสดรับ (บาท)</th>
+                                <th>เงินสดจ่าย (บาท)</th>
+                                <th>ผลต่าง (บาท)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>ม.ค.-68</td><td>273,778.90</td><td>208,323.53</td><td>65,455.37</td></tr>
+                            <tr><td>ก.พ.-68</td><td>211,822.03</td><td>213,656.52</td><td>(1,834.49)</td></tr>
+                            <tr><td>มี.ค.-68</td><td>119,210.00</td><td>126,993.10</td><td>(7,783.10)</td></tr>
+                            <tr><td>เม.ย.-68</td><td>304,649.60</td><td>230,761.92</td><td>73,887.68</td></tr>
+                            <tr><td>พ.ค.-68</td><td>351,260.00</td><td>328,639.30</td><td>22,620.70</td></tr>
+                            <tr><td>มิ.ย.-68</td><td>264,193.33</td><td>226,552.09</td><td>37,641.24</td></tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>รวม</td>
+                                <td>1,524,913.86</td>
+                                <td>1,334,926.46</td>
+                                <td>189,987.40</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Financial and Account Status Overview from image_d3a3e9.png (Debt Status) -->
+                <h4 class="text-lg font-semibold text-gray-700 mb-2">สรุปสถานะลูกหนี้ ณ วันที่ 1 กรกฎาคม 2568 (จากทั้งหมด 322 หลัง)</h4>
+                <div class="debt-status-container">
+                    <div class="debt-status-item">
+                        <span class="color-box no-debt"></span>ไม่ค้างชำระ
+                        <span class="percentage">201 หลัง (62%)</span>
+                    </div>
+                    <div class="debt-status-item">
+                        <span class="color-box debt-1-3"></span>ค้าง 1 - 3 เดือน
+                        <span class="percentage">17 หลัง (5%)</span>
+                    </div>
+                    <div class="debt-status-item">
+                        <span class="color-box debt-4-6"></span>ค้าง 4 - 6 เดือน
+                        <span class="percentage">8 หลัง (3%)</span>
+                    </div>
+                    <div class="debt-status-item">
+                        <span class="color-box blacklist"></span>ประกาศขาย/Blacklist
+                        <span class="percentage">16 หลัง (5%)</span>
+                    </div>
+                    <div class="debt-status-item">
+                        <span class="color-box debt-over-6"></span>ค้างตั้งแต่ 6 เดือนขึ้นไป
+                        <span class="percentage">80 หลัง (25%)</span>
+                    </div>
+                </div>
+
+                <div class="detail-card mt-6">
+                    <div class="detail-card-header"><span class="icon">&#x1F4B0;</span> รายละเอียดสถานะการเงิน</div>
+                    <ul class="list-disc list-inside text-gray-600 pl-4">
+                        <li>ตารางแสดงรายรับ-รายจ่ายเป็นเงินสดในแต่ละเดือน ตั้งแต่ ม.ค. 2568 - มิ.ย. 2568</li>
+                        <li>ข้อมูลสถานะลูกหนี้ค่าส่วนกลาง ณ วันที่ 1 กรกฎาคม 2568 จำแนกตามระยะเวลาการค้างชำระจากจำนวนทั้งหมด 322 หลัง</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agenda 5 Content -->
+        <div id="agenda5" class="content-section">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">ระเบียบวาระที่ 5: เรื่องอื่น (ถ้ามี)</h2>
+            <div class="bg-gray-100 p-8 rounded-lg text-center text-gray-600 shadow-inner">
+                <p class="text-xl mb-3 font-semibold">หน้านี้สำหรับหัวข้ออื่นๆ ที่อาจมีขึ้นในการประชุม</p>
+                <p class="text-md">โปรดติดตามข้อมูลเพิ่มเติมที่จะนำเสนอในภายหลัง หรือหารือในที่ประชุม</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            const subTabButtons = document.querySelectorAll('.sub-tab-button');
+            const subContentSections = document.querySelectorAll('.sub-content-section');
+
+            // Function to show/hide main tabs
+            const showTab = (tabId) => {
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                    if (button.dataset.tab === tabId) {
+                        button.classList.add('active');
+                    }
+                });
+
+                // When switching main tabs, ensure the first sub-tab of the new main tab is active
+                if (tabId === 'agenda4') {
+                    const firstSubTab = document.querySelector('#agenda4 .sub-tab-button');
+                    if (firstSubTab) {
+                        showSubTab(firstSubTab.dataset.subTab);
+                    }
+                }
+            };
+
+            // Function to show/hide sub-tabs
+            const showSubTab = (subTabId) => {
+                subContentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(subTabId).classList.add('active');
+
+                subTabButtons.forEach(button => {
+                    button.classList.remove('active');
+                    if (button.dataset.subTab === subTabId) {
+                        button.classList.add('active');
+                    }
+                });
+            };
+
+            // Add event listeners for main tabs
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    showTab(button.dataset.tab);
+                });
+            });
+
+            // Add event listeners for sub-tabs
+            subTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    showSubTab(button.dataset.subTab);
+                });
+            });
+
+            // Initialize: Show the first main tab and its first sub-tab
+            showTab('agenda4');
+            showSubTab('agenda4-1'); // Ensure 4.1 is shown by default
+        });
+    </script>
+</body>
+</html>
