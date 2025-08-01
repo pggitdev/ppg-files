@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปข้อมูลการประชุมใหญ่สามัญประจำปี 2568 - นิติบุคคลหมู่บ้านจัดสรร ฮาบิทาวน์โฟลด์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f5f5f7; /* Apple-like light gray background */
+            color: #1d1d1f; /* Apple's primary text color */
+        }
+        /* Apple-inspired navigation bar */
+        .apple-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            color: #555;
+            padding: 0.5rem 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0071e3; /* Apple blue */
+            transition: width 0.3s ease;
+        }
+        .nav-link.active-link {
+            color: #0071e3;
+            font-weight: 600;
+        }
+        .nav-link.active-link::after {
+            width: 100%;
+        }
+        /* Modern Card Styling */
+        .modern-card {
+            background-color: white;
+            border-radius: 1.5rem; /* 24px */
+            padding: 2.5rem; /* 40px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        /* KPI Card Styling */
+        .kpi-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* 24px */
+            padding: 1.5rem; /* 24px */
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .kpi-card:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        }
+        .kpi-value {
+            font-size: 2.75rem; /* 44px */
+            font-weight: 700;
+            line-height: 1.1;
+            color: #1d1d1f;
+        }
+        .kpi-value.blue { color: #0071e3; }
+        .kpi-value.green { color: #34c759; }
+        .kpi-value.orange { color: #ff9500; }
+
+        .kpi-label {
+            font-size: 1rem;
+            color: #6e6e73;
+            margin-top: 0.5rem;
+        }
+        /* Board Member Card */
+        .board-member-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .board-member-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .board-member-card .name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            flex-grow: 1;
+        }
+        .board-member-card .vote-count {
+            display: inline-block;
+            background-color: #e8f0fe;
+            color: #0071e3;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        /* Modern Table */
+        .modern-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: #fff;
+        }
+        .modern-table thead {
+            background-color: #f5f5f7;
+        }
+        .modern-table th, .modern-table td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .modern-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .modern-table tbody tr:hover {
+            background-color: #f5f5f7;
+        }
+        .modern-table .category-row td {
+            background-color: #e8f0fe;
+            font-weight: 600;
+            color: #0071e3;
+        }
+        .modern-table .total-row td {
+            background-color: #e5e5e5;
+            font-weight: 700;
+        }
+        .modern-table .final-total-row td {
+            background-color: #1d1d1f;
+            color: white;
+            font-weight: 700;
+        }
+        .section-title {
+            font-size: 2.5rem; /* 40px */
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            font-size: 1.25rem; /* 20px */
+            text-align: center;
+            color: #6e6e73;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="fixed top-0 z-50 w-full apple-nav">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#top" class="text-2xl font-bold text-[#1d1d1f] transition duration-300 hover:text-[#0071e3]">
+                    ฮาบิทาวน์โฟลด์ ติวานนท์-แจ้งวัฒนะ
+                </a>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#key-metrics-2567" class="nav-link font-medium">ภาพรวม</a>
+                    <a href="#agm-results-2566" class="nav-link font-medium">มติสำคัญ</a>
+                    <a href="#board-2566" class="nav-link font-medium">คณะกรรมการ</a>
+                    <a href="#member-voice" class="nav-link font-medium">เสียงสมาชิก</a>
+                    <a href="#financial-summary-2567-new" class="nav-link font-medium">การเงิน</a>
+                    <a href="#budget-summary-2569" class="nav-link font-medium">งบประมาณ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="top" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-28">
+        
+        <header class="text-center mb-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-[#1d1d1f] mb-4">สรุปการประชุมใหญ่ฯ ปี 2568</h1>
+            <p class="text-xl md:text-2xl text-gray-600">นิติบุคคลหมู่บ้านจัดสรร ฮาบิทาวน์โฟลด์ ติวานนท์-แจ้งวัฒนะ</p>
+            <div class="mt-6 text-lg bg-[#1d1d1f] text-white rounded-full py-3 px-6 inline-block shadow-lg">
+                🗓️ วันอาทิตย์ที่ 3 สิงหาคม 2568 | ⏰ 09:00 - 12:00 น.
+            </div>
+        </header>
+        
+        <section id="agenda-2568" data-section="agenda-2568" class="mb-20">
+            <h2 class="section-title">วาระสำคัญในการประชุม</h2>
+            <p class="section-subtitle">ประเด็นหลักที่จะร่วมกันพิจารณาและตัดสินใจเพื่ออนาคตของหมู่บ้านเรา</p>
+            <div class="max-w-3xl mx-auto modern-card">
+                <ul class="space-y-6 text-lg">
+                    <li class="flex items-center"><span class="text-2xl mr-4">✅</span><div><strong>วาระที่ 2:</strong> รับรองรายงานการประชุมครั้งก่อน</div></li>
+                    <li class="flex items-center"><span class="text-2xl mr-4">💰</span><div><strong>วาระที่ 3:</strong> รับรองงบการเงินปี 2567 เพื่อแสดงความโปร่งใส</div></li>
+                    <li class="flex items-center"><span class="text-2xl mr-4">📈</span><div><strong>วาระที่ 4:</strong> อนุมัติงบประมาณปี 2569 เพื่อวางแผนการดำเนินงาน</div></li>
+                    <li class="flex items-center"><span class="text-2xl mr-4">🗣️</span><div><strong>วาระที่ 5:</strong> เรื่องอื่นๆ ที่สมาชิกเสนอ เพื่อร่วมกันพัฒนาหมู่บ้าน</div></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="key-metrics-2567" data-section="key-metrics-2567" class="mb-20">
+            <h2 class="section-title">ทบทวนมติสำคัญปี 2567</h2>
+            <p class="section-subtitle">สรุปผลการตัดสินใจร่วมกันจากการประชุมใหญ่ครั้งที่ผ่านมา</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="kpi-card">
+                    <div class="kpi-value">86</div>
+                    <div class="kpi-label">ครัวเรือนเข้าร่วม</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">87.3%</div>
+                    <div class="kpi-label">รับรองงบปี 2566</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">86.2%</div>
+                    <div class="kpi-label">รับรองระเบียบฯ</div>
+                </div>
+                 <div class="kpi-card">
+                    <div class="kpi-value">฿57,900</div>
+                    <div class="kpi-label">อนุมัติซื้อลู่วิ่งใหม่</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">฿62,400</div>
+                    <div class="kpi-label">อนุมัติเครื่องเล่นเด็ก</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="agm-results-2566" data-section="agm-results-2566" class="mb-20">
+            <h2 class="section-title">ผลการพิจารณาจากที่ประชุม</h2>
+            <p class="section-subtitle">มติสำคัญที่ได้รับความเห็นชอบจากสมาชิกในการประชุมครั้งล่าสุด</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="modern-card">
+                    <h3 class="text-2xl font-bold mb-4 text-[#0071e3]">รับรองวาระสำคัญ</h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex justify-between items-center"><span>รับรองรายงานประชุมปี 2566</span><span class="font-semibold text-green-600">เห็นชอบ 83.2%</span></li>
+                        <li class="flex justify-between items-center"><span>รับรองงบการเงินปี 2566</span><span class="font-semibold text-green-600">เห็นชอบ 87.3%</span></li>
+                        <li class="flex justify-between items-center"><span>รับรองงบประมาณปี 2568</span><span class="font-semibold text-green-600">เห็นชอบ 86.9%</span></li>
+                    </ul>
+                </div>
+                <div class="modern-card">
+                    <h3 class="text-2xl font-bold mb-4 text-[#ff9500]">อนุมัติระเบียบใหม่ (เห็นชอบ 86.2%)</h3>
+                    <ul class="list-disc list-inside space-y-3 text-lg">
+                        <li>การชำระค่าส่วนกลาง: ปรับเป็นราย 3 เดือน (จ่ายรายปีลด 3%)</li>
+                        <li>เพิ่มค่าปรับใช้ถนนผิดประเภทเป็น 6,000 บาท/ปี</li>
+                        <li>ถังดับเพลิง:</span> กำหนดชนิดถังดับเพลิงสำหรับผู้รับเหมาและบ้านที่เก็บวัตถุไวไฟ</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="board-2566" data-section="board-2566" class="mb-20">
+            <h2 class="section-title">คณะกรรมการนิติบุคคลฯ ปี 2566</h2>
+            <p class="section-subtitle">ทีมงานที่ได้รับความไว้วางใจให้ดูแลและบริหารจัดการหมู่บ้านของเราด้วยคะแนนเสียงรับรอง 86.90%</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
+                <div class="board-member-card">
+                    <div class="name">นายศศิภพ จิตรกร</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+                <div class="board-member-card">
+                    <div class="name">นายธีรศักดิ์ สุทธิพงศ์ธนะกุล</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+                <div class="board-member-card">
+                    <div class="name">นายณัชพล เมฆลาย</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+                <div class="board-member-card">
+                    <div class="name">นางวิจิตรา ชินานุพันธ์</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+                <div class="board-member-card">
+                    <div class="name">นางสาวธันย์ดารินทร์ โภคินธนวานิช</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+                <div class="board-member-card">
+                    <div class="name">นายปิยะฉัตร ทิพยรัตน์</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+                <div class="board-member-card">
+                    <div class="name">นายอรรถพล พรหมมาศ</div>
+                    <div class="vote-count">86.9%</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="member-voice" data-section="member-voice" class="mb-20">
+            <h2 class="section-title">เสียงจากสมาชิก</h2>
+            <p class="section-subtitle">ประเด็นและข้อเสนอแนะที่ได้รับจากสมาชิก ซึ่งฝ่ายบริหารฯ ได้รับทราบและกำลังดำเนินการ</p>
+            <div class="max-w-4xl mx-auto modern-card">
+                <ul class="space-y-8">
+                    <li class="flex items-start">
+                        <span class="text-[#0071e3] mr-4 mt-1"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                        <div>
+                            <h3 class="text-xl font-semibold">การรักษาความปลอดภัย</h3>
+                            <p class="text-gray-700 mt-1">ข้อเสนอแนะ: ปรับปรุงมาตรฐานการทำงานของ รปภ. ในด้านการตรวจสอบบุคคลภายนอกและการอำนวยความสะดวก</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#ff9500] mr-4 mt-1"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18v-3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v3s-2 2-2 2h-1s-1 1-2 1-3-1-3-1h-2a2 2 0 0 0-2 2"/><path d="M16 15V6a2 2 0 0 0-2-2H9"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="9" r="1"/></svg></span>
+                        <div>
+                            <h3 class="text-xl font-semibold">คีย์การ์ดและอุปกรณ์</h3>
+                            <p class="text-gray-700 mt-1">ปัญหาคีย์การ์ดชำรุดและพิจารณาพื้นที่สำหรับให้เด็กๆ เล่นฟุตบอลในสนามส่วนกลาง</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#34c759] mr-4 mt-1"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17.1 2.9 18 2c1.8 1.7 2.2 4.6 2 8-.9 1.2-4.1 3.7-8 4-.6 2.1-1.1 3.9-2.1 5.4-.5.8-1.1 1.5-1.8 2.2V21h-.1z"/><path d="M14 6c4 2.5 6 3 6 2-1 2.5-1.5 6-2 7"/></svg></span>
+                        <div>
+                            <h3 class="text-xl font-semibold">การดูแลพื้นที่ส่วนกลาง</h3>
+                            <p class="text-gray-700 mt-1">การติดตามเรื่องค่าส่วนกลางค้างชำระ, การดูแลเด็กในพื้นที่ส่วนกลาง และการประสานงานตัดต้นไม้ริมกำแพง</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="financial-summary-2567-new" data-section="financial-summary-2567-new" class="mb-20">
+            <h2 class="section-title">สถานะการเงินปี 2567</h2>
+            <p class="section-subtitle">ภาพรวมสุขภาพทางการเงินที่แข็งแกร่งและมั่นคงของนิติบุคคลฯ</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="kpi-card">
+                    <div class="kpi-value blue">9.42 ล.</div>
+                    <div class="kpi-label">สินทรัพย์รวม</div>
+                    <p class="text-sm text-green-600 mt-2 font-semibold">+2.34%</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value blue">0.61 ล.</div>
+                    <div class="kpi-label">หนี้สินรวม</div>
+                    <p class="text-sm text-green-600 mt-2 font-semibold">-51.12%</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value green">2.6 แสน</div>
+                    <div class="kpi-label">รายรับสูงกว่ารายจ่าย</div>
+                    <p class="text-sm text-gray-500 mt-2">สถานะ: รายรับสูงกว่ารายจ่าย</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="financial-analysis-2567" data-section="financial-analysis-2567" class="mb-20">
+            <h2 class="section-title">เจาะลึกการเงินปี 2567</h2>
+            <p class="section-subtitle">เปรียบเทียบผลการดำเนินงานและสัดส่วนรายรับ-รายจ่าย</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="modern-card">
+                    <h3 class="text-2xl font-bold text-center mb-4">สัดส่วนรายรับ</h3>
+                    <div class="chart-container">
+                        <canvas id="revenueDistributionChart"></canvas>
+                    </div>
+                </div>
+                <div class="modern-card">
+                    <h3 class="text-2xl font-bold text-center mb-4">สัดส่วนค่าใช้จ่าย</h3>
+                     <div class="chart-container">
+                        <canvas id="expenseDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="budget-summary-2569" data-section="budget-summary-2569" class="mb-20">
+            <h2 class="section-title">แผนงบประมาณปี 2569</h2>
+            <p class="section-subtitle">วางแผนการเงินเพื่อการพัฒนาอย่างยั่งยืนและรักษาคุณภาพการบริการ</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="kpi-card">
+                    <div class="kpi-value blue">4.74 ล.</div>
+                    <div class="kpi-label">ประมาณการรายรับ</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value orange">4.40 ล.</div>
+                    <div class="kpi-label">ประมาณการรายจ่าย</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value green">0.34 ล.</div>
+                    <div class="kpi-label">คาดการณ์ รายรับสูงกว่ารายจ่าย</div>
+                </div>
+            </div>
+             <div class="modern-card">
+                <h3 class="text-2xl font-bold text-center mb-4">เงินจะถูกใช้ไปกับอะไรบ้าง?</h3>
+                <div class="chart-container">
+                    <canvas id="budgetSpendingChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section id="budget-details-2569" data-section="budget-details-2569" class="mb-20">
+            <h2 class="section-title">รายละเอียดงบประมาณรายจ่าย</h2>
+            <p class="section-subtitle">เปรียบเทียบงบประมาณปี 2568 และ 2569 เพื่อการพิจารณาอนุมัติ</p>
+            <div class="table-container overflow-x-auto">
+                <table class="modern-table min-w-[800px]">
+                    <thead>
+                        <tr>
+                            <th>รายการ</th>
+                            <th class="text-right">ประมาณการปี 2568 (เดิม)</th>
+                            <th class="text-right">ประมาณการปี 2569 (เสนอ)</th>
+                            <th class="text-right">เพิ่ม/ลด</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row">
+                            <td colspan="4">หมวด 1: ค่าใช้จ่ายดำเนินงาน</td>
+                        </tr>
+                        <tr>
+                            <td>ค่าจ้างบริหารงานและค่าบริการ</td>
+                            <td class="text-right">3,451,420.00</td>
+                            <td class="text-right">3,664,880.00</td>
+                            <td class="text-right text-red-600">+213,560.00</td>
+                        </tr>
+                        <tr class="category-row">
+                            <td colspan="4">หมวด 2: ค่าใช้จ่ายสาธารณูปโภค</td>
+                        </tr>
+                        <tr>
+                            <td>ค่าไฟฟ้า, ประปา, โทรศัพท์, เชื้อเพลิง</td>
+                            <td class="text-right">320,088.00</td>
+                            <td class="text-right">344,088.00</td>
+                            <td class="text-right text-red-600">+24,000.00</td>
+                        </tr>
+                        <tr class="category-row">
+                            <td colspan="4">หมวด 3: ค่าใช้จ่ายอื่นๆ</td>
+                        </tr>
+                        <tr>
+                            <td>ค่าธรรมเนียม, ค่าประชุม, ค่าตรวจสอบบัญชี</td>
+                            <td class="text-right">104,904.00</td>
+                            <td class="text-right">104,904.00</td>
+                            <td class="text-right">0.00</td>
+                        </tr>
+                         <tr class="category-row">
+                            <td colspan="4">หมวด 4: ค่าซ่อมบำรุงและงานพัฒนา</td>
+                        </tr>
+                        <tr>
+                            <td>ค่าซ่อมแซมระบบต่างๆ และทรัพย์สินส่วนกลาง</td>
+                            <td class="text-right">292,000.00</td>
+                            <td class="text-right">292,000.00</td>
+                            <td class="text-right">0.00</td>
+                        </tr>
+                        <tr class="final-total-row">
+                            <td>รวมค่าใช้จ่ายทั้งหมด</td>
+                            <td class="text-right">4,199,412.00</td>
+                            <td class="text-right">4,401,872.00</td>
+                            <td class="text-right">+202,460.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#1d1d1f] text-white text-center py-6">
+        <p class="text-gray-400">บริหารจัดการโดย บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด</p>
+        <p>ติดต่อสำนักงานนิติบุคคลฯ: 02-501-2541 | ID LINE: @habitownfold</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Navigation Scroll Spy ---
+            const sections = document.querySelectorAll('section[data-section]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-40% 0px -60% 0px', // Trigger when section is in the middle of the viewport
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Chart.js Configuration ---
+            Chart.defaults.font.family = 'Sarabun';
+            Chart.defaults.color = '#6e6e73';
+
+            const applePalette = {
+                blue: '#0071e3',
+                green: '#34c759',
+                orange: '#ff9500',
+                pink: '#ff2d55',
+                purple: '#af52de',
+                teal: '#5ac8fa',
+                gray1: '#8e8e93',
+                gray2: '#aeaeb2',
+            };
+            
+            const chartTooltip = {
+                callbacks: {
+                    label: (context) => {
+                        const value = context.parsed;
+                        const label = context.label || '';
+                        return `${label}: ${new Intl.NumberFormat('th-TH').format(value)} บาท`;
+                    }
+                }
+            };
+
+            // --- Revenue Distribution Chart ---
+            const revenueDistributionCtx = document.getElementById('revenueDistributionChart').getContext('2d');
+            new Chart(revenueDistributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['ค่าบริการสาธารณะ', 'ค่าเบี้ยปรับ', 'ดอกเบี้ย', 'ค่าคีย์การ์ด', 'อื่นๆ'],
+                    datasets: [{
+                        data: [4738830.00, 27918.94, 16072.57, 6000.00, 1000.00],
+                        backgroundColor: [applePalette.blue, applePalette.orange, applePalette.teal, applePalette.purple, applePalette.gray1],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 15 } },
+                        tooltip: chartTooltip
+                    }
+                }
+            });
+            
+            // --- Expense Distribution Chart ---
+            const expenseDistributionCtx = document.getElementById('expenseDistributionChart').getContext('2d');
+            new Chart(expenseDistributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['บริหารและบริการ', 'สาธารณูปโภค', 'ค่าเสื่อมราคา', 'ดำเนินงาน', 'ซ่อมบำรุง'],
+                    datasets: [{
+                        data: [3560680.00, 342112.69, 315940.55, 192993.28, 114597.62],
+                        backgroundColor: [applePalette.blue, applePalette.purple, applePalette.gray2, applePalette.pink, applePalette.orange],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 15 } },
+                        tooltip: chartTooltip
+                    }
+                }
+            });
+
+            // --- Budget Spending Chart ---
+            const budgetSpendingCtx = document.getElementById('budgetSpendingChart').getContext('2d');
+            new Chart(budgetSpendingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['ค่าบริหารจัดการ', 'ค่าซ่อมบำรุง', 'ค่าสาธารณูปโภค', 'ค่าใช้จ่ายอื่นๆ'],
+                    datasets: [{
+                        data: [3664880.00, 292000.00, 344088.00, 104904.00],
+                        backgroundColor: [applePalette.blue, applePalette.green, applePalette.orange, applePalette.gray1],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 15 } },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    const total = context.chart.getData().datasets[0].data.reduce((a, b) => a + b, 0);
+                                    const value = context.parsed;
+                                    const percentage = ((value / total) * 100).toFixed(1) + '%';
+                                    return `${context.label}: ${percentage}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
