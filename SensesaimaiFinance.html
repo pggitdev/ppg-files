@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปผลการดำเนินงานและงบการเงิน - นิติบุคคลหมู่บ้านจัดสรร เซนส์ สายไหม 56</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+        }
+        .section-title {
+            font-size: 1.875rem; /* 30px */
+            font-weight: 700;
+            color: #1e293b; /* slate-800 */
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .kpi-value {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+            color: #0f172a; /* slate-900 */
+        }
+        .kpi-label {
+            font-size: 0.875rem; /* 14px */
+            font-weight: 500;
+            color: #64748b; /* slate-500 */
+        }
+        .kpi-icon {
+            width: 3rem; /* 48px */
+            height: 3rem; /* 48px */
+            padding: 0.75rem; /* 12px */
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .table-header {
+            font-weight: 600;
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .table-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #f1f5f9; /* slate-100 */
+        }
+         .table-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto text-center p-4">
+            <h1 class="text-2xl font-bold text-slate-800">สรุปผลการดำเนินงาน ปี 2567-2568</h1>
+            <p class="text-slate-500">นิติบุคคลหมู่บ้านจัดสรร เซนส์ สายไหม 56</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8 mt-8">
+
+        <!-- Section 1: Financial Overview 2024 -->
+        <section id="overview-2024" class="mb-16">
+            <h2 class="section-title">ภาพรวมสถานะการเงิน ปี 2567</h2>
+            
+            <!-- KPIs -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="card p-5 flex items-center space-x-4">
+                    <div class="kpi-icon bg-blue-100 text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 3a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 9m18 3h-5.25M3 12h5.25" /></svg>
+                    </div>
+                    <div>
+                        <div class="kpi-label">สินทรัพย์รวม</div>
+                        <div class="kpi-value">฿2,419,366</div>
+                    </div>
+                </div>
+                <div class="card p-5 flex items-center space-x-4">
+                    <div class="kpi-icon bg-orange-100 text-orange-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 21Z" /></svg>
+                    </div>
+                    <div>
+                        <div class="kpi-label">หนี้สินรวม</div>
+                        <div class="kpi-value">฿1,022,355</div>
+                    </div>
+                </div>
+                <div class="card p-5 flex items-center space-x-4">
+                    <div class="kpi-icon bg-green-100 text-green-600">
+                        <div class="kpi-icon bg-green-100 text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" /></svg>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="kpi-label">ส่วนของสมาชิก</div>
+                        <div class="kpi-value">฿1,397,031</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <!-- Income/Expense Summary -->
+                <div class="card p-6 lg:col-span-3">
+                    <h3 class="font-semibold text-slate-800 mb-4">สรุปรายรับ-รายจ่าย ปี 2567</h3>
+                    <canvas id="incomeExpenseChart2024" style="max-height: 350px;"></canvas>
+                </div>
+                <!-- Net Income -->
+                <div class="card p-6 lg:col-span-2 flex flex-col justify-center items-center text-center bg-green-50">
+                    <div class="kpi-icon bg-green-200 text-green-700 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.328 4.328a2.25 2.25 0 0 0 3.182 0l2.909-2.909m0 0A2.25 2.25 0 0 1 21 12.75V9a2.25 2.25 0 0 0-2.25-2.25H15m3 3-3-3" /></svg>
+                    </div>
+                    <p class="kpi-label">รายรับสูงกว่ารายจ่ายสุทธิ</p>
+                    <p class="text-4xl font-bold text-green-700 mt-1">฿431,081.09</p>
+                    <p class="text-sm text-green-600 mt-2">สะท้อนสภาพคล่องทางการเงินที่ดี</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Financial Details -->
+        <section id="details-2024" class="mb-16">
+            <h2 class="section-title">รายละเอียดงบการเงินปี 2567</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                 <!-- Assets Breakdown -->
+                <div class="card overflow-hidden">
+                    <div class="p-4"><h3 class="font-semibold text-slate-800">รายละเอียดสินทรัพย์</h3></div>
+                    <div class="text-sm">
+                        <div class="table-row table-header"><span>รายการ</span><span>จำนวนเงิน (บาท)</span></div>
+                        <div class="table-row"><span>เงินสดย่อย</span><span>5,000.00</span></div>
+                        <div class="table-row"><span>เงินฝากออมทรัพย์</span><span>76,051.78</span></div>
+                        <div class="table-row"><span>เงินฝากกระแสรายวัน</span><span>2,267,951.96</span></div>
+                        <div class="table-row font-semibold bg-slate-50"><span>รวมเงินสดและเทียบเท่า</span><span>2,349,003.74</span></div>
+                        <div class="table-row"><span>ลูกหนี้ค่าส่วนกลาง</span><span>59,338.17</span></div>
+                        <div class="table-row"><span>ลูกหนี้โครงการ</span><span>11,025.00</span></div>
+                        <div class="table-row font-semibold bg-slate-50"><span>รวมลูกหนี้</span><span>70,363.17</span></div>
+                        <div class="table-row table-header text-base"><span>รวมสินทรัพย์</span><span>2,419,366.91</span></div>
+                    </div>
+                </div>
+                <!-- Liabilities Breakdown -->
+                <div class="card overflow-hidden">
+                    <div class="p-4"><h3 class="font-semibold text-slate-800">รายละเอียดหนี้สิน</h3></div>
+                     <div class="text-sm">
+                        <div class="table-row table-header"><span>รายการ</span><span>จำนวนเงิน (บาท)</span></div>
+                        <div class="table-row"><span>ค่าใช้จ่ายค้างจ่าย</span><span>202,958.00</span></div>
+                        <div class="table-row"><span>รายรับล่วงหน้าค่าส่วนกลาง</span><span>642,575.00</span></div>
+                        <div class="table-row"><span>ภาษีหัก ณ ที่จ่ายรอนำส่ง</span><span>5,202.00</span></div>
+                        <div class="table-row"><span>เจ้าหนี้หมุนเวียนอื่น</span><span>171,600.00</span></div>
+                        <div class="table-row table-header text-base"><span>รวมหนี้สิน</span><span>1,022,335.00</span></div>
+                    </div>
+                </div>
+            </div>
+             <div class="card p-6 mt-6">
+                <h3 class="font-semibold text-slate-800 mb-4">สัดส่วนรายจ่ายจริง ปี 2567</h3>
+                <canvas id="expenseBreakdown2024" style="max-height: 350px;"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 3: Budget 2025 -->
+        <section id="budget-2025" class="mb-16">
+            <h2 class="section-title">งบประมาณและแผนงานปี 2568</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div class="card p-6 lg:col-span-2 flex flex-col justify-center items-center text-center bg-blue-50">
+                    <div class="kpi-icon bg-blue-200 text-blue-700 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12" /></svg>
+                    </div>
+                    <p class="kpi-label">ประมาณการรายจ่ายรวมทั้งปี</p>
+                    <p class="text-4xl font-bold text-blue-700 mt-1">฿3,077,936</p>
+                    <p class="text-sm text-blue-600 mt-2">เพื่อการบริหารและบำรุงรักษาสาธารณูปโภค</p>
+                </div>
+                <div class="card p-6 lg:col-span-3">
+                    <h3 class="font-semibold text-slate-800 mb-4">สัดส่วนงบประมาณรายจ่าย ปี 2568</h3>
+                    <canvas id="budget2025Chart" style="max-height: 350px;"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Operations -->
+        <section id="operations" class="mb-16">
+            <h2 class="section-title">การดำเนินงานและสถานะปัจจุบัน</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-slate-800 mb-4">สถานะการชำระค่าส่วนกลาง (ณ 31 พ.ค. 2568)</h3>
+                    <div class="space-y-3">
+                        <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium text-red-800">ค้างชำระเกิน 180 วัน</span>
+                                <span class="font-bold text-red-800 text-lg">฿59,339</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium text-orange-800">ค้างชำระ 91 - 180 วัน</span>
+                                <span class="font-bold text-orange-800 text-lg">฿781,524</span>
+                            </div>
+                        </div>
+                         <div class="p-4 bg-slate-100 rounded-lg border-t-2 border-slate-300 mt-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-slate-800">ยอดค้างชำระรวม</span>
+                                <span class="font-bold text-slate-900 text-xl">฿840,863</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-slate-800 mb-4">สรุปค่าสาธารณูปโภค (ม.ค. - พ.ค. 2568)</h3>
+                    <canvas id="utilitiesChart" style="max-height: 350px;"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 py-6 mt-8">
+        <div class="container mx-auto text-center px-4">
+            <p>บริหารจัดการโดย บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด</p>
+            <p class="text-sm text-slate-400 mt-1">เอกสารนี้จัดทำขึ้นเพื่อสรุปข้อมูลประกอบการประชุมเท่านั้น</p>
+        </div>
+    </footer>
+
+    <script>
+        const formatCurrency = (value) => '฿' + new Intl.NumberFormat('th-TH', { 
+            notation: 'compact', 
+            maximumFractionDigits: 2 
+        }).format(value);
+        
+        const formatCurrencyFull = (value) => '฿' + new Intl.NumberFormat('th-TH').format(value);
+
+        const chartTooltip = {
+            callbacks: {
+                label: (context) => `${context.label}: ${formatCurrencyFull(context.raw)}`
+            }
+        };
+
+        // Chart for Agenda 2.2: Income vs Expense 2024
+        const incomeExpenseCtx = document.getElementById('incomeExpenseChart2024').getContext('2d');
+        new Chart(incomeExpenseCtx, {
+            type: 'bar',
+            data: {
+                labels: ['รายรับรวม', 'รายจ่ายรวม'],
+                datasets: [{
+                    label: 'จำนวนเงิน (บาท)',
+                    data: [3002264.11, 2571183.02],
+                    backgroundColor: ['#38bdf8', '#fb923c'], // sky-400, orange-400
+                    borderRadius: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { 
+                    y: { beginAtZero: true, ticks: { callback: formatCurrency } },
+                    x: { grid: { display: false } }
+                },
+                plugins: { legend: { display: false }, tooltip: chartTooltip }
+            }
+        });
+
+        // Chart for Actual Expenses 2024
+        const expenseBreakdownCtx = document.getElementById('expenseBreakdown2024').getContext('2d');
+        new Chart(expenseBreakdownCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['ค่าบริหารจัดการ', 'ค่าใช้จ่ายสาธารณูปโภค', 'ค่าใช้จ่ายในการดำเนินงาน'],
+                datasets: [{
+                    label: 'รายจ่ายจริงปี 2567',
+                    data: [2234257.04, 295922.00, 41003.98],
+                    backgroundColor: ['#60a5fa', '#facc15', '#fb923c'], // blue-400, yellow-400, orange-400
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' }, tooltip: chartTooltip }
+            }
+        });
+
+        // Chart for Agenda 2.3: Budget 2025
+        const budgetCtx = document.getElementById('budget2025Chart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['ค่าใช้จ่ายด้านพนักงาน', 'ค่าบริหาร', 'ค่าสาธารณูปโภค', 'เงินสำรอง', 'ค่าซ่อมแซม'],
+                datasets: [{
+                    label: 'งบประมาณปี 2568',
+                    data: [1562640, 946562.40, 323733.60, 145000, 100000],
+                    backgroundColor: ['#38bdf8', '#6366f1', '#34d399', '#a78bfa', '#facc15'], // sky-400, indigo-500, emerald-400, violet-400, yellow-400
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' }, tooltip: chartTooltip }
+            }
+        });
+
+        // Chart for Agenda 3: Utilities 2025
+        const utilitiesCtx = document.getElementById('utilitiesChart').getContext('2d');
+        new Chart(utilitiesCtx, {
+            type: 'line',
+            data: {
+                labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.'],
+                datasets: [{
+                    label: 'ค่าไฟฟ้า',
+                    data: [30342.06, 26622.35, 28465.35, 29465.35, 27779.67],
+                    borderColor: '#f97316', // orange-500
+                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#f97316',
+                    pointRadius: 4
+                }, {
+                    label: 'ค่าน้ำประปา',
+                    data: [816.29, 516.11, 888.83, 505.81, 405.61],
+                    borderColor: '#0ea5e9', // sky-500
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#0ea5e9',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, ticks: { callback: formatCurrency } } },
+                plugins: { legend: { position: 'top' }, tooltip: chartTooltip }
+            }
+        });
+    </script>
+</body>
+</html>
