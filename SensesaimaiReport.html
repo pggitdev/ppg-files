@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: รายงานผลการดำเนินงาน นิติบุคคลฯ เซนส์ สายไหม</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #F3F3F3;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#00A1E4]">รายงานผลการดำเนินงาน</h1>
+            <p class="text-xl md:text-2xl text-gray-600 mt-2">นิติบุคคลหมู่บ้านจัดสรร เซนส์ สายไหม</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
+                <span class="text-6xl text-[#00BADE]">🏡</span>
+                <p class="text-5xl font-bold text-[#00A1E4] mt-2">126</p>
+                <p class="text-lg text-gray-600 mt-1">จำนวนแปลงพักอาศัย</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
+                <span class="text-6xl text-[#00BADE]">📹</span>
+                <p class="text-5xl font-bold text-[#00A1E4] mt-2">28</p>
+                <p class="text-lg text-gray-600 mt-1">กล้องวงจรปิด (CCTV)</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center justify-center text-center">
+                <span class="text-6xl text-[#00BADE]">👥</span>
+                <p class="text-5xl font-bold text-[#00A1E4] mt-2">5</p>
+                <p class="text-lg text-gray-600 mt-1">คณะกรรมการนิติบุคคล</p>
+            </div>
+        </section>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-4">การจัดสรรพื้นที่ในโครงการ</h2>
+                <p class="text-center text-gray-600 mb-4">แสดงสัดส่วนการใช้ประโยชน์ที่ดินทั้งหมดในโครงการ ซึ่งประกอบด้วยพื้นที่พักอาศัย พื้นที่ส่วนกลางและสาธารณูปโภคต่างๆ เพื่อให้เห็นภาพรวมของการจัดสรรพื้นที่</p>
+                <div class="chart-container">
+                    <canvas id="landUseChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-4">อัตรากำลังเจ้าหน้าที่บริการส่วนกลาง</h2>
+                 <p class="text-center text-gray-600 mb-4">เปรียบเทียบจำนวนบุคลากรจากบริษัทคู่สัญญาที่เข้ามาดูแลด้านต่างๆ ภายในโครงการ เพื่อให้เห็นถึงการจัดสรรทรัพยากรบุคคลในแต่ละส่วนงาน</p>
+                <div class="chart-container">
+                    <canvas id="staffingChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg lg:col-span-2">
+                <h2 class="text-2xl font-bold text-center mb-4">ตารางการให้บริการส่วนกลาง</h2>
+                <p class="text-center text-gray-600 mb-6">สรุปความถี่และกำหนดการเข้าปฏิบัติงานของบริการสาธารณะต่างๆ เพื่อความสะดวกในการรับบริการและตรวจสอบการดำเนินงานของสมาชิก</p>
+                <div class="overflow-x-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="bg-[#99E8E7] bg-opacity-30 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-[#00A1E4]">ดูแลสระว่ายน้ำ</p>
+                            <p class="text-3xl font-bold my-2">3</p>
+                            <p>ครั้ง / สัปดาห์</p>
+                            <p class="text-sm text-gray-500">(จ, พ, ศ)</p>
+                        </div>
+                        <div class="bg-[#99E8E7] bg-opacity-30 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-[#00A1E4]">จัดเก็บขยะ</p>
+                            <p class="text-3xl font-bold my-2">2</p>
+                            <p>ครั้ง / สัปดาห์</p>
+                            <p class="text-sm text-gray-500">(พ, อา)</p>
+                        </div>
+                        <div class="bg-[#99E8E7] bg-opacity-30 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-[#00A1E4]">ทำความสะอาด</p>
+                            <p class="text-3xl font-bold my-2">4</p>
+                            <p>วัน / สัปดาห์</p>
+                            <p class="text-sm text-gray-500">(สโมสร, สำนักงาน)</p>
+                        </div>
+                        <div class="bg-[#99E8E7] bg-opacity-30 p-4 rounded-lg">
+                            <p class="font-bold text-lg text-[#00A1E4]">ดูแลสวน/ถนน</p>
+                            <p class="text-3xl font-bold my-2">6</p>
+                            <p>วัน / สัปดาห์</p>
+                             <p class="text-sm text-gray-500">(หยุด 1 วัน)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-4">กำลังพลฝ่ายรักษาความปลอดภัย</h2>
+                <p class="text-center text-gray-600 mb-4">แสดงการจัดสรรกำลังเจ้าหน้าที่รักษาความปลอดภัยตลอด 24 ชั่วโมง โดยแบ่งตามผลัดการทำงาน (กลางวันและกลางคืน) เพื่อให้มั่นใจในความปลอดภัยของโครงการ</p>
+                 <div class="chart-container">
+                    <canvas id="securityChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-4">คณะกรรมการนิติบุคคล</h2>
+                <p class="text-center text-gray-600 mb-6">รายนามคณะกรรมการผู้มีอำนาจในการบริหารจัดการและตัดสินใจในนามของนิติบุคคลหมู่บ้านจัดสรร</p>
+                <ul class="space-y-3">
+                    <li class="bg-gray-50 p-3 rounded-md flex items-center">
+                        <span class="text-xl mr-4 text-[#00BADE]">👤</span> คุณชัยสิทธิ์ พุ่มพันธุ์
+                    </li>
+                    <li class="bg-gray-50 p-3 rounded-md flex items-center">
+                        <span class="text-xl mr-4 text-[#00BADE]">👤</span> คุณจิรวัฒน์ โรจน์วรัตถ์กุล
+                    </li>
+                    <li class="bg-gray-50 p-3 rounded-md flex items-center">
+                        <span class="text-xl mr-4 text-[#00BADE]">👤</span> คุณธีระยุทธ รองสวัสดิ์
+                    </li>
+                    <li class="bg-gray-50 p-3 rounded-md flex items-center">
+                        <span class="text-xl mr-4 text-[#00BADE]">👤</span> คุณปุณณาสา หลวงราช ลิมปิยประพันธ์
+                    </li>
+                    <li class="bg-gray-50 p-3 rounded-md flex items-center">
+                        <span class="text-xl mr-4 text-[#00BADE]">👤</span> คุณชุติสรา ศรีจาด
+                    </li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg mb-8">
+                <h2 class="text-2xl font-bold text-center mb-2">ข้อมูลด้านการเงินและงบประมาณ</h2>
+                <p class="text-center text-gray-600 mb-6">สรุปภาพรวมทางการเงินช่วงเดือน มกราคม - พฤษภาคม 2568</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4">รายรับเทียบกับรายจ่าย</h3>
+                        <div class="chart-container h-64 md:h-auto">
+                            <canvas id="financeSummaryChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4">สัดส่วนค่าใช้จ่ายหลัก</h3>
+                         <div class="chart-container h-64 md:h-auto">
+                            <canvas id="expenseBreakdownChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-12 py-4 border-t">
+            <p class="text-gray-500">รายงานนี้จัดทำขึ้นเพื่อสรุปผลการดำเนินงานของฝ่ายจัดการ</p>
+        </footer>
+    </div>
+    
+    <script>
+        const FONT_FAMILY = "'Sarabun', sans-serif";
+        const PRIMARY_COLOR = '#00A1E4';
+        const SECONDARY_COLOR = '#00BADE';
+        const ACCENT_COLOR_1 = '#00D2D3';
+        const ACCENT_COLOR_2 = '#99E8E7';
+        const EXPENSE_COLOR = '#FF6384';
+        const INCOME_COLOR = '#4BC0C0';
+
+        function wrapLabel(label) {
+            const maxLength = 16;
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines.filter(line => line.length > 0);
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: FONT_FAMILY,
+                            size: 14,
+                        }
+                    }
+                },
+                tooltip: {
+                    titleFont: { family: FONT_FAMILY },
+                    bodyFont: { family: FONT_FAMILY },
+                    callbacks: {
+                        title: tooltipTitleCallback,
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: { family: FONT_FAMILY, size: 12 },
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: {
+                        font: { family: FONT_FAMILY, size: 12 },
+                        callback: function(value, index, values) {
+                            return value.toLocaleString('th-TH');
+                        }
+                    },
+                    grid: { color: '#e5e7eb' }
+                }
+            }
+        };
+
+        const landUseData = {
+            labels: ['ที่ดินบ้านแฝด (126 แปลง)', 'สวนส่วนกลาง', 'สโมสรและสระว่ายน้ำ', ['ที่ดินสาธารณูปโภค', 'และสำนักงาน']],
+            datasets: [{
+                label: 'ขนาดพื้นที่ (ตร.วา)',
+                data: [ (36.4 * 126), 333.5, 185.0, 26.5 ],
+                backgroundColor: [PRIMARY_COLOR, SECONDARY_COLOR, ACCENT_COLOR_1, ACCENT_COLOR_2],
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('landUseChart'), {
+            type: 'doughnut',
+            data: landUseData,
+            options: {
+                ...defaultChartOptions,
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                    tooltip: {
+                         callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed.toLocaleString('th-TH') + ' ตร.วา';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+
+        const staffingData = {
+            labels: ['รักษาความปลอดภัย', 'ดูแลสวน', 'ผู้จัดการ', 'แม่บ้าน'],
+            datasets: [{
+                label: 'จำนวนบุคลากร (คน)',
+                data: [4, 2, 1, 1],
+                backgroundColor: [PRIMARY_COLOR, SECONDARY_COLOR, ACCENT_COLOR_1, ACCENT_COLOR_2],
+                borderRadius: 5,
+                barThickness: 40
+            }]
+        };
+        new Chart(document.getElementById('staffingChart'), {
+            type: 'bar',
+            data: staffingData,
+            options: {
+                ...defaultChartOptions,
+                plugins: { ...defaultChartOptions.plugins, legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback, label: (ctx) => `${ctx.parsed.y} คน` } } },
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        const securityData = {
+            labels: ['เจ้าหน้าที่รักษาความปลอดภัย'],
+            datasets: [
+                {
+                    label: 'ผลัดกลางวัน (2 นาย)',
+                    data: [2],
+                    backgroundColor: PRIMARY_COLOR,
+                    borderRadius: 5,
+                },
+                {
+                    label: 'ผลัดกลางคืน (2 นาย)',
+                    data: [2],
+                    backgroundColor: ACCENT_COLOR_1,
+                    borderRadius: 5,
+                }
+            ]
+        };
+        new Chart(document.getElementById('securityChart'), {
+            type: 'bar',
+            data: securityData,
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: { stacked: true, ticks: { stepSize: 1 } },
+                    y: { stacked: true }
+                },
+                 plugins: {
+                    ...defaultChartOptions.plugins,
+                    legend: { position: 'top' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback, label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.x} นาย` } }
+                }
+            }
+        });
+
+        const financeSummaryData = {
+            labels: ['สรุปยอด'],
+            datasets: [
+                {
+                    label: 'รายรับรวม',
+                    data: [1007563.60],
+                    backgroundColor: INCOME_COLOR,
+                    borderRadius: 5,
+                },
+                {
+                    label: 'รายจ่ายรวม',
+                    data: [1249587.52],
+                    backgroundColor: EXPENSE_COLOR,
+                    borderRadius: 5,
+                }
+            ]
+        };
+        new Chart(document.getElementById('financeSummaryChart'), {
+            type: 'bar',
+            data: financeSummaryData,
+            options: {
+                ...defaultChartOptions,
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                    legend: { position: 'top' }
+                }
+            }
+        });
+
+        const expenseBreakdownData = {
+            labels: [wrapLabel('บริการรักษาความปลอดภัย'), wrapLabel('ดูแลสระว่ายน้ำ'), wrapLabel('ดูแลสวน'), wrapLabel('ค่าไฟฟ้า'), wrapLabel('ทำความสะอาด'), wrapLabel('ค่าน้ำประปา')],
+            datasets: [{
+                label: 'ค่าใช้จ่าย',
+                data: [438700.00, 347775.00, 88400.00, 91500.14, 73665.00, 6086.00],
+                backgroundColor: [EXPENSE_COLOR, PRIMARY_COLOR, SECONDARY_COLOR, ACCENT_COLOR_1, ACCENT_COLOR_2, '#FFCD56'],
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('expenseBreakdownChart'), {
+            type: 'pie',
+            data: expenseBreakdownData,
+            options: {
+                ...defaultChartOptions,
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                     tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                     label += new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+
+    </script>
+</body>
+</html>
