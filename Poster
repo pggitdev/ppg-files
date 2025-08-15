@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ประกาศแนะนำบุคลากร</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  body {
+    font-family: "Sarabun", sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+  }
+  .poster-wrapper {
+    padding: 20px; /* เพิ่มพื้นที่รอบๆ เงา */
+  }
+  .poster {
+    background-color: #ffffff; /* สีขาวเต็ม */
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 800px;
+    line-height: 1.8;
+    position: relative;
+  }
+  h1 { font-size: 36px; margin-bottom: 10px; color: #003366; }
+  h2 { font-size: 22px; margin-bottom: 30px; color: #555; }
+  b { color: #c0392b; }
+  button {
+    margin: 20px 10px 0 10px;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+  }
+  #downloadPNG { background: #27ae60; }
+  #downloadPDF { background: #2980b9; }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="poster-wrapper">
+    <div class="poster" id="poster">
+      <h1>ประกาศ</h1>
+      <h2>บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด</h2>
+      <p>
+        ขอแนะนำทีมงานด้านบัญชีจาก<br><br>
+        <b>We Go Account</b><br><br>
+        เพื่อเข้ามาดำเนินงานด้านบัญชีและการเงินของบริษัท โดยทีมงานจะดูแลและสนับสนุนการจัดทำบัญชี
+        การตรวจสอบความถูกต้อง ตลอดจนการให้คำปรึกษาด้านบัญชีและภาษี
+        เพื่อให้การดำเนินงานของบริษัทเป็นไปอย่างมีประสิทธิภาพ โปร่งใส
+        และได้มาตรฐานตามหลักการบัญชีที่รับรองทั่วไป<br><br>
+        เรามั่นใจว่าการเข้ามาร่วมงานในครั้งนี้ จะช่วยเสริมสร้างความแข็งแกร่ง
+        และเพิ่มศักยภาพในการบริหารงานด้านบัญชีของบริษัทให้ดียิ่งขึ้น<br><br>
+        <b>ขอให้ทุกท่านให้การต้อนรับและให้ความร่วมมือกับทีมงาน We Go Account ในการปฏิบัติงานร่วมกัน</b>
+      </p>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <button id="downloadPNG">ดาวน์โหลดเป็น PNG</button>
+    <button id="downloadPDF">ดาวน์โหลดเป็น PDF</button>
+  </div>
+</div>
+
+<script>
+  const poster = document.getElementById('poster');
+
+  document.getElementById('downloadPNG').addEventListener('click', () => {
+    // ปิดเงาก่อน capture
+    const oldShadow = poster.style.boxShadow;
+    poster.style.boxShadow = 'none';
+
+    html2canvas(poster, {backgroundColor: '#ffffff'}).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'ประกาศ.png';
+      link.href = canvas.toDataURL();
+      link.click();
+      // คืนค่าเงาเดิม
+      poster.style.boxShadow = oldShadow;
+    });
+  });
+
+  document.getElementById('downloadPDF').addEventListener('click', () => {
+    const oldShadow = poster.style.boxShadow;
+    poster.style.boxShadow = 'none';
+
+    html2canvas(poster, {backgroundColor: '#ffffff'}).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save("ประกาศ.pdf");
+      poster.style.boxShadow = oldShadow;
+    });
+  });
+</script>
+
+</body>
+</html>
