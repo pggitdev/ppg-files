@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เอกสารประกอบการประชุมใหญ่สามัญประจำปี 2568 - บ้านพฤกษาวิลล์ 42</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background-color: #f9fafb;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .gallery-item p {
+            font-weight: 500;
+        }
+        .vote-result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+        .vote-result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        /* Flowchart Styles */
+        .flow-node {
+            border: 2px solid #34d399; /* emerald-400 */
+            background-color: #f0fdf4; /* emerald-50 */
+            color: #065f46; /* emerald-800 */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            min-width: 280px;
+            max-width: 90%;
+        }
+        .flow-connector {
+            width: 2px;
+            height: 2rem;
+            background-color: #9ca3af; /* gray-400 */
+            position: relative;
+        }
+        .flow-connector::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -2px;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #9ca3af; /* gray-400 */
+        }
+        .branch-node {
+            border: 2px solid #60a5fa; /* blue-400 */
+            background-color: #eff6ff; /* blue-50 */
+            color: #1e40af; /* blue-800 */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="sticky-nav shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-emerald-700">ประชุมใหญ่สามัญ 2568</h1>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#toc" class="text-gray-600 hover:text-emerald-600 font-semibold">สารบัญ</a>
+                <a href="#agenda-1" class="text-gray-600 hover:text-emerald-600 font-semibold">วาระที่ 1</a>
+                <a href="#agenda-2" class="text-gray-600 hover:text-emerald-600 font-semibold">วาระที่ 2</a>
+                <a href="#agenda-3" class="text-gray-600 hover:text-emerald-600 font-semibold">วาระที่ 3</a>
+                <a href="#agenda-4" class="text-gray-600 hover:text-emerald-600 font-semibold">วาระที่ 4</a>
+                <a href="#agenda-5" class="text-gray-600 hover:text-emerald-600 font-semibold">วาระที่ 5</a>
+                <a href="#agenda-6" class="text-gray-600 hover:text-emerald-600 font-semibold">วาระที่ 6</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-600 mb-2">เอกสารประกอบการประชุมใหญ่สามัญประจำปี 2568</h2>
+            <p class="text-lg md:text-xl text-gray-600">นิติบุคคลหมู่บ้านจัดสรร บ้านพฤกษาวิลล์ 42</p>
+            <p class="text-md text-gray-500 mt-2">วันอาทิตย์ที่ 31 สิงหาคม 2568 ณ สวนสาธารณะหมู่บ้าน</p>
+        </section>
+
+        <!-- Table of Contents -->
+        <section id="toc" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4 border-b-2 border-emerald-200 pb-2">สารบัญ</h3>
+            <ul class="space-y-3">
+                <li><a href="#agenda-1" class="text-blue-600 hover:underline font-medium">วาระที่ 1: ประธานแจ้งเพื่อทราบ</a></li>
+                <li><a href="#agenda-2" class="text-blue-600 hover:underline font-medium">วาระที่ 2: พิจารณารับรองรายงานการประชุมครั้งที่ผ่านมา</a></li>
+                <li><a href="#agenda-3" class="text-blue-600 hover:underline font-medium">วาระที่ 3: รายงานผลการดำเนินงานของนิติบุคคลหมู่บ้านจัดสรร</a></li>
+                <li><a href="#agenda-4" class="text-blue-600 hover:underline font-medium">วาระที่ 4: พิจารณารับรองงบการเงินสิ้นสุด ณ วันที่ 31 ธันวาคม 2567</a></li>
+                <li>
+                    <a href="#agenda-5" class="text-blue-600 hover:underline font-medium">วาระที่ 5: เรื่องเพื่อพิจารณา</a>
+                    <ul class="list-disc list-inside ml-6 mt-2 space-y-2 text-gray-700">
+                        <li>5.1: พิจารณาอนุมัติงานลอกท่อระบายน้ำในหมู่บ้าน</li>
+                        <li>5.2: กำหนดจุดวางถังขยะ เพื่อการจัดเก็บและคัดแยกขยะ</li>
+                        <li>5.3: พิจารณาอนุมัติงานซ่อมกำแพงหมู่บ้าน ซอย 1</li>
+                        <li>5.4: พิจารณาเห็นชอบให้จัดประชุมใหญ่ภายใน 90 วัน นับจากวันสิ้นสุดงวดบัญชี</li>
+                        <li>5.5: พิจารณาเห็นชอบให้จัดจ้างพนักงานประจำสำนักงานนิติ 2 อัตรา</li>
+                        <li>5.6: พิจารณาปรับลดอัตราค่าส่วนกลาง และเงื่อนไขเบี้ยปรับ</li>
+                        <li>5.7: คัดเลือกคณะกรรมการชุดใหม่แทนคณะกรรมการชุดเก่าที่หมดวาระ</li>
+                        <li>5.8: พิจารณาเห็นชอบให้รายงานผลการลงมติทุกเรื่องจะต้องเสร็จสิ้นก่อนปิดการประชุม</li>
+                    </ul>
+                </li>
+                <li><a href="#agenda-6" class="text-blue-600 hover:underline font-medium">วาระที่ 6: เรื่องอื่นๆ (ถ้ามี)</a></li>
+            </ul>
+        </section>
+
+        <!-- Agenda 1 -->
+        <section id="agenda-1" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4 border-b-2 border-emerald-200 pb-2">วาระที่ 1: ประธานแจ้งเพื่อทราบ</h3>
+            <p class="text-gray-700 leading-relaxed">
+                นิติบุคคลหมู่บ้านจัดสรร บ้านพฤกษาวิลล์ 42 ได้รับการจดทะเบียนจัดตั้งเมื่อวันที่ 28 มีนาคม 2559 ทะเบียนเลขที่ 3/2559 โดยมีวัตถุประสงค์เพื่อรับโอนที่ดินเป็นสาธารณูปโภค และบริการสาธารณะไปจัดการและบำรุงดูแลรักษา ให้คงไว้ซึ่งประโยชน์ร่วมกันของสมาชิกภายในหมู่บ้านจัดสรร ตามมติที่ประชุมใหญ่ภายใต้ข้อบังคับแห่งพระราชบัญญัติจัดสรร พ.ศ.2543
+                <br><br>
+                ปัจจุบันหมู่บ้านมีบ้านพักอาศัยจำนวน 317 หลัง และได้ว่าจ้าง บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด เข้ามาทำหน้าที่บริหารจัดการตั้งแต่วันที่ 1 มีนาคม 2567
+            </p>
+        </section>
+
+        <!-- Agenda 2 -->
+        <section id="agenda-2" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4 border-b-2 border-emerald-200 pb-2">วาระที่ 2: พิจารณารับรองรายงานการประชุมครั้งที่ผ่านมา</h3>
+            <div class="p-4 border rounded-lg bg-gray-50 space-y-6">
+                <div>
+                    <h4 class="font-semibold text-lg">สรุปผลการรับรองรายงานการประชุมจากการประชุมใหญ่สามัญประจำปี 2567</h4>
+                    <p class="mt-1 text-gray-600">ในการประชุมใหญ่สามัญ ประจำปี 2567 (เมื่อวันที่ 20 ตุลาคม 2567) ที่ประชุมได้พิจารณารับรองรายงานการประชุมครั้งที่ผ่านมา 3 ฉบับ ซึ่งมีผลการลงมติ ดังนี้:</p>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.1 รายงานการประชุมใหญ่สามัญประจำปี 2564-2565</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">65 แปลง (1,673.40)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">1 แปลง (21.10)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">1 แปลง (18.20)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.2 รายงานการประชุมใหญ่สมาชิกวิสามัญ ครั้งที่ 1/2566</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">67 แปลง (1,712.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.3 รายงานการประชุมใหญ่สมาชิกสามัญ ครั้งที่ 2/2566</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">67 แปลง (1,712.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.4 ผลการลงมติรับรองงบการเงินสิ้นสุด ณ วันที่ 31 ธันวาคม 2566</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">66 แปลง (1,670.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">2 แปลง (42.00)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.5 ผลการลงมติแก้ไขข้อบังคับข้อ 16 (จำนวนคณะกรรมการ)</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">59 แปลง (1,498.30)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">3 แปลง (77.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">5 แปลง (136.50)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.6 ผลการลงมติแก้ไขข้อบังคับข้อ 19 (2) (อำนาจอนุมัติค่าใช้จ่าย)</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">56 แปลง (1,416.90)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">9 แปลง (250.90)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">2 แปลง (44.90)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.7 ผลการลงมติแก้ไขข้อบังคับข้อ 25 (การจัดประชุมใหญ่)</p>
+                     <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">66 แปลง (1,694.50)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">1 แปลง (18.20)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+                 
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.8 ผลการลงมติเรื่องการซ่อมแซมสระว่ายน้ำ</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">41 แปลง (1,062.40)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">22 แปลง (553.90)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">4 แปลง (96.40)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.9 ผลการลงมติคัดเลือกคณะกรรมการแทนท่านที่ลาออก 3 ท่าน</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">60 แปลง (1,545.50)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">1 แปลง (28.60)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">5 แปลง (120.20)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">2 แปลง (38.20)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.10 ผลการลงมติเรื่องระเบียบการใช้สวนสาธารณะ</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">65 แปลง (1,675.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">1 แปลง (18.20)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">1 แปลง (18.80)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.11 ผลการลงมติเรื่องซ่อมแซมระบบบ่อบำบัด</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">67 แปลง (1,712.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.12 ผลการลงมติเรื่องซ่อมแซมสะพานซอย 15</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">67 แปลง (1,712.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">0 แปลง (0.00)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.13 ผลการลงมติเรื่องพิจารณาลดอัตราค่าส่วนกลาง</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">54 แปลง (1,426.70)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">6 แปลง (139.70)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">7 แปลง (146.30)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">1 แปลง (19.80)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.14 ผลการลงมติเรื่องกำหนดจุดจอดรถขยะยาง</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">58 แปลง (1,521.60)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">7 แปลง (172.90)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">1 แปลง (18.20)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">2 แปลง (38.00)</span></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border rounded-md bg-white">
+                    <p class="font-semibold">2.15 ผลการลงมติเรื่องอื่น ๆ (ถ้ามี)</p>
+                    <div class="vote-result-grid">
+                        <div class="vote-result-item bg-green-100"><span class="text-green-800">รับรอง:</span> <span class="font-mono">43 แปลง (1,103.30)</span></div>
+                        <div class="vote-result-item bg-red-100"><span class="text-red-800">ไม่รับรอง:</span> <span class="font-mono">2 แปลง (62.00)</span></div>
+                        <div class="vote-result-item bg-yellow-100"><span class="text-yellow-800">งดออกเสียง:</span> <span class="font-mono">16 แปลง (396.30)</span></div>
+                        <div class="vote-result-item bg-gray-100"><span class="text-gray-800">บัตรเสีย:</span> <span class="font-mono">7 แปลง (170.90)</span></div>
+                    </div>
+                </div>
+                
+                <p class="mt-6 pt-4 border-t text-gray-700 font-semibold">ที่ประชุมโปรดพิจารณาให้การรับรองรายงานการประชุมใหญ่สามัญประจำปี 2567 ซึ่งมีรายละเอียดข้างต้น</p>
+            </div>
+        </section>
+
+        <!-- Agenda 3 -->
+        <section id="agenda-3" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4 border-b-2 border-emerald-200 pb-2">วาระที่ 3: รายงานผลการดำเนินงาน</h3>
+            
+            <div class="space-y-12">
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">3.1-3.2 ด้านบริหารจัดการ การเงินและบัญชี</h4>
+                    <p class="mb-4">คณะกรรมการได้มอบหมายให้ บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด ทำหน้าที่บริหารจัดการภายใต้นโยบายของคณะกรรมการ โดยมีขอบเขตการดำเนินงานครอบคลุมด้านการบริหารทั่วไป, การเงินและบัญชี, การดูแลสาธารณูปโภค, รักษาความปลอดภัย, สิ่งแวดล้อม และด้านกฎหมาย</p>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-lg mb-2">สถานะบัญชีธนาคาร (ณ วันที่ 17 สิงหาคม 2568)</h5>
+                        <ul class="list-disc list-inside">
+                             <li><b>เงินฝากกระแสรายวัน (ธ.ไทยพาณิชย์):</b> 2,702,579.23 บาท</li>
+                             <li><b>เงินฝากออมทรัพย์ (ธ.ไทยพาณิชย์):</b> 8,287,037.39 บาท</li>
+                             <li class="font-bold">รวมทั้งสิ้น: 10,989,616.62 บาท</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">3.3 งานบริหารและคู่สัญญา</h4>
+                    <div class="my-8 flex flex-col items-center text-center text-sm md:text-base bg-gray-50 p-6 rounded-lg border">
+                        <div class="flow-node">สมาชิกนิติบุคคลหมู่บ้านจัดสรร</div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-node">คณะกรรมการนิติบุคคลหมู่บ้านจัดสรร</div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-node">บริหารจัดการโดย บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด</div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-node">ผู้จัดการหมู่บ้าน</div>
+                        
+                        <div class="w-px h-8 bg-gray-400"></div>
+
+                        <div class="w-full relative">
+                            <!-- Horizontal Line -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 md:w-3/4 h-px bg-gray-400"></div>
+                            
+                            <!-- Vertical Lines from Horizontal -->
+                            <div class="absolute top-0 w-full flex justify-around">
+                               <div class="w-px h-8 bg-gray-400"></div>
+                               <div class="w-px h-8 bg-gray-400"></div>
+                               <div class="w-px h-8 bg-gray-400"></div>
+                            </div>
+
+                            <!-- Branch Nodes -->
+                            <div class="w-full flex justify-around items-stretch mt-8 space-x-2 md:space-x-4">
+                               <div class="flex-1 flex flex-col items-center">
+                                   <div class="branch-node">งานบริการงานรักษาความปลอดภัย</div>
+                               </div>
+                               <div class="flex-1 flex flex-col items-center">
+                                   <div class="branch-node">งานบริการทำความสะอาด ดูแลสวน</div>
+                               </div>
+                               <div class="flex-1 flex flex-col items-center">
+                                   <div class="branch-node">งานบริการจัดเก็บขยะ</div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-emerald-50">
+                                <tr>
+                                    <th class="p-3 font-semibold">รายการ</th>
+                                    <th class="p-3 font-semibold">บริษัท/บุคคล</th>
+                                    <th class="p-3 font-semibold">พนักงาน</th>
+                                    <th class="p-3 font-semibold">ราคา (ต่อเดือน)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-3">งานบริหารจัดการ</td>
+                                    <td class="p-3">บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด</td>
+                                    <td class="p-3">1 อัตรา (ผจก.)</td>
+                                    <td class="p-3">62,400 บาท</td>
+                                </tr>
+                                <tr class="border-b bg-gray-50">
+                                    <td class="p-3">งานรักษาความปลอดภัย</td>
+                                    <td class="p-3">บริษัท รักษาความปลอดภัย บิ๊ก ดาร์ก้อน การ์ด เซอร์วิส จำกัด</td>
+                                    <td class="p-3">4 อัตรา</td>
+                                    <td class="p-3">81,536 บาท</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3">งานดูแลสวน/ทำความสะอาด</td>
+                                    <td class="p-3">คุณสมเกียรติ สโรบล</td>
+                                    <td class="p-3">4 อัตรา</td>
+                                    <td class="p-3">58,200 บาท</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="p-3">งานจัดเก็บขยะ</td>
+                                    <td class="p-3">สำนักงานเขตภาษีเจริญ</td>
+                                    <td class="p-3">-</td>
+                                    <td class="p-3">5,600 บาท</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                 <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">3.4 รายงานผลงานพัฒนาและปรับปรุงหมู่บ้าน</h4>
+                    <div class="gallery-grid">
+                        <div class="gallery-item"><p>ประสานงานเขตฯ เรื่องการคัดแยกขยะ</p></div>
+                        <div class="gallery-item"><p>ซ่อมท่อน้ำดีหลังสำนักงาน</p></div>
+                        <div class="gallery-item"><p>ซ่อมป้ายไฟเรียกแท็กซี่</p></div>
+                        <div class="gallery-item"><p>ติดตั้งกล้องวงจรปิดเพิ่มเติม</p></div>
+                        <div class="gallery-item"><p>ประสานงานการไฟฟ้าเปลี่ยนไฟทาง</p></div>
+                        <div class="gallery-item"><p>ประสานงานเขตฯ จับแมวทำหมัน</p></div>
+                        <div class="gallery-item"><p>จัดกิจกรรมร้านธงฟ้าราคาประหยัด</p></div>
+                        <div class="gallery-item"><p>ซ่อมตู้ระบบไม้กั้นฝั่งขาออก</p></div>
+                        <div class="gallery-item"><p>ซ่อมไฟฟ้ารั่วที่เสาไฟในสนาม</p></div>
+                        <div class="gallery-item"><p>ประสานงาน สว. ฉีดพ่นยุงลาย</p></div>
+                        <div class="gallery-item"><p>จัดอบรมการคัดแยกขยะโดยสำนักงานเขต</p></div>
+                        <div class="gallery-item"><p>ตัดแต่งกิ่งไม้ใหญ่ทั่วทั้งหมู่บ้าน</p></div>
+                        <div class="gallery-item"><p>ประสานงานลอกท่อระบายน้ำหน้าหมู่บ้าน</p></div>
+                        <div class="gallery-item"><p>คัดสำนวนคดีค้างชำระที่กรมบังคับคดี</p></div>
+                        <div class="gallery-item"><p>ตีเส้นจราจรภายในหมู่บ้าน</p></div>
+                        <div class="gallery-item"><p>ประสานงานขอความอนุเคราะห์ราดยางมะตอย</p></div>
+                        <div class="gallery-item"><p>เปลี่ยนทรายกรองสระว่ายน้ำ</p></div>
+                        <div class="gallery-item"><p>ประสานงานเขตลอกคลองซอย 15</p></div>
+                        <div class="gallery-item"><p>ยื่นแก้ไขข้อบังคับต่อกรมที่ดิน</p></div>
+                        <div class="gallery-item"><p>ซ่อมหลังคากันสาดป้อม รปภ.</p></div>
+                        <div class="gallery-item"><p>ติดตามรับเช็คจากการขายทอดตลาด</p></div>
+                        <div class="gallery-item"><p>แจ้งปัญหาเขื่อนทรุดผ่าน Traffy Fondue</p></div>
+                        <div class="gallery-item"><p>ระงับนิติกรรมบ้านค้างชำระเกิน 6 เดือน</p></div>
+                        <div class="gallery-item"><p>ยาแนวสระว่ายน้ำ</p></div>
+                        <div class="gallery-item"><p>จัดงานทำบุญปีใหม่</p></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">3.7-3.8 รายงานการใช้สาธารณูปโภค (ไฟฟ้าและประปา)</h4>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h5 class="text-lg font-semibold text-center mb-2">กราฟเปรียบเทียบค่าไฟฟ้าส่วนกลาง (บาท)</h5>
+                            <div class="chart-container"><canvas id="electricityChart"></canvas></div>
+                        </div>
+                        <div>
+                            <h5 class="text-lg font-semibold text-center mb-2">กราฟเปรียบเทียบค่าประปาส่วนกลาง (บาท)</h5>
+                            <div class="chart-container"><canvas id="waterChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">3.9 สถานะการจัดเก็บค่าส่วนกลาง</h4>
+                     <div class="chart-container" style="height:500px"><canvas id="feeCollectionChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agenda 4 -->
+        <section id="agenda-4" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4 border-b-2 border-emerald-200 pb-2">วาระที่ 4: พิจารณารับรองงบการเงินสิ้นสุด ณ วันที่ 31 ธันวาคม 2567</h3>
+            <p class="mb-6 text-gray-700">ฝ่ายจัดการฯ ได้จัดทำงบการเงินประจำปี 2567 และส่งให้ผู้สอบบัญชีรับอนุญาต (บริษัท แอท แอนด์ แอสโซซิเอท จำกัด) ตรวจสอบเป็นที่เรียบร้อย โดยผู้สอบบัญชีได้แสดงความเห็นอย่างไม่มีเงื่อนไข ซึ่งสรุปสาระสำคัญได้ดังนี้</p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">งบแสดงฐานะการเงิน</h4>
+                    <div class="chart-container"><canvas id="balanceSheetChart"></canvas></div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">สรุปรายรับ-รายจ่าย</h4>
+                     <div class="space-y-4 text-lg">
+                        <div class="flex justify-between items-center bg-green-50 p-3 rounded-lg">
+                            <span class="font-semibold">รายรับรวม:</span>
+                            <span class="font-bold text-green-600">3,755,425.72 บาท</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-red-50 p-3 rounded-lg">
+                            <span class="font-semibold">รายจ่ายรวม:</span>
+                            <span class="font-bold text-red-600">3,335,059.73 บาท</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-blue-50 p-3 rounded-lg">
+                            <span class="font-semibold">กำไร (ขาดทุน) สุทธิ:</span>
+                            <span class="font-bold text-blue-600">420,365.99 บาท</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mt-6 mb-3">สัดส่วนรายจ่ายปี 2567</h4>
+                    <div class="chart-container"><canvas id="expenseChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agenda 5 -->
+        <section id="agenda-5" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-6 border-b-2 border-emerald-200 pb-2">วาระที่ 5: เรื่องเพื่อพิจารณา</h3>
+            <div class="space-y-6">
+                <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.1 อนุมัติงานลอกท่อระบายน้ำในหมู่บ้าน</h4>
+                    <p><b>เหตุผล:</b> พบการอุดตันในหลายจุด ทำให้ประสิทธิภาพการระบายน้ำลดลง โดยมีการลอกท่อครั้งล่าสุดเมื่อปี 2565<br><b>ขอบเขตงาน:</b> เปิดฝาท่อทุกจุด, ดูดสิ่งอุดตัน, ล้างทำความสะอาดด้วยเครื่องฉีดน้ำแรงดันสูง และขนย้ายสิ่งปฏิกูลไปกำจัดอย่างถูกวิธี</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.2 กำหนดจุดวางถังขยะ เพื่อการจัดเก็บและคัดแยก</h4>
+                    <p><b>เหตุผล:</b> เพื่อรองรับข้อบัญญัติใหม่ของ กทม. เรื่องค่าธรรมเนียมขยะ ซึ่งหากมีการคัดแยกขยะจะช่วยลดค่าใช้จ่ายจาก 60 บาท เหลือ 20 บาทต่อเดือน<br><b>ข้อเสนอ:</b> กำหนดจุดวางถังขยะ 4 ประเภท (เศษอาหาร, รีไซเคิล, อันตราย, ทั่วไป) จำนวน 2 จุด ได้แก่ 1) บริเวณหลังสำนักงานนิติฯ และ 2) สวนหย่อมที่ 2</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.3 อนุมัติงานซ่อมกำแพงหมู่บ้าน ซอย 1</h4>
+                    <p><b>เหตุผล:</b> พบการทรุดเอียงของเขื่อนแนวคลองบางประทุน และรอยแตกร้าวของกำแพงสวนสาธารณะ ซึ่งอาจส่งผลต่อความปลอดภัยและโครงสร้างในอนาคต</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.4 พิจารณาเห็นชอบให้จัดประชุมใหญ่ภายใน 90 วัน นับจากวันสิ้นสุดงวดบัญชี</h4>
+                    <p><b>เหตุผล:</b> เพื่อให้เป็นไปตามข้อบังคับฯ หมวด 6 ข้อ 11 และ พรบ. การจัดสรรที่ดิน ที่กำหนดให้ต้องรายงานกิจการและงบการเงินที่ผ่านการตรวจสอบภายใน 3 เดือนนับแต่วันสิ้นงวดบัญชี</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.5 พิจารณาเห็นชอบให้จัดจ้างพนักงานประจำสำนักงานนิติ 2 อัตรา</h4>
+                    <p><b>เหตุผล:</b> เพื่อเพิ่มประสิทธิภาพในการบริหารจัดการ, บริการสมาชิก, และงานเอกสารให้รวดเร็วและเป็นระบบยิ่งขึ้น<br><b>ตำแหน่ง:</b> 1) ผู้จัดการหมู่บ้าน 2) ธุรการหมู่บ้าน</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.6 พิจารณาปรับลดอัตราค่าส่วนกลาง และเงื่อนไขเบี้ยปรับ</h4>
+                    <p><b>ข้อเสนอ:</b> เพื่อลดภาระของสมาชิกและส่งเสริมการชำระค่าส่วนกลาง จึงเสนอปรับลดค่าส่วนกลางจาก 38 บาท/ตรว. เหลือ 35 บาท/ตรว. และยกเว้นเบี้ยปรับในกรณีที่ค้างชำระไม่เกิน 3 เดือน</p>
+                </div>
+                 <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.7 คัดเลือกคณะกรรมการชุดใหม่แทนคณะกรรมการชุดเก่าที่หมดวาระ</h4>
+                    <p><b>เนื่องจาก:</b> คณะกรรมการชุดปัจจุบันครบวาระการดำรงตำแหน่ง 2 ปี จึงต้องมีการคัดเลือกคณะกรรมการชุดใหม่สำหรับปี 2568-2570 จำนวน 5-7 ท่าน เพื่อทำหน้าที่ต่อไป</p>
+                </div>
+                 <div class="p-4 border rounded-lg bg-gray-50">
+                    <h4 class="font-bold text-lg">5.8 พิจารณาเห็นชอบให้รายงานผลการลงมติทุกเรื่องจะต้องเสร็จสิ้นก่อนปิดการประชุม</h4>
+                    <p><b>เหตุผล:</b> เพื่อให้การประชุมเป็นไปด้วยความเรียบร้อย มีประสิทธิภาพ และแล้วเสร็จตามกำหนดเวลา</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agenda 6 -->
+        <section id="agenda-6" class="section-card">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4 border-b-2 border-emerald-200 pb-2">วาระที่ 6: เรื่องอื่นๆ (ถ้ามี)</h3>
+            <p class="text-gray-700">เปิดโอกาสให้สมาชิกเสนอเรื่องอื่นๆ เพื่อพิจารณาในที่ประชุม</p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-gray-800 text-white">
+        <p>&copy; 2568 นิติบุคคลหมู่บ้านจัดสรร บ้านพฤกษาวิลล์ 42</p>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Chart Config
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(context.parsed.y);
+                        }
+                        return label;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value, index, values) {
+                        return new Intl.NumberFormat('th-TH').format(value);
+                    }
+                }
+            }
+        }
+    };
+
+    const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+
+    // 1. Electricity Chart
+    const electricityCtx = document.getElementById('electricityChart').getContext('2d');
+    new Chart(electricityCtx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: 'ปี 2567',
+                    data: [21386.86, 24676.50, 20810.69, 16949.56, 17117.51, 18248.44, 17484.49, 18770.55, 19936.49, 23037.09, 17998.22, 22515.49],
+                    backgroundColor: 'rgba(52, 211, 153, 0.7)',
+                    borderColor: 'rgba(5, 150, 105, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'ปี 2568',
+                    data: [22737.24, 25198.25, 20254.96, 23271.84, 22869.43, 21755.67, 20625.94, null, null, null, null, null],
+                    backgroundColor: 'rgba(251, 146, 60, 0.7)',
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: chartOptions
+    });
+
+    // 2. Water Chart
+    const waterCtx = document.getElementById('waterChart').getContext('2d');
+    new Chart(waterCtx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: 'ปี 2567',
+                    data: [1224.15, 855.58, 771.09, 717.23, 688.49, 1764.69, 934.92, 687.85, 605.51, 583.85, 699.12, 435.59],
+                    backgroundColor: 'rgba(96, 165, 250, 0.7)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'ปี 2568',
+                    data: [1176.59, 995.76, 424.46, 2292.07, 2673.78, 1040.28, 540.25, null, null, null, null, null],
+                    backgroundColor: 'rgba(251, 146, 60, 0.7)',
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: chartOptions
+    });
+
+    // 3. Fee Collection Chart
+    const feeCollectionCtx = document.getElementById('feeCollectionChart').getContext('2d');
+    new Chart(feeCollectionCtx, {
+        type: 'bar',
+        data: {
+            labels: ['ปี 2561', 'ปี 2562', 'ปี 2563', 'ปี 2564', 'ปี 2565', 'ปี 2566', 'ปี 2567', 'ปี 2568'],
+            datasets: [
+                {
+                    label: 'ค่าส่วนกลางรวม',
+                    data: [2413740.00, 2413740.00, 2413740.00, 2413740.00, 3668884.80, 3668884.80, 3668884.80, 3379236.00],
+                    backgroundColor: 'rgba(167, 139, 250, 0.7)',
+                    borderColor: 'rgba(139, 92, 246, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'ชำระแล้ว',
+                    data: [1322925.25, 2102594.91, 3082251.36, 2887408.92, 3087038.55, 3253689.83, 3076395.07, 1995231.12],
+                    backgroundColor: 'rgba(52, 211, 153, 0.7)',
+                    borderColor: 'rgba(5, 150, 105, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'ค้างชำระ',
+                    data: [1090814.75, 311145.09, -668511.36, -473668.92, 581846.25, 415194.97, 592489.73, 1384004.88],
+                    backgroundColor: 'rgba(248, 113, 113, 0.7)',
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: chartOptions
+    });
+
+    // 4. Balance Sheet Chart (Assets vs Liabilities & Equity)
+    const balanceSheetCtx = document.getElementById('balanceSheetChart').getContext('2d');
+    new Chart(balanceSheetCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['สินทรัพย์หมุนเวียน', 'สินทรัพย์ไม่หมุนเวียน', 'หนี้สินหมุนเวียน', 'ส่วนของสมาชิก'],
+            datasets: [{
+                label: 'งบแสดงฐานะการเงิน',
+                data: [3445660.55, 8676559.66, 402780.55, 11719439.66],
+                backgroundColor: [
+                    'rgba(52, 211, 153, 0.8)',
+                    'rgba(16, 185, 129, 0.8)',
+                    'rgba(248, 113, 113, 0.8)',
+                    'rgba(59, 130, 246, 0.8)'
+                ],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                title: { display: true, text: 'สัดส่วนสินทรัพย์และหนี้สิน ปี 2567' },
+                tooltip: chartOptions.plugins.tooltip
+            }
+        }
+    });
+
+    // 5. Expense Breakdown Chart
+    const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+    new Chart(expenseCtx, {
+        type: 'pie',
+        data: {
+            labels: ['รายจ่ายตามสัญญา', 'ค่าสาธารณูปโภค', 'ค่าซ่อมบำรุง', 'ค่าดำเนินงาน', 'ค่าเสื่อมราคา'],
+            datasets: [{
+                label: 'สัดส่วนรายจ่าย',
+                data: [2484019.07, 252909.37, 216868.73, 158666.29, 222596.27],
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.8)',
+                    'rgba(251, 146, 60, 0.8)',
+                    'rgba(239, 68, 68, 0.8)',
+                    'rgba(139, 92, 246, 0.8)',
+                    'rgba(107, 114, 128, 0.8)'
+                ],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                title: { display: false },
+                tooltip: chartOptions.plugins.tooltip
+            }
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
