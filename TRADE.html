@@ -12,7 +12,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, where, doc, setDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, where, doc, setDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
         // กำหนดให้แสดง Log สำหรับการดีบั๊ก
@@ -25,6 +25,7 @@
 
         let app, auth, db, userId;
         let tradeIdToDelete = null;
+        let isAuthenticatedWithUsername = false;
 
         const initFirebase = async () => {
             if (Object.keys(firebaseConfig).length === 0) {
@@ -42,7 +43,9 @@
                         userId = user.uid;
                         document.getElementById('user-id').textContent = userId;
                         console.log("Logged in with user ID:", userId);
-                        attachRealtimeListener(userId);
+                        // เมื่อได้ user ID แล้ว แสดงฟอร์มให้กรอกชื่อผู้ใช้
+                        document.getElementById('loading-state').classList.add('hidden');
+                        document.getElementById('username-form-container').classList.remove('hidden');
                     } else {
                         try {
                             if (initialAuthToken) {
@@ -76,9 +79,70 @@
             });
         };
 
+        // ฟังก์ชันสำหรับบันทึกชื่อผู้ใช้
+        window.registerUsername = async (event) => {
+            event.preventDefault();
+            const usernameInput = document.getElementById('username-input').value.trim();
+            if (!usernameInput) {
+                showStatusMessage('กรุณากรอกชื่อผู้ใช้', 'error');
+                return;
+            }
+
+            if (!userId) {
+                showStatusMessage('ไม่พบ User ID. กรุณาลองใหม่อีกครั้ง', 'error');
+                return;
+            }
+
+            try {
+                // แก้ไข: เปลี่ยน collection path ให้ถูกต้องตามกฎของ Firestore
+                const usernamesCollection = collection(db, `/artifacts/${appId}/public/data/usernames`);
+                const q = query(usernamesCollection, where("name", "==", usernameInput));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    // ชื่อยังไม่ถูกใช้, ทำการลงทะเบียน
+                    const newUsernameRef = doc(usernamesCollection);
+                    await setDoc(newUsernameRef, {
+                        name: usernameInput,
+                        uid: userId
+                    });
+                    isAuthenticatedWithUsername = true;
+                    showMainUI(usernameInput);
+                    showStatusMessage(`ลงทะเบียนชื่อ ${usernameInput} เรียบร้อยแล้ว!`, 'success');
+                } else {
+                    // ชื่อถูกใช้แล้ว, ตรวจสอบว่าเป็นคนเดียวกันหรือไม่
+                    const usernameDoc = querySnapshot.docs[0];
+                    if (usernameDoc.data().uid === userId) {
+                        isAuthenticatedWithUsername = true;
+                        showMainUI(usernameInput);
+                        showStatusMessage(`ยินดีต้อนรับกลับ, ${usernameInput}!`, 'success');
+                    } else {
+                        showStatusMessage('ชื่อนี้ถูกใช้งานแล้ว กรุณาใช้ชื่ออื่น', 'error');
+                    }
+                }
+            } catch (error) {
+                console.error("Error during username registration:", error);
+                showStatusMessage('เกิดข้อผิดพลาดในการลงทะเบียน', 'error');
+            }
+        };
+
+        // ฟังก์ชันสำหรับแสดง UI หลักหลังจากลงทะเบียน/เข้าสู่ระบบ
+        const showMainUI = (username) => {
+            document.getElementById('username-form-container').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            // เพิ่ม: แสดงข้อมูลผู้ใช้
+            document.getElementById('user-info-display').classList.remove('hidden');
+            document.getElementById('current-username').textContent = username;
+            attachRealtimeListener(userId);
+        };
+
         // ฟังก์ชันสำหรับบันทึกข้อมูลการเทรด
         window.saveTrade = async (event) => {
             event.preventDefault();
+            if (!isAuthenticatedWithUsername) {
+                showStatusMessage('กรุณาลงทะเบียนชื่อผู้ใช้ก่อนบันทึกข้อมูล', 'error');
+                return;
+            }
             const form = event.target;
             const tradeData = {
                 date: form.date.value,
@@ -92,11 +156,6 @@
                 reason: form.reason.value,
                 timestamp: new Date().toISOString()
             };
-
-            if (!userId) {
-                console.error("User is not authenticated. Cannot save data.");
-                return;
-            }
 
             try {
                 const collectionPath = `/artifacts/${appId}/users/${userId}/trades`;
@@ -174,9 +233,8 @@
             document.getElementById('delete-modal').classList.add('hidden');
             if (!tradeIdToDelete) return;
             
-            if (!userId) {
-                console.error("User is not authenticated. Cannot delete data.");
-                showStatusMessage('กรุณาเข้าสู่ระบบก่อนลบข้อมูล', 'error');
+            if (!isAuthenticatedWithUsername) {
+                showStatusMessage('กรุณาลงทะเบียนชื่อผู้ใช้ก่อนลบข้อมูล', 'error');
                 return;
             }
 
@@ -201,9 +259,8 @@
 
         // ฟังก์ชันสำหรับส่งออกข้อมูล
         window.exportData = () => {
-            if (!userId) {
-                console.error("User is not authenticated. Cannot export data.");
-                showStatusMessage('กรุณาเข้าสู่ระบบก่อนส่งออกข้อมูล', 'error');
+            if (!isAuthenticatedWithUsername) {
+                showStatusMessage('กรุณาลงทะเบียนชื่อผู้ใช้ก่อนส่งออกข้อมูล', 'error');
                 return;
             }
             const collectionPath = `/artifacts/${appId}/users/${userId}/trades`;
@@ -231,7 +288,7 @@
                         trade.sl,
                         trade.result === 'win' ? 'ชนะ' : 'แพ้',
                         trade.profit,
-                        `"${trade.reason.replace(/"/g, '""')}"`
+                        `"${(trade.reason || '').replace(/"/g, '""')}"`
                     ];
                     csvRows.push(row.join(','));
                 });
@@ -260,9 +317,8 @@
                 return;
             }
 
-            if (!userId) {
-                console.error("User is not authenticated. Cannot import data.");
-                showStatusMessage('กรุณาเข้าสู่ระบบก่อนนำเข้าข้อมูล', 'error');
+            if (!isAuthenticatedWithUsername) {
+                showStatusMessage('กรุณาลงทะเบียนชื่อผู้ใช้ก่อนนำเข้าข้อมูล', 'error');
                 return;
             }
 
@@ -276,7 +332,9 @@
 
                     const tradesToImport = [];
                     dataLines.forEach(line => {
-                        const values = line.split(',');
+                        // Regular expression to handle commas inside quoted strings
+                        const values = line.match(/(?:"[^"]*"|[^,])+/g).map(v => v.trim().replace(/^"|"$/g, ''));
+                        
                         if (values.length === headers.length) {
                             const tradeData = {
                                 date: values[0].trim(),
@@ -308,6 +366,56 @@
                 }
             };
             reader.readAsText(file);
+        };
+
+        // ฟังก์ชันใหม่: ส่งออกข้อมูลทั้งหมดไปยัง Google Apps Script
+        window.syncToGoogleSheet = async () => {
+            if (!isAuthenticatedWithUsername) {
+                showStatusMessage('กรุณาลงทะเบียนชื่อผู้ใช้ก่อนส่งออกข้อมูล', 'error');
+                return;
+            }
+
+            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxDefUA8QrG67Nikr4bcP3-ubtLzPmSGnKzRvX-iKVXq1aDd3eK1QiOXfaPdDxmzjYV6A/exec'; // <-- กรุณาเปลี่ยนเป็น URL ของคุณ
+            if (googleSheetUrl === 'https://script.google.com/macros/s/AKfycbxDefUA8QrG67Nikr4bcP3-ubtLzPmSGnKzRvX-iKVXq1aDd3eK1QiOXfaPdDxmzjYV6A/exec') {
+                showStatusMessage('กรุณาตั้งค่า URL ของ Google Apps Script ก่อน', 'error');
+                return;
+            }
+
+            showStatusMessage('กำลังส่งออกข้อมูล...', 'info');
+
+            try {
+                const collectionPath = `/artifacts/${appId}/users/${userId}/trades`;
+                const querySnapshot = await getDocs(collection(db, collectionPath));
+                const trades = [];
+                querySnapshot.forEach(doc => {
+                    trades.push(doc.data());
+                });
+
+                if (trades.length === 0) {
+                    showStatusMessage('ไม่มีข้อมูลให้ส่งออก', 'info');
+                    return;
+                }
+
+                // ส่งข้อมูลทั้งหมดในครั้งเดียว
+                const response = await fetch(googleSheetUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // สร้างโครงสร้างข้อมูลที่ Apps Script คาดหวัง
+                    body: JSON.stringify({ data: trades }), 
+                });
+
+                const result = await response.json();
+                if (response.ok && result === "Success") {
+                    showStatusMessage('ส่งออกข้อมูลไปยัง Google Sheets เรียบร้อยแล้ว!', 'success');
+                } else {
+                    throw new Error(result);
+                }
+            } catch (error) {
+                console.error("Error syncing to Google Sheet:", error);
+                showStatusMessage(`การส่งออกล้มเหลว: ${error.message}`, 'error');
+            }
         };
 
         // ฟังก์ชันแสดงข้อความสถานะแบบ Modal
@@ -412,7 +520,7 @@
 <body class="bg-blue-50 text-gray-800 font-sans p-6 md:p-12">
     
     <!-- Status Message Box -->
-    <div id="message-box" class="fixed bottom-5 right-5 p-4 rounded-lg shadow-lg z-50 transition-opacity duration-300 opacity-0">
+    <div id="message-box" class="fixed bottom-5 right-5 p-4 rounded-lg shadow-lg z-50 text-white transition-opacity duration-300 opacity-0">
         <p id="message-text"></p>
     </div>
 
@@ -439,159 +547,186 @@
         <header class="bg-blue-600 text-white p-6 md:p-8 rounded-t-3xl shadow-inner">
             <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Trading Journal</h1>
             <p class="mt-1 text-blue-200">บันทึกการเทรดของคุณให้เป็นระบบ</p>
-            <p class="mt-2 text-sm text-blue-300">
-                <span class="font-semibold">User ID:</span> 
+            <p class="mt-2 text-sm text-blue-300 hidden" id="user-info-display">
+                <span class="font-semibold">ผู้ใช้ปัจจุบัน:</span> 
+                <span id="current-username" class="break-all font-bold"></span>
+                <span class="font-semibold ml-4">User ID:</span> 
                 <span id="user-id" class="break-all">...loading...</span>
             </p>
         </header>
 
-        <!-- Dashboard Section -->
-        <section class="p-6 md:p-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Total Trades Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-blue-700">จำนวนการเทรดทั้งหมด</h3>
-                    <p id="total-trades" class="mt-2 text-4xl font-bold text-gray-900">0</p>
-                </div>
-                <!-- Win Rate Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-blue-700">อัตราการชนะ (Win Rate)</h3>
-                    <p id="win-rate" class="mt-2 text-4xl font-bold text-gray-900">0%</p>
-                </div>
-                <!-- Total Profit Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-blue-700">กำไรสุทธิ</h3>
-                    <p id="total-profit" class="mt-2 text-4xl font-bold text-gray-900">0.00 $</p>
-                </div>
-                <!-- Lot Analysis Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-semibold text-blue-700">การวิเคราะห์ Lot</h3>
-                    <p class="mt-2 text-base font-bold text-gray-900">ล็อตคงที่: <span id="is-fixed-lot" class="font-normal text-gray-600">ไม่ใช่</span></p>
-                    <p class="mt-1 text-base font-bold text-gray-900">ล็อตเฉลี่ย: <span id="average-lot" class="font-normal text-gray-600">0.00</span></p>
-                </div>
-            </div>
-            
-            <hr class="my-8 border-t border-gray-200" />
-            
-            <!-- Charts Section -->
-            <div class="grid grid-cols-1 gap-8">
-                <!-- Total Profit Chart -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">กราฟกำไรสะสม</h3>
-                    <div id="profit-chart" class="h-64"></div>
-                </div>
-            </div>
-        </section>
+        <!-- Loading State -->
+        <div id="loading-state" class="p-8 text-center">
+            <p class="text-gray-500 text-lg">กำลังโหลด...</p>
+        </div>
 
-        <!-- Form Section and Trade List -->
-        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-8">
-            
-            <!-- Trade Entry Form -->
-            <div class="lg:col-span-1">
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <h2 class="text-2xl font-bold text-blue-800 mb-6">บันทึกรายการเทรดใหม่</h2>
-                    <form onsubmit="saveTrade(event)">
-                        <!-- Date -->
-                        <div class="mb-4">
-                            <label for="date" class="block text-sm font-medium text-gray-700">วันที่เข้าออเดอร์</label>
-                            <input type="date" id="date" name="date" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                        </div>
-                        <!-- Pair -->
-                        <div class="mb-4">
-                            <label for="pair" class="block text-sm font-medium text-gray-700">คู่เงิน/สินทรัพย์</label>
-                            <input type="text" id="pair" name="pair" placeholder="เช่น XAUUSD, BTCUSD" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                        </div>
-                        <!-- Lot Size -->
-                        <div class="mb-4">
-                            <label for="lotSize" class="block text-sm font-medium text-gray-700">ล็อตที่เข้า</label>
-                            <input type="number" step="any" id="lotSize" name="lotSize" placeholder="เช่น 0.01, 1.00" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                        </div>
-                        <!-- Entry, TP, SL -->
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <label for="entry" class="block text-sm font-medium text-gray-700">จุดเข้า</label>
-                                <input type="number" step="any" id="entry" name="entry" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                            </div>
-                            <div>
-                                <label for="tp" class="block text-sm font-medium text-gray-700">จุด TP</label>
-                                <input type="number" step="any" id="tp" name="tp" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                            </div>
-                            <div>
-                                <label for="sl" class="block text-sm font-medium text-gray-700">จุด SL</label>
-                                <input type="number" step="any" id="sl" name="sl" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                            </div>
-                        </div>
-                        <!-- Result -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">ผลการเทรด</label>
-                            <div class="mt-1 flex items-center space-x-6">
-                                <label class="flex items-center">
-                                    <input type="radio" name="result" value="win" class="form-radio text-green-500" checked>
-                                    <span class="ml-2 text-green-600 font-medium">ชนะ</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="result" value="loss" class="form-radio text-red-500">
-                                    <span class="ml-2 text-red-600 font-medium">แพ้</span>
-                                </label>
-                            </div>
-                        </div>
-                        <!-- Profit/Loss -->
-                        <div class="mb-4">
-                            <label for="profit" class="block text-sm font-medium text-gray-700">กำไร/ขาดทุน ($)</label>
-                            <input type="number" step="any" id="profit" name="profit" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
-                        </div>
-                        <!-- Reason -->
-                        <div class="mb-6">
-                            <label for="reason" class="block text-sm font-medium text-gray-700">เหตุผลการเข้า/ออก</label>
-                            <textarea id="reason" name="reason" rows="3" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2" placeholder="อธิบายกลยุทธ์, จุดที่มองเห็น หรือบทเรียนที่ได้จากการเทรดครั้งนี้"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full shadow-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            บันทึกรายการเทรด
-                        </button>
-                    </form>
-                </div>
+        <!-- Username Registration Form -->
+        <div id="username-form-container" class="hidden p-6 md:p-8">
+            <div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4 text-center">ลงทะเบียน/เข้าสู่ระบบด้วยชื่อผู้ใช้</h2>
+                <p class="text-gray-600 text-center mb-6">กรอกชื่อของคุณเพื่อเข้าสู่ระบบหรือลงทะเบียนเพื่อใช้งาน</p>
+                <form onsubmit="registerUsername(event)">
+                    <div class="mb-4">
+                        <label for="username-input" class="sr-only">ชื่อผู้ใช้</label>
+                        <input type="text" id="username-input" name="username" placeholder="ชื่อผู้ใช้" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2 text-center">
+                    </div>
+                    <button type="submit" class="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full shadow-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        เข้าสู่ระบบ / ลงทะเบียน
+                    </button>
+                </form>
             </div>
+        </div>
 
-            <!-- Trade List and Export -->
-            <div class="lg:col-span-1">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold text-blue-800">รายการเทรดทั้งหมด</h2>
-                    <div class="flex space-x-2">
-                        <label for="import-file" class="py-2 px-4 bg-blue-200 hover:bg-blue-300 text-blue-700 text-sm font-medium rounded-full shadow-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 cursor-pointer">
-                            อัปโหลด CSV
-                        </label>
-                        <input type="file" id="import-file" accept=".csv" class="hidden" onchange="importData(event)">
-                        <button onclick="exportData()" class="py-2 px-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium rounded-full shadow-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
-                            ส่งออกข้อมูล (CSV)
-                        </button>
+        <!-- Main Content (hidden by default) -->
+        <div id="main-content" class="hidden">
+            <!-- Dashboard Section -->
+            <section class="p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- Total Trades Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <h3 class="text-xl font-semibold text-blue-700">จำนวนการเทรดทั้งหมด</h3>
+                        <p id="total-trades" class="mt-2 text-4xl font-bold text-gray-900">0</p>
+                    </div>
+                    <!-- Win Rate Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <h3 class="text-xl font-semibold text-blue-700">อัตราการชนะ (Win Rate)</h3>
+                        <p id="win-rate" class="mt-2 text-4xl font-bold text-gray-900">0%</p>
+                    </div>
+                    <!-- Total Profit Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <h3 class="text-xl font-semibold text-blue-700">กำไรสุทธิ</h3>
+                        <p id="total-profit" class="mt-2 text-4xl font-bold text-gray-900">0.00 $</p>
+                    </div>
+                    <!-- Lot Analysis Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <h3 class="text-xl font-semibold text-blue-700">การวิเคราะห์ Lot</h3>
+                        <p class="mt-2 text-base font-bold text-gray-900">ล็อตคงที่: <span id="is-fixed-lot" class="font-normal text-gray-600">ไม่ใช่</span></p>
+                        <p class="mt-1 text-base font-bold text-gray-900">ล็อตเฉลี่ย: <span id="average-lot" class="font-normal text-gray-600">0.00</span></p>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-blue-50">
-                            <tr>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">วันที่</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">คู่เงิน</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">ล็อต</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">จุดเข้า</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">TP</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">SL</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">ผล</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">กำไร ($)</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">เหตุผล</th>
-                                <th scope="col" class="p-4 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">การจัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="trade-table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Trade rows will be dynamically inserted here -->
-                        </tbody>
-                    </table>
+                <hr class="my-8 border-t border-gray-200" />
+                
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 gap-8">
+                    <!-- Total Profit Chart -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 text-center">กราฟกำไรสะสม</h3>
+                        <div id="profit-chart" class="h-64"></div>
+                    </div>
                 </div>
-            </div>
-        </main>
-    </div>
+            </section>
 
+            <!-- Form Section and Trade List -->
+            <main class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-8">
+                
+                <!-- Trade Entry Form -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <h2 class="text-2xl font-bold text-blue-800 mb-6">บันทึกรายการเทรดใหม่</h2>
+                        <form onsubmit="saveTrade(event)">
+                            <!-- Date -->
+                            <div class="mb-4">
+                                <label for="date" class="block text-sm font-medium text-gray-700">วันที่เข้าออเดอร์</label>
+                                <input type="date" id="date" name="date" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                            </div>
+                            <!-- Pair -->
+                            <div class="mb-4">
+                                <label for="pair" class="block text-sm font-medium text-gray-700">คู่เงิน/สินทรัพย์</label>
+                                <input type="text" id="pair" name="pair" placeholder="เช่น XAUUSD, BTCUSD" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                            </div>
+                            <!-- Lot Size -->
+                            <div class="mb-4">
+                                <label for="lotSize" class="block text-sm font-medium text-gray-700">ล็อตที่เข้า</label>
+                                <input type="number" step="any" id="lotSize" name="lotSize" placeholder="เช่น 0.01, 1.00" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                            </div>
+                            <!-- Entry, TP, SL -->
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label for="entry" class="block text-sm font-medium text-gray-700">จุดเข้า</label>
+                                    <input type="number" step="any" id="entry" name="entry" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                                </div>
+                                <div>
+                                    <label for="tp" class="block text-sm font-medium text-gray-700">จุด TP</label>
+                                    <input type="number" step="any" id="tp" name="tp" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                                </div>
+                                <div>
+                                    <label for="sl" class="block text-sm font-medium text-gray-700">จุด SL</label>
+                                    <input type="number" step="any" id="sl" name="sl" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                                </div>
+                            </div>
+                            <!-- Result and Profit -->
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="result" class="block text-sm font-medium text-gray-700">ผลการเทรด</label>
+                                    <select id="result" name="result" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                                        <option value="win">ชนะ</option>
+                                        <option value="loss">แพ้</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="profit" class="block text-sm font-medium text-gray-700">กำไร/ขาดทุน ($)</label>
+                                    <input type="number" step="any" id="profit" name="profit" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2">
+                                </div>
+                            </div>
+                            <!-- Reason -->
+                            <div class="mb-4">
+                                <label for="reason" class="block text-sm font-medium text-gray-700">เหตุผลในการเข้าเทรด</label>
+                                <textarea id="reason" name="reason" rows="3" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out px-4 py-2"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full shadow-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                บันทึกการเทรด
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Trade List and Actions -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                        <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-blue-800 mb-4 sm:mb-0">รายการเทรดทั้งหมด</h2>
+                            <div class="flex flex-wrap justify-end gap-2">
+                                <button onclick="exportData()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition duration-200">
+                                    ส่งออก CSV
+                                </button>
+                                <button onclick="document.getElementById('importFile').click()" class="px-4 py-2 bg-orange-500 text-white rounded-lg shadow-md hover:bg-orange-600 transition duration-200">
+                                    นำเข้า CSV
+                                </button>
+                                <input type="file" id="importFile" class="hidden" onchange="importData(event)" accept=".csv">
+                                <!-- ปุ่มใหม่สำหรับส่งออกไปยัง Google Sheets -->
+                                <button onclick="syncToGoogleSheet()" class="px-4 py-2 bg-purple-500 text-white rounded-lg shadow-md hover:bg-purple-600 transition duration-200">
+                                    ส่งออกไป Google Sheets
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">วันที่</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">คู่เงิน</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ล็อต</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">จุดเข้า</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">TP</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">SL</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ผล</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">กำไร ($)</th>
+                                        <th scope="col" class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">เหตุผล</th>
+                                        <th scope="col" class="p-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">ลบ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trade-table-body" class="bg-white divide-y divide-gray-200">
+                                    <!-- Trade data will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
 </body>
 </html>
