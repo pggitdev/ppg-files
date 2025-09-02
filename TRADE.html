@@ -374,8 +374,8 @@
                 showStatusMessage('กรุณาลงทะเบียนชื่อผู้ใช้ก่อนส่งออกข้อมูล', 'error');
                 return;
             }
-
-            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxDefUA8QrG67Nikr4bcP3-ubtLzPmSGnKzRvX-iKVXq1aDd3eK1QiOXfaPdDxmzjYV6A/exec'; // <-- กรุณาเปลี่ยนเป็น URL ของคุณ
+            // แก้ไข: เพิ่มเครื่องหมายคำพูด (Quotation marks) ครอบ URL
+            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxDefUA8QrG67Nikr4bcP3-ubtLzPmSGnKzRvX-iKVXq1aDd3eK1QiOXfaPdDxmzjYV6A/exec';
             if (googleSheetUrl === 'https://script.google.com/macros/s/AKfycbxDefUA8QrG67Nikr4bcP3-ubtLzPmSGnKzRvX-iKVXq1aDd3eK1QiOXfaPdDxmzjYV6A/exec') {
                 showStatusMessage('กรุณาตั้งค่า URL ของ Google Apps Script ก่อน', 'error');
                 return;
