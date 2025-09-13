@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปวาระการประชุมใหญ่วิสามัญ | ศุภาลัย เบลล่า วงแหวน ลำลูกกา คลอง 6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #00529B, #002B5B);
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="max-w-4xl mx-auto p-4 md:p-8">
+
+        <!-- Header Section -->
+        <header class="text-center p-6 bg-white rounded-2xl shadow-lg mb-8 border-t-8 border-blue-800">
+            <img src="https://placehold.co/150x50/002B5B/FFFFFF?text=SUPALAI" alt="Supalai Logo" class="mx-auto mb-4 h-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-900">เชิญประชุมใหญ่วิสามัญ ครั้งสำคัญ!</h1>
+            <p class="text-lg text-gray-600 mt-2">นิติบุคคลหมู่บ้านจัดสรร ศุภาลัย เบลล่า วงแหวน ลำลูกกา คลอง 6</p>
+            <div class="mt-6 p-4 gradient-bg text-white rounded-xl shadow-inner inline-block">
+                <p class="text-xl font-semibold">วันอาทิตย์ที่ 14 กันยายน 2568</p>
+                <p class="text-lg">เวลา 10.00 - 12.00 น. (ลงทะเบียน 09.30 น.)</p>
+                <p class="text-lg font-medium">ณ บริเวณสวนสาธารณะ</p>
+            </div>
+        </header>
+
+        <!-- Main Agenda Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-lg mb-8">
+            <h2 class="text-2xl font-bold text-center text-blue-900 mb-6">วาระสำคัญที่ต้องตัดสินใจร่วมกัน</h2>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div class="bg-blue-50 p-6 rounded-xl border-2 border-blue-200 hover:shadow-xl transition-shadow">
+                    <div class="mx-auto bg-blue-600 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-800">พิจารณารับมอบสาธารณูปโภค</h3>
+                    <p class="text-gray-600 mt-2">ตัดสินใจรับมอบพื้นที่ส่วนกลาง ถนน และระบบต่างๆ จากโครงการ</p>
+                </div>
+                <div class="bg-orange-50 p-6 rounded-xl border-2 border-orange-200 hover:shadow-xl transition-shadow">
+                    <div class="mx-auto bg-orange-500 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"/><path d="M19.5 16s-3.33-3-7.5-3-7.5 3-7.5 3"/><line x1="12" x2="12" y1="2" y2="8"/><line x1="4.22" x2="7.76" y1="4.22" y2="7.76"/><line x1="19.78" x2="16.24" y1="4.22" y2="7.76"/></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-orange-800">รับรองงานซ่อม Defect</h3>
+                    <p class="text-gray-600 mt-2">ตรวจสอบและรับรองรายการซ่อมแซมจุดบกพร่องทั้งหมดจากศุภาลัย</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl border-2 border-green-200 hover:shadow-xl transition-shadow">
+                    <div class="mx-auto bg-green-500 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-green-800">พิจารณาสร้างสำนักงานนิติฯ</h3>
+                    <p class="text-gray-600 mt-2">ลงมติเรื่องการก่อสร้างอาคารสำนักงานเพื่อการบริหารจัดการที่มีประสิทธิภาพ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Defect Data Visualization Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-lg mb-8">
+            <h2 class="text-2xl font-bold text-center text-blue-900 mb-2">สรุปภาพรวมจุดบกพร่อง (Defect) ที่ต้องพิจารณา</h2>
+            <p class="text-center text-gray-500 mb-8">จากเอกสารสำรวจทั้งหมด พบรายการที่ต้องซ่อมแซมจำนวนมาก</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Chart 1: Public Utilities -->
+                <div>
+                    <h3 class="text-xl font-semibold text-center text-gray-700 mb-4">ปัญหาพื้นที่ส่วนกลางและถนน (รวม 815 รายการ)</h3>
+                    <div class="chart-container">
+                        <canvas id="utilitiesChart"></canvas>
+                    </div>
+                </div>
+                <!-- Chart 2: Fence -->
+                <div>
+                    <h3 class="text-xl font-semibold text-center text-gray-700 mb-4">ปัญหาแนวรั้วโครงการ (รวม 354 รายการ)</h3>
+                    <div class="chart-container">
+                        <canvas id="fenceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Detailed Breakdown Section -->
+            <div class="mt-12 pt-8 border-t-2 border-gray-200 grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">รายละเอียดปัญหาพื้นที่ส่วนกลางฯ:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>ผิวถนนแตกร้าว/ชำรุด</span> <span class="font-bold text-red-600 text-lg">316 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>ถนนเป็นหลุม/ผิวหน้าเสียหาย</span> <span class="font-bold text-orange-600 text-lg">198 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>รางระบายน้ำและบ่อพัก</span> <span class="font-bold text-green-600 text-lg">120 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>ถนนทรุด/ซ่อมโครงสร้าง</span> <span class="font-bold text-purple-600 text-lg">86 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>ทางเท้าและคันหิน</span> <span class="font-bold text-blue-600 text-lg">75 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>อื่นๆ</span> <span class="font-bold text-gray-600 text-lg">20 รายการ</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">รายละเอียดปัญหาแนวรั้วโครงการ:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>เสาและคานแตกร้าว (โครงสร้าง)</span> <span class="font-bold text-red-600 text-lg">257 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>แผ่นกำแพง/อิฐบล็อกเสียหาย</span> <span class="font-bold text-orange-600 text-lg">81 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>เสาเข็ม/รั้วเอียง (ฐานราก)</span> <span class="font-bold text-purple-600 text-lg">15 รายการ</span></li>
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg"><span>อื่นๆ</span> <span class="font-bold text-gray-600 text-lg">1 รายการ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="gradient-bg text-white p-8 rounded-2xl shadow-lg text-center">
+            <h2 class="text-3xl font-bold mb-4">ทุกเสียงของท่านมีความสำคัญ!</h2>
+            <p class="text-lg mb-6">การตัดสินใจของท่านในวันนี้ จะส่งผลต่อคุณภาพชีวิตและมูลค่าทรัพย์สินของพวกเราทุกคนในระยะยาว</p>
+            <div class="bg-white/20 p-4 rounded-lg">
+                <p>หากไม่สามารถเข้าร่วมประชุมได้ กรุณามอบฉันทะให้บุคคลที่ท่านไว้วางใจ</p>
+                <p class="mt-2">ติดต่อรับเอกสารและสอบถามข้อมูลเพิ่มเติมได้ที่:</p>
+                <p class="font-semibold mt-2">โทร: 080-847-3358 | Email: supalaibellaklong@gmail.com</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Data for Chart 1: Public Utilities Defects
+        const utilitiesData = {
+            labels: [
+                'ผิวถนนแตกร้าว/ชำรุด', // E, AE, K
+                'ถนนเป็นหลุม/ผิวหน้าเสียหาย', // C
+                'ถนนทรุด/ซ่อมโครงสร้าง', // A, B
+                'ทางเท้าและคันหิน', // J, AF
+                'รางระบายน้ำและบ่อพัก', // U, M, AG, AH, AI
+                'อื่นๆ'
+            ],
+            datasets: [{
+                label: 'จำนวนรายการ',
+                data: [316, 198, 86, 75, 120, 20],
+                backgroundColor: [
+                    '#EF4444', // Red
+                    '#F97316', // Orange
+                    '#A855F7', // Purple
+                    '#3B82F6', // Blue
+                    '#10B981', // Green
+                    '#6B7280'  // Gray
+                ],
+                borderColor: '#FFFFFF',
+                borderWidth: 3,
+                hoverOffset: 4
+            }]
+        };
+
+        // Data for Chart 2: Fence Defects
+        const fenceData = {
+            labels: [
+                'เสาและคานแตกร้าว (โครงสร้าง)', // C,D,E,F,G,H,I,J
+                'แผ่นกำแพง/อิฐบล็อกเสียหาย', // L, B, M
+                'เสาเข็ม/รั้วเอียง (ฐานราก)', // O, A
+                'อื่นๆ'
+            ],
+            datasets: [{
+                label: 'จำนวนรายการ',
+                data: [257, 81, 15, 1],
+                 backgroundColor: [
+                    '#EF4444', // Red
+                    '#F97316', // Orange
+                    '#A855F7', // Purple
+                    '#6B7280'  // Gray
+                ],
+                borderColor: '#FFFFFF',
+                borderWidth: 3,
+                hoverOffset: 4
+            }]
+        };
+
+        // Chart Config
+        const createChartConfig = (chartData) => ({
+            type: 'doughnut',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: "'Kanit', sans-serif",
+                                size: 14,
+                            },
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        titleFont: {
+                            family: "'Kanit', sans-serif",
+                        },
+                        bodyFont: {
+                            family: "'Kanit', sans-serif",
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + ' รายการ';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        // Render Charts
+        window.onload = function() {
+            const utilitiesCtx = document.getElementById('utilitiesChart').getContext('2d');
+            new Chart(utilitiesCtx, createChartConfig(utilitiesData));
+
+            const fenceCtx = document.getElementById('fenceChart').getContext('2d');
+            new Chart(fenceCtx, createChartConfig(fenceData));
+        };
+    </script>
+
+</body>
+</html>
+
