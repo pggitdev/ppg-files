@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เอกสารประกอบการประชุมใหญ่สามัญประจำปี 2568 | หมู่บ้านภูริ ประตูน้ำพระอินทร์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #005C97, #363795);
+        }
+        .agenda-card {
+            background-color: #ffffff;
+            border-left: 5px solid #005C97;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 80px; /* Offset for sticky nav */
+        }
+        .agenda-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .pie-chart {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background-image: conic-gradient(
+                #ef4444 0% 62%, 
+                #10b981 62% 93%, 
+                #a7f3d0 93% 100%
+            );
+        }
+        .section-title {
+            border-bottom: 3px solid #363795;
+            padding-bottom: 0.5rem;
+        }
+        details > summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] .arrow-down {
+            transform: rotate(180deg);
+        }
+        .arrow-down {
+            transition: transform 0.2s ease-in-out;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .nav-link.active {
+            color: #0284c7; /* sky-600 */
+            font-weight: 600;
+            border-bottom: 2px solid #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center items-center gap-x-4 md:gap-x-8 py-2">
+                <li><a href="#agenda1" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 1</a></li>
+                <li><a href="#agenda2" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 2</a></li>
+                <li><a href="#agenda3" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 3</a></li>
+                <li><a href="#agenda4" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 4</a></li>
+                <li><a href="#agenda5" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 5</a></li>
+                <li><a href="#agenda6" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 6</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        
+        <header class="text-center mb-8 md:mb-12 pt-8">
+            <h1 class="text-3xl md:text-5xl font-bold text-slate-900">เอกสารประกอบการประชุมใหญ่สามัญ</h1>
+            <h2 class="text-2xl md:text-4xl font-semibold text-sky-800 mt-2">ประจำปี 2568</h2>
+            <p class="text-lg md:text-xl text-slate-600 mt-4">นิติบุคคลหมู่บ้านจัดสรร ภูริ ประตูน้ำพระอินทร์</p>
+        </header>
+
+        
+        <section class="gradient-header text-white rounded-2xl p-6 mb-10 md:mb-16 shadow-xl">
+            <div class="flex flex-col md:flex-row justify-around items-center text-center space-y-4 md:space-y-0">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                    <p class="font-semibold text-lg">วันอาทิตย์ที่ 28 กันยายน 2568</p>
+                </div>
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <p class="font-semibold text-lg">เวลา 10:00 - 12:00 น.</p>
+                </div>
+                <div class="flex items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <p class="font-semibold text-lg">ณ บริเวณสวนสาธารณะ (เต็นท์ชั่วคราว)</p>
+                </div>
+            </div>
+        </section>
+        
+        <main class="space-y-12">
+            
+            <section id="agenda1" class="agenda-card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 1: แจ้งเพื่อทราบ</h3>
+                <p class="text-slate-700">ประธานแจ้งให้ที่ประชุมทราบว่า "นิติบุคคลหมู่บ้านจัดสรร ภูริ ประตูน้ำพระอินทร์" ได้รับการจดทะเบียนจัดตั้งอย่างเป็นทางการเมื่อวันที่ 23 เมษายน 2568 โดยมีวัตถุประสงค์เพื่อบริหารจัดการและดูแลบำรุงรักษาสาธารณูปโภคและบริการสาธารณะเพื่อประโยชน์ของสมาชิกทุกท่าน</p>
+            </section>
+
+            
+            <section id="agenda2" class="agenda-card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 2: เรื่องเพื่อรับรอง</h3>
+                <div class="space-y-4">
+                    <div>
+                        <p class="mb-2"><span class="font-semibold">2.1 รับรองระเบียบการพักอาศัย:</span> ขอให้ที่ประชุมพิจารณารับรองระเบียบการพักอาศัยฉบับสมบูรณ์ เพื่อใช้เป็นแนวทางปฏิบัติร่วมกัน</p>
+                        <details class="bg-slate-100 rounded-lg">
+                            <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                                <span>คลิกเพื่อดูรายละเอียดระเบียบการพักอาศัย</span>
+                                <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                            </summary>
+                            <div class="p-4 md:p-6 border-t border-slate-200 space-y-6 text-slate-700">
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 1: ระเบียบการใช้ประโยชน์/ข้อปฏิบัติภายในบ้านพักอาศัยและการใช้ประโยชน์ในแปลงที่ดินจัดสรรภายในหมู่บ้าน</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>ท่านเจ้าของบ้านและสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้าน จะต้องช่วยกันดูแลรักษาที่ดินแปลงจัดสรร และ/หรือ สภาพบ้านให้อยู่ในสภาพที่ดี ไม่ทำลายทัศนียภาพตลอดจนภาพพจน์ และสถาปัตยกรรมที่ดีของหมู่บ้าน</li><li>ท่านเจ้าของบ้านและสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้าน ต้องไม่กระทำการใดๆที่กระทบสิทธิของผู้อื่นและขัดต่อศีลธรรมอันดีในการอาศัยอยู่ร่วมกัน ตลอดจนไม่ขัดขวางต่อการปฏิบัติงานของเจ้าหน้าที่รักษาความปลอดภัยหมู่บ้านโดยเด็ดขาด</li><li>บุคคลภายนอก หรือผู้เข้ามาติดต่อ จะต้องปฏิบัติตามระเบียบที่กำหนดไว้อย่างเคร่งครัด ทั้งนี้ ท่านเจ้าของบ้านและสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้าน จะต้องควบคุมบุคคลภายนอก หรือผู้เข้ามาติดต่อท่านให้ปฏิบัติตามระเบียบที่กำหนดไว้อย่างเคร่งครัด</li><li>ท่านเจ้าของบ้าน และสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้าน จะต้องดูแลรักษาต้นไม้ที่ปลูกบริเวณแปลงที่ดินของตน ไม่ให้ก่ออันตราย และ/หรือ รุกล้ำแปลงที่ดินของผู้อื่น</li><li>ท่านเจ้าของบ้าน และสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้าน จะต้องใช้คีย์การ์ดหรือสติกเกอร์ สำหรับผ่านเข้า - ออกหมู่บ้านทุกครั้ง สำหรับผู้เข้ามาติดต่อขอพบหรือทำการฝากส่งสิ่งของจะต้องทำการแลกบัตรและบันทึกข้อมูลที่ฝ่ายรักษาความปลอดภัยทุกครั้งเมื่อผ่านเข้า - ออกหมู่บ้าน</li><li>ท่านเจ้าของบ้านมีความประสงค์จะทำการโอนกรรมสิทธิแก่บุคคลอื่น จะต้องแจ้งชื่อ - ที่อยู่ หรือสถานที่ติดต่อของผู้รับโอนแก่ฝ่ายบริหารหมู่บ้านล่วงหน้าไม่น้อยกว่า 7 วัน</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 2: ระเบียบการใช้ประโยชน์ทรัพย์สินส่วนกลาง การใช้ประโยชน์สาธารณูปโภคและบริการสาธารณะ</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>ห้ามมิให้ท่านเจ้าของบ้านและสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้านปลูกสร้างตกแต่งต่อเติมหรือขยายรั้วของที่ดินจัดสรร รุกล้ำทางเท้า และริมฟุตบาทของหมู่บ้าน</li><li>ห้ามนำทรัพย์สินส่วนบุคคล รุกล้ำในบริเวณพื้นที่ส่วนกลาง และ/หรือ พื้นที่สาธารณูปโภค หรือบริการสาธารณะของหมู่บ้านโดยเด็ดขาด</li><li>ห้ามมิให้ท่านเจ้าของบ้านและสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้านนำสัตว์เลี้ยงที่มิได้มีสายลากจูงหรือสัตว์เลี้ยงที่ดุร้าย หรืออาจก่อให้เกิดอันตราย เข้ามาบริเวณที่ดินแปลงสาธารณูปโภค หรือบริการสาธารณะ</li><li>ห้ามท่านเจ้าของบ้าน และสมาชิกผู้ใช้ประโยชน์ภายในหมู่บ้าน ใช้ที่ดินส่วนกลาง และ/หรือ ที่ดินแปลงสาธารณูปโภค หรือบริการสาธารณะผิดวัตถุประสงค์การใช้เพื่อประโยชน์ส่วนรวม อันก่อให้เกิดความเดือดร้อนรำคาญแก่ท่านเจ้าของบ้านอื่น ๆ</li><li>ห้ามขีดเขียนปิดป้ายโฆษณา และปิดประกาศทุกชนิด ในบริเวณพื้นที่ส่วนกลาง พื้นที่สาธารณูปโภค หรือบริการสาธารณะของหมู่บ้าน</li><li>ฝ่ายบริหารหมู่บ้านขอสงวนสิทธิที่จะไม่ต้อนรับบุคคลใดๆที่แต่งกายหรือประพฤติไม่สุภาพเป็นที่รังเกียจ หรือกระทำการอื่นใดที่ไม่เหมาะสม หรือขัดต่อกฎหมาย และระเบียบหมู่บ้าน</li><li>ห้ามมิให้บุคคลใดๆที่เป็นโรคติดต่อร้ายแรงใช้บริการสาธารณูปโภคหรือบริการสาธารณะของหมู่บ้านโดยเด็ดขาด</li><li>ห้ามเคลื่อนย้ายหรือครอบครองทรัพย์สินส่วนกลางของหมู่บ้านทุกชนิดโดยเด็ดขาด</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 3: ระเบียบการปลูกสร้าง การต่อเติมตกแต่ง และการดำเนินการของผู้รับเหมา</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>การก่อสร้าง แก้ไข ดัดแปลง ตกแต่งและต่อเติม ถือว่าการรับประกันบ้านสิ้นสุดลง หากมีการจัดตั้งนิติบุคคลฯ แล้ว สิทธิและหน้าที่ตามระเบียบนี้จะโอนไปยังนิติบุคคลฯ ทันที</li><li>อนุญาตให้ท่านเจ้าของบ้านทำการตกแต่งภายในอาคารเท่านั้น</li><li>ห้ามต่อเติมบ้าน เว้นแต่ได้รับอนุญาตจากหน่วยงานราชการ และต้องมอบแบบให้ฝ่ายบริหารหมู่บ้านตรวจสอบเพื่อดูแลผลกระทบต่อส่วนกลางเท่านั้น</li><li>หากการก่อสร้างไม่ตรงตามที่ขออนุญาต บริษัทมีสิทธิสั่งระงับและปิดกั้นมิให้ผู้รับเหมาเข้าพื้นที่ได้</li><li>ห้ามกระทำการใด ๆ อันเป็นการเปลี่ยนแปลงรูปแบบโครงสร้าง และสถาปัตยกรรมภายนอกบ้าน</li><li>ห้ามดำเนินการใดๆอันเป็นเหตุให้เกิดสูญเสียความมั่นคงแข็งแรงของโครงสร้างอาคาร รวมถึงเปลี่ยนแปลงระบบสุขาภิบาล ไฟฟ้า ประปา</li><li>ห้ามก่อสร้าง แก้ไข ดัดแปลง ตกแต่ง ต่อเติม รุกล้ำในบริเวณพื้นที่ส่วนกลางโดยเด็ดขาด</li><li>ก่อนดำเนินการก่อสร้าง ต้องมีการตรวจสอบพื้นที่ส่วนกลางร่วมกันระหว่างเจ้าของบ้าน ผู้รับเหมา และฝ่ายบริหารหมู่บ้าน</li><li>ผู้รับเหมาจะต้องจัดส่งหนังสือแจ้งความจำนงขอเข้าดำเนินการ พร้อมระยะเวลาในการทำงาน</li><li>ข้อปฏิบัติของผู้รับเหมา: ต้องติดบัตร, ห้ามเทเศษปูนลงท่อ, ห้ามวางวัสดุบนพื้นที่ส่วนกลาง, ป้องกันฝุ่นและเศษวัสดุ, ทำความสะอาดพื้นที่, ใช้อุปกรณ์แจ้งเตือนเมื่อกีดขวางจราจร, ทำเอกสารขนย้ายของทุกครั้ง, นำขยะไปทิ้งนอกโครงการ, ใช้ความเร็วไม่เกิน 30 กม./ชม., ให้ความร่วมมือในการตรวจค้น, ห้ามเสพยาเสพติด-ดื่มสุรา-เล่นการพนัน-ทะเลาะวิวาท, ห้ามนำสัตว์เลี้ยงเข้ามา, ห้ามพักค้างคืน และต้องรับผิดชอบค่าเสียหายที่เกิดขึ้น</li><li>เมื่อเสร็จสิ้นการก่อสร้าง ให้เจ้าของบ้านแจ้งฝ่ายบริหารหมู่บ้านเพื่อตรวจสอบความเสียหาย (ถ้ามี)</li><li>ระเบียบการเข้า-ออกของผู้รับเหมา: ต้องแจ้งชื่อคนงาน, ผู้ไม่มีชื่อต้องแลกบัตร (ฝ่าฝืนปรับ 1,000 บาท), ต้องวางบัตรอนุญาตไว้หน้ารถ</li><li>ระเบียบการปฏิบัติงาน: ทำงาน จันทร์-เสาร์ 08:00-17:00 น., ทำงานล่วงเวลา (ไม่เกิน 19:00 น.) ต้องแจ้งล่วงหน้า, รับประทานอาหารในพื้นที่ทำงาน และรักษาความสะอาด</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 4: ระเบียบการใช้สาธารณูปโภค ในส่วนถนน และทางเท้า</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>ปฏิบัติตามเครื่องหมายจราจรของหมู่บ้าน</li><li>ห้ามใช้ความเร็วเกินกว่า 30 กิโลเมตรต่อชั่วโมง</li><li>ห้ามล้างรถ หรือซ่อมแซมเครื่องยนต์บนถนนและทางเท้า</li><li>ต้องจอดรถยนต์ภายในบ้าน หากมีรถเกินจำนวนช่องจอด ให้จอดในที่ที่กำหนดเท่านั้น</li><li>ห้ามจอดรถกีดขวางทางเข้า-ออกหน้าบ้านของสมาชิกท่านอื่น</li><li>ห้ามจอดรถบริเวณทางเข้า-ออกหมู่บ้านหรือบดบังทัศนวิสัย</li><li>ห้ามจอดรถในบริเวณเส้นทางคับขัน บริเวณโค้งถนน ทางร่วม ทางแยก และช่องกลับรถ</li><li>ห้ามทำการขนย้ายวัตถุที่ก่อให้เกิดเสียงดังรบกวนหลังเวลา 18:00 น. เป็นต้นไป</li><li>ห้ามนำสิ่งของหรือจอดรถยนต์กีดขวางบนถนนและทางเท้าในลักษณะจองพื้นที่ส่วนตัว</li><li>บริษัทฯ ไม่รับผิดชอบต่อความเสียหายหรือสูญหายของทรัพย์สินหรือยานพาหนะที่นำมาจอดบนถนนและทางเท้า</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 5: ระเบียบการเข้า-ออก โครงการ</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>รถยนต์ของสมาชิกที่มีบัตรคีย์การ์ดและสติกเกอร์ไม่ต้องแลกบัตร</li><li>สมาชิกมีสิทธิได้รับบัตรคีย์การ์ด/สติกเกอร์ จำนวน 2 สิทธิต่อหนึ่งแปลงที่ดินโดยไม่มีค่าใช้จ่าย</li><li>กรณีทำบัตร/สติกเกอร์สูญหายหรือชำรุด จะต้องชำระค่าธรรมเนียมตามที่กำหนด</li><li>สติกเกอร์มีอายุการใช้งานคราวละ 1 ปี</li><li>บุคคลภายนอกต้องแลกบัตรประชาชนหรือใบขับขี่, แจ้งบ้านเลขที่ที่จะไปติดต่อ และให้เจ้าของบ้านประทับตราลงในบัตรผ่านก่อนออกจากหมู่บ้าน</li><li>ห้ามนำรถบรรทุกเกินกว่าหกล้อ หรือรถบัสโดยสาร เข้ามาในหมู่บ้านโดยเด็ดขาด</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 6: ระเบียบการรักษาความสะอาด และการทิ้งขยะ</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>สมาชิกจะต้องดูแลรักษาความสะอาดบริเวณหน้าบ้านของตนเองอยู่เสมอ</li><li>ไม่ทิ้งเศษอาหาร หรือวัสดุที่ย่อยสลายไม่ได้ลงท่อระบายน้ำ</li><li>ขยะขนาดใหญ่ เช่น กิ่งไม้, โฟม ขอให้สมาชิกนำไปทิ้งภายนอกหมู่บ้านเอง</li><li>ห้ามทิ้งขยะในที่ห้ามทิ้ง หรือตัดกิ่งไม้วางบนพื้นที่ส่วนกลาง</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 7: ระเบียบการเลี้ยงสัตว์ภายในหมู่บ้าน</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>ต้องจัดหาสัญลักษณ์แสดงความเป็นเจ้าของสัตว์เลี้ยง เช่น ปลอกคอ</li><li>ต้องฉีดวัคซีนป้องกันโรคต่างๆ ให้สัตว์เลี้ยง</li><li>ห้ามนำสัตว์เลี้ยงที่เป็นอันตราย ดุร้าย หรือน่ารังเกียจเข้ามาในหมู่บ้าน</li><li>ต้องเลี้ยงสัตว์เลี้ยงภายในบริเวณบ้านของตนเองเท่านั้น</li><li>เมื่อนำสัตว์เลี้ยงออกมาภายนอกบ้าน ต้องมีสายลากจูงตลอดเวลา</li><li>เจ้าของต้องรับผิดชอบค่าเสียหายและค่ารักษาพยาบาล หากสัตว์เลี้ยงไปทำอันตรายต่อผู้อื่น</li><li>หากสัตว์เลี้ยงสร้างความเดือดร้อนให้ผู้อื่น เจ้าของต้องแก้ไขทันที หากเพิกเฉยจะแจ้งหน่วยงานที่เกี่ยวข้องมาดำเนินการ</li><li>หากสัตว์เลี้ยงถ่ายมูลในที่สาธารณะ เจ้าของต้องทำความสะอาดทันที</li><li>บริษัทฯ ไม่รับผิดชอบหากสัตว์เลี้ยงเกิดอุบัติเหตุในพื้นที่ส่วนกลาง</li><li>ต้องควบคุมสัตว์เลี้ยงไม่ให้ส่งเสียงดังรบกวน</li><li>กรณีไม่อยู่บ้านเป็นเวลานาน ต้องเคลื่อนย้ายสัตว์เลี้ยงไปไว้ที่เหมาะสม</li><li>ห้ามนำสัตว์เลี้ยงเข้ามาในบริเวณที่ประกาศห้าม</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 8: ระเบียบการใช้สระว่ายน้ำ</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>ให้บริการเฉพาะสมาชิกและครอบครัวเท่านั้น เปิด 06:00 - 21:00 น.</li><li>ห้ามผู้ป่วยโรคติดต่อ, โรคหัวใจ, ความดัน, หอบหืด, โรคผิวหนัง, ผู้มีบาดแผล หรือมีประจำเดือนใช้บริการ</li><li>เด็กอายุต่ำกว่า 12 ปี ต้องมีผู้ปกครองดูแลอย่างใกล้ชิด</li><li>ต้องสวมหมวกและชุดว่ายน้ำ และต้องชำระล้างร่างกายก่อนลงสระ</li><li>ห้ามบ้วนน้ำลาย, สั่งน้ำมูก, ปัสสาวะ หรือถ่ายของเสียลงสระ</li><li>ห้ามนำอาหาร, เครื่องดื่ม, ของมึนเมา, บุหรี่, สัตว์เลี้ยง หรือภาชนะที่แตกได้เข้ามาบริเวณสระ</li><li>เจ้าของต้องรับผิดชอบในความปลอดภัยและทรัพย์สินของตนเอง และชดใช้ค่าเสียหายหากทำอุปกรณ์ชำรุด</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 9: ระเบียบการใช้ห้องออกกำลังกาย</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>ให้บริการเฉพาะสมาชิกและครอบครัวเท่านั้น เปิด 06:00 - 21:00 น.</li><li>เด็กอายุต่ำกว่า 12 ปี ต้องมีผู้ปกครองดูแลอย่างใกล้ชิด</li><li>ต้องใช้เครื่องออกกำลังกายให้ถูกต้องตามคู่มือ และปฏิบัติตามกฎระเบียบ</li><li>โปรดรักษาความสะอาดและไม่รบกวนผู้อื่น</li><li>ห้ามนำสัตว์เลี้ยงเข้ามา และห้ามขโมยอุปกรณ์</li><li>เจ้าของต้องรับผิดชอบในความปลอดภัยและทรัพย์สินของตนเอง และชดใช้ค่าเสียหายหากทำอุปกรณ์ชำรุด</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 10: ระเบียบการใช้สวนสาธารณะส่วนกลาง</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>มีไว้สำหรับพักผ่อน, เดินเล่น, ออกกำลังกาย</li><li>โปรดรักษาความสะอาด และเก็บขยะทุกครั้ง</li><li>ห้ามจัดงานเลี้ยง, สังสรรค์ หรือดื่มสุรา</li><li>ห้ามนำสัตว์เลี้ยงมาขับถ่าย (หากเกิดต้องทำความสะอาดทันที)</li><li>ห้ามนำทรัพย์สินส่วนตัวมาวาง และห้ามทิ้งขยะทุกชนิด</li><li>ห้ามนำต้นไม้ส่วนตัวมาปลูก และห้ามเด็ดหรือทำลายต้นไม้ในสวน</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 11: ระเบียบการชำระค่าบริการสาธารณะ</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>สมาชิกยินยอมชำระค่าบริการสาธารณะตามอัตราที่กำหนด</li><li>ฝ่ายบริหารหมู่บ้านเป็นตัวแทนในการจัดเก็บและบริหารค่าใช้จ่าย</li><li>หากผิดนัดชำระ ต้องชำระค่าปรับในอัตราร้อยละ 10 ต่อปีของยอดเงินที่ค้างชำระ</li></ul></div>
+                                <div class="space-y-2"><h4 class="font-bold text-lg text-slate-800">หมวดที่ 12: บทกำหนดโทษ</h4><ul class="list-decimal list-inside pl-4 space-y-1"><li>หากสมาชิกฝ่าฝืนระเบียบและได้รับการแจ้งเตือนเป็นลายลักษณ์อักษรแล้วยังเพิกเฉย จะมีมาตรการดังนี้:
+                                    <ul class="list-disc list-inside pl-6">
+                                        <li>ระงับการให้บริการสาธารณูปโภคบางประเภท เช่น คีย์การ์ด, สโมสร, สระว่ายน้ำ จนกว่าจะปฏิบัติให้ถูกต้อง</li>
+                                        <li>หากการฝ่าฝืนก่อให้เกิดความเสียหายต่อทรัพย์ส่วนกลาง จะมีการเรียกร้องค่าเสียหายเพิ่มเติม</li>
+                                    </ul>
+                                </li>
+                                </ul></div>
+                            </div>
+                        </details>
+                    </div>
+                    <div>
+                        <p class="mb-2"><span class="font-semibold">2.2 รับรองงบประมาณประจำปี 2569:</span> ขอให้ที่ประชุมพิจารณารับรองงบประมาณรายรับ-รายจ่าย ประจำปี 2569 เพื่อใช้ในการบริหารจัดการหมู่บ้านต่อไป</p>
+                        
+                        <details class="bg-slate-100 rounded-lg">
+                            <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                                <span>คลิกเพื่อดูรายละเอียดงบประมาณประจำปี 2569</span>
+                                <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                            </summary>
+                            <div class="p-4 border-t border-slate-200 overflow-x-auto">
+                                <h4 class="font-bold text-lg mb-2 text-center">งบประมาณการรายรับ-รายจ่าย ปี 2569</h4>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                                    <div class="bg-blue-100 p-3 rounded-lg">
+                                        <p class="font-semibold">ประมาณการรายรับ 100%</p>
+                                        <p>337,437.00 <span class="text-sm">/เดือน</span></p>
+                                        <p>4,049,244.00 <span class="text-sm">/ปี</span></p>
+                                    </div>
+                                    <div class="bg-green-100 p-3 rounded-lg">
+                                        <p class="font-semibold">ประมาณการรายรับ 90%</p>
+                                        <p>303,693.30 <span class="text-sm">/เดือน</span></p>
+                                        <p>3,644,319.60 <span class="text-sm">/ปี</span></p>
+                                    </div>
+                                     <div class="bg-orange-100 p-3 rounded-lg">
+                                        <p class="font-semibold">ประมาณการรายรับ 80%</p>
+                                        <p>269,949.60 <span class="text-sm">/เดือน</span></p>
+                                        <p>3,239,395.20 <span class="text-sm">/ปี</span></p>
+                                    </div>
+                                </div>
+
+                                <table class="w-full text-sm text-left text-slate-600">
+                                    <thead class="text-xs text-slate-700 uppercase bg-slate-200">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-3">รายการค่าใช้จ่าย</th>
+                                            <th scope="col" class="px-4 py-3 text-right">ประมาณการ (รายเดือน)</th>
+                                            <th scope="col" class="px-4 py-3 text-right">ประมาณการ (รายปี)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-sky-100 font-bold"><td colspan="3" class="px-4 py-2">หมวดที่ 1: ค่าจ้างตามสัญญา</td></tr>
+                                        <tr><td class="px-4 py-2">งานรักษาความปลอดภัย (รปภ. 4 อัตรา)</td><td class="px-4 py-2 text-right">78,000.00</td><td class="px-4 py-2 text-right">936,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">งานบริหารนิติบุคคล (ผจก. 1 / ธุรการ 1)</td><td class="px-4 py-2 text-right">68,200.00</td><td class="px-4 py-2 text-right">818,400.00</td></tr>
+                                        <tr><td class="px-4 py-2">งานแม่บ้านดูแลอาคารสโมสร (แม่บ้าน 1 อัตรา)</td><td class="px-4 py-2 text-right">6,000.00</td><td class="px-4 py-2 text-right">72,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">งานดูแลสวน (พนักงาน 2 อัตรา)</td><td class="px-4 py-2 text-right">22,000.00</td><td class="px-4 py-2 text-right">264,000.00</td></tr>
+                                        <tr><td class="px-4 py-2 border-b">งานดูแลสระว่ายน้ำ</td><td class="px-4 py-2 text-right border-b">4,300.00</td><td class="px-4 py-2 text-right border-b">51,600.00</td></tr>
+                                        <tr class="font-semibold"><td class="px-4 py-2">รวมค่าใช้จ่ายตามสัญญา</td><td class="px-4 py-2 text-right">174,200.00</td><td class="px-4 py-2 text-right">2,142,000.00</td></tr>
+
+                                        <tr class="bg-sky-100 font-bold"><td colspan="3" class="px-4 py-2">หมวดที่ 2: ค่าใช้จ่ายระบบสาธารณูปโภค</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าไฟฟ้าส่องสว่างพื้นที่ส่วนกลาง</td><td class="px-4 py-2 text-right">24,000.00</td><td class="px-4 py-2 text-right">288,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าน้ำประปา (อาคารสโมสร)</td><td class="px-4 py-2 text-right">1,500.00</td><td class="px-4 py-2 text-right">18,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าโทรศัพท์ และ Internet</td><td class="px-4 py-2 text-right">133.33</td><td class="px-4 py-2 text-right">1,599.96</td></tr>
+                                        <tr><td class="px-4 py-2 border-b">ค่าจัดเก็บขยะในครัวเรือน</td><td class="px-4 py-2 text-right border-b">14,220.00</td><td class="px-4 py-2 text-right border-b">170,640.00</td></tr>
+                                        <tr class="font-semibold"><td class="px-4 py-2">รวมค่าใช้จ่ายระบบสาธารณูปโภค</td><td class="px-4 py-2 text-right">39,853.33</td><td class="px-4 py-2 text-right">478,239.96</td></tr>
+                                        
+                                        <tr class="bg-sky-100 font-bold"><td colspan="3" class="px-4 py-2">หมวดที่ 3: หมวดค่าจัดการ</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าธรรมเนียมธนาคาร</td><td class="px-4 py-2 text-right">125.00</td><td class="px-4 py-2 text-right">1,500.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าธรรมเนียมจัดทำเอกสาร</td><td class="px-4 py-2 text-right">1,000.00</td><td class="px-4 py-2 text-right">12,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าวัสดุสิ้นเปลืองสำนักงาน</td><td class="px-4 py-2 text-right">2,000.00</td><td class="px-4 py-2 text-right">24,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าใช้จ่ายในการเดินทาง</td><td class="px-4 py-2 text-right">500.00</td><td class="px-4 py-2 text-right">6,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าใช้จ่ายจัดประชุมใหญ่สามัญประจำปี</td><td class="px-4 py-2 text-right">2,500.00</td><td class="px-4 py-2 text-right">30,000.00</td></tr>
+                                        <tr><td class="px-4 py-2 border-b">ค่าตรวจสอบบัญชี (ปีละ 1 ครั้ง)</td><td class="px-4 py-2 text-right border-b">833.33</td><td class="px-4 py-2 text-right border-b">10,000.00</td></tr>
+                                        <tr class="font-semibold"><td class="px-4 py-2">รวมค่าใช้จ่ายหมวดค่าจัดการ</td><td class="px-4 py-2 text-right">6,958.33</td><td class="px-4 py-2 text-right">83,500.00</td></tr>
+
+                                        <tr class="bg-sky-100 font-bold"><td colspan="3" class="px-4 py-2">หมวดที่ 4: ค่าซ่อมแซมและบำรุงรักษาและงานพัฒนา</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าซ่อมแซมและบำรุงรักษาระบบไฟฟ้า</td><td class="px-4 py-2 text-right">3,000.00</td><td class="px-4 py-2 text-right">36,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าซ่อมแซมและบำรุงรักษาระบบกล้องวงจรปิด(CCTV)</td><td class="px-4 py-2 text-right">13,333.33</td><td class="px-4 py-2 text-right">160,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าซ่อมแซมและบำรุงรักษาระบบสระว่ายน้ำ</td><td class="px-4 py-2 text-right">2,000.00</td><td class="px-4 py-2 text-right">24,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าซ่อมแซมและบำรุงรักษา-งานปรับปรุงภูมิทัศน์</td><td class="px-4 py-2 text-right">2,000.00</td><td class="px-4 py-2 text-right">24,000.00</td></tr>
+                                        <tr><td class="px-4 py-2">ค่าซ่อมแซมและบำรุงรักษาทรัพย์สินส่วนกลาง</td><td class="px-4 py-2 text-right">2,000.00</td><td class="px-4 py-2 text-right">24,000.00</td></tr>
+                                        <tr><td class="px-4 py-2 border-b">ค่าใช้จ่ายวัสดุอุปกรณ์งานช่าง</td><td class="px-4 py-2 text-right border-b">2,000.00</td><td class="px-4 py-2 text-right border-b">24,000.00</td></tr>
+                                        <tr class="font-semibold"><td class="px-4 py-2">รวมค่าใช้จ่ายการซ่อมแซมและบำรุงรักษา</td><td class="px-4 py-2 text-right">24,333.33</td><td class="px-4 py-2 text-right">292,000.00</td></tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="bg-slate-200 font-bold text-lg">
+                                            <td class="px-4 py-3">รวมค่าใช้จ่ายทั้งสิ้น</td>
+                                            <td class="px-4 py-3 text-right">245,344.99</td>
+                                            <td class="px-4 py-3 text-right">2,995,739.97</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="agenda3" class="agenda-card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 3: รายงานผลการดำเนินงาน ปี 2568</h3>
+                <div class="space-y-4">
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.1 ด้านบริหารจัดการทั่วไปและสัญญาบริการต่างๆ</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200 space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-slate-800">ขอบเขตการดำเนินงาน:</h4>
+                                <ul class="list-disc list-inside pl-4 mt-2 space-y-1 text-slate-700">
+                                    <li>ดูแลการประชุมใหญ่, จัดทำทะเบียนสมาชิก, ติดต่อประสานงานหน่วยงานราชการ</li>
+                                    <li>จัดทำงบประมาณ, จัดเก็บค่าส่วนกลาง, จัดทำบัญชีและรายงานการเงิน, ติดตามหนี้ค้างชำระ</li>
+                                    <li>ดูแลบำรุงรักษาสาธารณูปโภค (ถนน, ท่อระบายน้ำ, ไฟฟ้า, สวน)</li>
+                                    <li>บริหารงาน รปภ., ดูแลระบบกล้องวงจรปิด, กำหนดมาตรการความปลอดภัย</li>
+                                    <li>ดูแลการเก็บขยะ, ความสะอาดพื้นที่ส่วนกลาง, และงานสวน</li>
+                                    <li>บังคับใช้ข้อบังคับหมู่บ้าน และให้คำปรึกษาด้านกฎหมายที่เกี่ยวข้อง</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-slate-800">สัญญาบริการ:</h4>
+                                <div class="overflow-x-auto mt-2">
+                                    <table class="w-full text-sm">
+                                        <thead class="bg-slate-200"><tr><th>รายการ</th><th>คู่สัญญา</th><th>พนักงาน</th><th>ค่าบริการ (ต่อเดือน)</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>งานบริหารจัดการ</td><td>บจก. ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป</td><td>2 อัตรา</td><td>73,000 บาท</td></tr>
+                                            <tr><td>งานรักษาความปลอดภัย</td><td>บจก. รักษาความ ปลอดภัย สยามอิรเตอร์กรุ๊ป</td><td>4 อัตรา</td><td>78,000 บาท</td></tr>
+                                            <tr><td>งานเก็บขยะครัวเรือน</td><td>อบต.พยอม</td><td>-</td><td>14,200 บาท</td></tr>
+                                            <tr><td>งานดูแลสระว่ายน้ำ</td><td>นายคัมภัร์ ทวีเหลือ</td><td>1 อัตรา</td><td>4,300 บาท</td></tr>
+                                            <tr><td>งานดูแลความสะอาดสโมสร</td><td>นางอุษาภรณ์ สุขชม</td><td>1 อัตรา</td><td>วันละ 500 บาท</td></tr>
+                                            <tr><td>งานดูแลรักษาสวน</td><td>นายประทีบ จองลองแสน, นายณัฐกร จวนสาง</td><td>2 อัตรา</td><td>22,000 บาท</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.2 ด้านระบบบัญชีและการเงิน</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200">
+                             <h4 class="font-semibold text-slate-800 mb-2">สถานะบัญชีธนาคาร (ณ 17 ก.ย. 2568):</h4>
+                             <table class="w-full text-sm">
+                                <thead class="bg-slate-200"><tr><th>ประเภทบัญชี</th><th>ธนาคาร</th><th>เลขที่บัญชี</th><th class="text-right">ยอดคงเหลือ</th></tr></thead>
+                                <tbody>
+                                    <tr><td>เดินสะพัด</td><td>SCB</td><td>345-300880-9</td><td class="text-right">2,068,756.00 บาท</td></tr>
+                                    <tr><td>ออมทรัพย์</td><td>SCB</td><td>345-436541-6</td><td class="text-right">307,643.10 บาท</td></tr>
+                                    <tr class="font-bold"><td>รวมทั้งสิ้น</td><td colspan="2"></td><td class="text-right">2,376,399.10 บาท</td></tr>
+                                </tbody>
+                             </table>
+                        </div>
+                    </details>
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.3 รายงานสถานะการจัดเก็บค่าส่วนกลาง</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                         <div class="p-4 border-t border-slate-200">
+                            <h4 class="text-lg font-semibold text-slate-800 mb-4 text-center">สถานะการชำระค่าส่วนกลาง (ณ 20 ก.ย. 2568)</h4>
+                            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                                <div class="pie-chart flex-shrink-0"></div>
+                                <div class="w-full md:w-auto">
+                                    <div class="flex items-center mb-2 p-2 bg-red-100 rounded">
+                                        <span class="w-4 h-4 rounded-full bg-red-500 mr-3"></span>
+                                        <p>ยังไม่ชำระ / ไม่มีการเคลื่อนไหว: <span class="font-bold">62% (294 หลัง)</span></p>
+                                    </div>
+                                    <div class="flex items-center mb-2 p-2 bg-emerald-100 rounded">
+                                        <span class="w-4 h-4 rounded-full bg-emerald-500 mr-3"></span>
+                                        <p>ชำระรายเดือน: <span class="font-bold">31% (149 หลัง)</span></p>
+                                    </div>
+                                    <div class="flex items-center p-2 bg-green-100 rounded">
+                                        <span class="w-4 h-4 rounded-full bg-emerald-200 mr-3"></span>
+                                        <p>ชำระรายปี: <span class="font-bold">7% (32 หลัง)</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.4 รายงานผลงานพัฒนาและปรุงหมู่บ้านฯ</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/12qy8ajFfV5DdTGI_pCciWq0HCGUpzf5m" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">1. คนสวนเปลี่ยนสายชำระให้ลูกบ้าน (งานช่วยเหลือเบื้องต้น)</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1FY6vw4BHxGcluvv9tqEjISWJuWk910oG" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">2. คนสวนดำเนินการตัดหญ้าทางกลับรถ</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1rmX-sI9TXxmE_9Z4TGP2WdSe2R01CbC9" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">3. ดำเนินการขนย้ายจัดของในสโมสร</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1NBBJN8JcIX9XX1ltDQgTkjZvMxVrl6nq" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">4. ดำเนินการแจกกล่อง ใบแจ้งหนี้ค่าไฟฟ้า</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1IsJZcQIMcXriSZNVH6r6w8MLxey7yeqH" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">5. ควบคุม กำกับการตัดหญ้าทีมงานคนสวน</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1ZokH_RxTFLmQ9JA4PrkbiQuyZAO2jDLh" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">6. ดำเนินการตรวจสอบลูกบ้านขับรถชนไม้กระดก</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1IajQ51Ss8UtxP2C7Q0-wnwVbA_4IQivK" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">7. ควบคุมดูแลการไฟฟ้า เปลี่ยนหลอดไฟ แสงจันทร์</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1JHLTgVyH1L_-lYHM6ln8WJJRj6L3IXUX" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">8. เดินทางประสานงาน กรมบังคับคดีเพื่อยื่นกันหนี้บ้านสมาชิกฯ</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1Op157hsU7t3F4Nc2_delVxFcdF3I6E56" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">9. ดำเนินการไปรับเช็คนิติที่ธนาคาร</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1_ph5XXOpZihhmk1q6HggQ-YLzw7fE4J_" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">10. ดำเนินขอน้ำให้ลูกบ้านเนื่องจากน้ำประปาไม่ไหล</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1AnU90Zobgu2o6LaP-DL4nuBdBVwY9yEg" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">11. ดำเนินซ่อม ลู่วิ่ง บอร์ดแผงวงจร</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1xG0cyUZyfS53rUiWA_r0D54fKchQj1RU" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">12. เดินทางประสานงานกรมที่ดิน เพื่อยื่นจดทะเบียนคณะกรรมการ</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1LYdb0Z_9SnPVKMJ8LG-AzqiaUyzToyBb" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">13. ดำเนินการตรวจสอบกลิ่นไฟไหม้พบว่าหลังหมู่บ้านได้เผานา</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1FaB_OjYSJGfeMlukHYhdddQhYZkVAK9-" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">14. ผู้รับเหมา ซ่อมแซมลู่วิ่ง ตัวที่ 2 ได้เข้ามาตรวจสอบ และ แก้ไข</p></div>
+                                <div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://lh5.googleusercontent.com/d/1cCuwInjaGoPuddBB8hpFIUW6FKTzCmFj" class="w-full h-48 object-cover"><p class="p-3 text-sm text-slate-700">15. ตัดแต่งกิ่งไม้โดยรอบโครงการ</p></div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.5 งานรักษาความปลอดภัย</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200 space-y-2 text-slate-700">
+                           <p><span class="font-semibold">คู่สัญญา:</span> บริษัท รักษาความ ปลอดภัย สยามอิรเตอร์กรุ๊ป จำกัด</p>
+                           <p><span class="font-semibold">จำนวนพนักงาน:</span> 4 อัตรา (ผลัดกลางวัน 2 อัตรา / ผลัดกลางคืน 2 อัตรา)</p>
+                           <p><span class="font-semibold">เวลาปฏิบัติงาน:</span> ผลัดกลางวัน 06:00 - 18:00 น., ผลัดกลางคืน 18:00 - 06:00 น.</p>
+                        </div>
+                    </details>
+                     <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.6 งานดูแลรักษาความสะอาดและงานสวน</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200 space-y-2 text-slate-700">
+                           <p><span class="font-semibold">คู่สัญญา:</span> นายประทีบ จองลองแสน, นายณัฐกร จวนสาง</p>
+                           <p><span class="font-semibold">จำนวนพนักงาน:</span> 2 อัตรา</p>
+                        </div>
+                    </details>
+                     <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.7 งานจัดเก็บขยะครัวเรือน</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200 space-y-2 text-slate-700">
+                           <p>ดำเนินการโดย อบต.พยอม เข้าจัดเก็บสัปดาห์ละ 2 ครั้ง (วันพุธ และ วันอาทิตย์)</p>
+                        </div>
+                    </details>
+                     <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.8 งานดูแลสระว่ายน้ำ</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200 space-y-2 text-slate-700">
+                           <p><span class="font-semibold">ผู้ดูแล:</span> นายคัมภัร์ ทวีเหลือ (1 อัตรา)</p>
+                        </div>
+                    </details>
+                     <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.9 งานดูแลรักษาความสะอาดสโมสร</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-200 space-y-2 text-slate-700">
+                            <p><span class="font-semibold">ผู้ดูแล:</span> นางอุษาภรณ์ สุขชม (1 อัตรา)</p>
+                           <p>เข้าปฏิบัติงานสัปดาห์ละ 3 วัน (จันทร์, พุธ, เสาร์)</p>
+                        </div>
+                    </details>
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.10 รายงานการใช้สาธารณูปโภค ค่าไฟฟ้า</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                         <div class="p-4 border-t border-slate-200 space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-slate-800 mb-2">ตารางค่าไฟฟ้าส่วนกลาง เดือน ม.ค. - ส.ค. 2568</h4>
+                                <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                <thead class="bg-slate-200"><tr><th>เดือน</th><th class="text-right">ค่าไฟฟ้า (บาท)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>ม.ค.</td><td class="text-right">14,877.11</td></tr>
+                                    <tr><td>ก.พ.</td><td class="text-right">12,928.93</td></tr>
+                                    <tr><td>มี.ค.</td><td class="text-right">13,726.45</td></tr>
+                                    <tr><td>เม.ย.</td><td class="text-right">12,972.00</td></tr>
+                                    <tr><td>พ.ค.</td><td class="text-right">12,972.00</td></tr>
+                                    <tr><td>มิ.ย.</td><td class="text-right">21,168.04</td></tr>
+                                    <tr><td>ก.ค.</td><td class="text-right">24,270.42</td></tr>
+                                    <tr><td>ส.ค.</td><td class="text-right">23,909.11</td></tr>
+                                </tbody>
+                                </table>
+                                </div>
+                                <div class="mt-4 bg-white p-4 rounded-lg shadow">
+                                    <canvas id="electricChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>3.11 รายงานการใช้สาธารณูปโภค ค่าน้ำประปา</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                         <div class="p-4 border-t border-slate-200 space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-slate-800 mb-2">ตารางค่าน้ำประปาสโมสร เดือน ม.ค. - ส.ค. 2568</h4>
+                                <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                <thead class="bg-slate-200"><tr><th>เดือน</th><th class="text-right">ค่าน้ำ (บาท)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>ม.ค.</td><td class="text-right">0.00</td></tr>
+                                    <tr><td>ก.พ.</td><td class="text-right">0.00</td></tr>
+                                    <tr><td>มี.ค.</td><td class="text-right">0.00</td></tr>
+                                    <tr><td>เม.ย.</td><td class="text-right">0.00</td></tr>
+                                    <tr><td>พ.ค.</td><td class="text-right">0.00</td></tr>
+                                    <tr><td>มิ.ย.</td><td class="text-right">0.00</td></tr>
+                                    <tr><td>ก.ค.</td><td class="text-right">2,715.66</td></tr>
+                                    <tr><td>ส.ค.</td><td class="text-right">1,377.09</td></tr>
+                                </tbody>
+                                </table>
+                                </div>
+                                <div class="mt-4 bg-white p-4 rounded-lg shadow">
+                                    <canvas id="waterChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            
+            <section id="agenda4" class="agenda-card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 4: เรื่องเพื่อพิจารณาอนุมัติ</h3>
+                <div class="space-y-4 text-slate-700">
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-semibold text-lg">4.1 รูปแบบการจัดเก็บค่าบริการสาธารณะ:</p>
+                        <p>เสนอพิจารณาเพิ่มทางเลือกการชำระค่าส่วนกลางเป็น <span class="font-bold">ราย 3 เดือน, 6 เดือน และ 12 เดือน</span> เพื่อเพิ่มสภาพคล่องทางการเงินให้นิติบุคคลฯ และลดภาระการติดตามค่าใช้จ่าย</p>
+                    </div>
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-semibold text-lg">4.2 กำหนดระยะเวลาชำระค่าบริการสาธารณะ:</p>
+                        <p>เสนอพิจารณากำหนดให้ชำระภายใน <span class="font-bold">วันที่ 10 ของเดือนถัดไป</span>ในแต่ละรอบบิล หากเกินกำหนดจะมีค่าปรับ <span class="font-bold">10% ต่อปี</span> ของยอดค้างชำระ ตามข้อบังคับข้อ 29</p>
+                    </div>
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                         <p class="font-semibold text-lg">4.3 ผู้สอบบัญชีประจำปี 2568:</p>
+                        <details class="mt-2">
+                            <summary class="font-semibold text-sky-700 cursor-pointer">คลิกเพื่อดูรายละเอียดและตารางเปรียบเทียบผู้สอบบัญชี</summary>
+                            <div class="overflow-x-auto pt-2">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-slate-200">
+                                        <tr>
+                                            <th>รายการ</th>
+                                            <th>บจก. ตรวจสอบบัญชี เอ็นวาย พลัส</th>
+                                            <th>บจก. อินโฟล แอคเคาน์ติ้ง</th>
+                                            <th>บจก. แอท แอนด์ แอสโซซิเอท</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>ราคาค่าสอบบัญชี</td><td>9,000.00</td><td>12,000.00</td><td>10,000.00</td></tr>
+                                        <tr><td>ค่าเดินทาง</td><td>3,000.00</td><td>-</td><td>ไม่เข้าร่วมประชุม</td></tr>
+                                        <tr><td>ค่าแปลเอกสาร (อังกฤษ)</td><td>-</td><td>-</td><td>2,000.00</td></tr>
+                                        <tr><td>ประสบการณ์</td><td>30 ปี</td><td>20 ปี</td><td>12 ปี</td></tr>
+                                        <tr><td>ระยะเวลาตรวจสอบ</td><td>1-2 สัปดาห์</td><td>-</td><td>4-10 วัน</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-semibold text-lg">4.4 และ 4.5 สร้างโรงจอดรถจักรยานยนต์:</p>
+                        <p>พิจารณาขอใช้พื้นที่บริเวณสวนหน้าหมู่บ้าน (กว้าง 5 เมตร, ยาว 30 เมตร) และขออนุมัติงบประมาณเพื่อดำเนินการก่อสร้าง</p>
+                         <details class="mt-2">
+                            <summary class="font-semibold text-sky-700 cursor-pointer">คลิกเพื่อดูตารางเปรียบเทียบราคา</summary>
+                            <div class="overflow-x-auto pt-2">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-slate-200">
+                                        <tr>
+                                            <th>ผู้เสนอราคา</th>
+                                            <th>ราคารวม (บาท)</th>
+                                            <th>เงื่อนไข</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>นาย อรรถพันธ์ คำชู</td><td class="text-right">390,336.00</td><td>-</td></tr>
+                                        <tr><td>นาย ปรีดา สุขขีรี</td><td class="text-right">680,000.00</td><td>เบิกจ่าย 3 งวด</td></tr>
+                                        <tr><td>นางสาว อภิรักษ์ คนซื่อ</td><td class="text-right">660,000.00</td><td>-</td></tr>
+                                    </tbody>
+                                </table>
+                                <p class="text-xs mt-2">*หมายเหตุ: งบประมาณที่ขออนุมัติในเอกสารวาระการประชุมคือ 150,000 บาท ซึ่งอาจต้องมีการพิจารณาปรับลดขนาดหรือรูปแบบตามใบเสนอราคา</p>
+                            </div>
+                        </details>
+                    </div>
+                     <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-semibold text-lg">4.6 เปลี่ยนระบบไม้กั้น:</p>
+                        <p>พิจารณาเปลี่ยนระบบไม้กั้นทางเข้า-ออกจากระบบเดิม เป็น <span class="font-bold">ระบบกล้องส่องป้ายทะเบียน (LPR)</span> เพื่อเพิ่มความสะดวกและความปลอดภัย</p>
+                        <details class="mt-2">
+                            <summary class="font-semibold text-sky-700 cursor-pointer">คลิกเพื่อดูตารางเปรียบเทียบราคา</summary>
+                             <div class="overflow-x-auto pt-2">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-slate-200">
+                                        <tr>
+                                            <th>ผู้เสนอราคา</th>
+                                            <th>ราคารวม (บาท)</th>
+                                            <th>การรับประกัน</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>AUTOPASS</td><td class="text-right">187,678.00</td><td>2 ปี (MA ปีละ 9,600)</td></tr>
+                                        <tr><td>DAIP</td><td class="text-right">196,906.75</td><td>3 ปี</td></tr>
+                                        <tr><td>JT SOLUTIONS</td><td class="text-right">156,113.00</td><td>2 ปี (MA ปีละ 18,000)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="p-4 bg-slate-100 rounded-lg">
+                        <p class="font-semibold text-lg">4.7 ติดตั้งถังดับเพลิง:</p>
+                        <p>พิจารณาจัดซื้อและติดตั้งถังดับเพลิงตามจุดต่างๆ ในพื้นที่ส่วนกลางเพื่อความปลอดภัย</p>
+                        <details class="mt-2">
+                            <summary class="font-semibold text-sky-700 cursor-pointer">คลิกเพื่อดูตารางเปรียบเทียบราคา</summary>
+                             <div class="overflow-x-auto pt-2">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-slate-200">
+                                        <tr>
+                                            <th>ผู้เสนอราคา</th>
+                                            <th>ราคารวม (บาท)</th>
+                                            <th>เงื่อนไข</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>บจก. อำนวยการดับเพลิง</td><td class="text-right">82,069.00</td><td>รับประกัน 5 ปี</td></tr>
+                                        <tr><td>หจก. สมบูรณ์พาณิช</td><td class="text-right">94,106.50</td><td>รับประกัน 7 ปี</td></tr>
+                                        <tr><td>PACIFIC PLAN INTERNATIONAL</td><td class="text-right">88,168.00</td><td>-</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="agenda5" class="agenda-card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 5: พิจารณาแต่งตั้งคณะกรรมการ (เพิ่มเติม)</h3>
+                <div class="space-y-6">
+                    <details class="bg-slate-100 rounded-lg">
+                        <summary class="p-4 flex justify-between items-center font-semibold text-sky-700">
+                            <span>ข้อบังคับนิติบุคคลฯ หมวดที่ 4: คณะกรรมการหมู่บ้านจัดสรร</span>
+                            <svg class="w-6 h-6 arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </summary>
+                        <div class="p-4 md:p-6 border-t border-slate-200 space-y-3 text-sm text-slate-700">
+                            <p><strong class="font-semibold">ข้อ 8:</strong> ให้มีคณะกรรมการเป็นผู้ดำเนินกิจการของนิติบุคคลฯ ตามกฎหมายและข้อบังคับ</p>
+                            <p><strong class="font-semibold">ข้อ 9:</strong> คณะกรรมการมาจากการเลือกตั้งของสมาชิกในที่ประชุมใหญ่</p>
+                            <p><strong class="font-semibold">ข้อ 10:</strong> คณะกรรมการประกอบด้วยประธาน 1 คน และกรรมการอีกไม่น้อยกว่า 8 คน แต่ไม่เกิน 10 คน</p>
+                            <p><strong class="font-semibold">ข้อ 11:</strong> ผู้มีสิทธิ์สมัครรับเลือกตั้งต้องมีคุณสมบัติตามที่กำหนด เช่น เป็นสมาชิก, ผู้ดูแลโดยชอบธรรม, มีความสามารถในการจัดการ, ไม่มีการกระทำผิดตามหลักฐานทะเบียนบ้าน เป็นต้น</p>
+                            <p><strong class="font-semibold">ข้อ 12:</strong> ประธานและกรรมการมีวาระดำรงตำแหน่งคราวละ 2 ปี และสามารถได้รับเลือกตั้งกลับเข้ารับตำแหน่งได้ไม่เกิน 2 วาระติดต่อกัน</p>
+                        </div>
+                    </details>
+                    
+                    <div>
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">คณะกรรมการนิติบุคคลหมู่บ้านจัดสรร ภูริ ประตูน้ำพระอินทร์ (วาระปี 2568-2570)</h4>
+                        <div id="org-chart-container" class="space-y-4">
+                            
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-slate-100 rounded-lg">
+                        <h4 class="text-lg font-semibold text-slate-800 mb-3">เพิ่ม/แก้ไขรายชื่อคณะกรรมการ</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <input type="text" id="committee-name" placeholder="ชื่อ-นามสกุล" class="md:col-span-2 p-2 border border-slate-300 rounded-md focus:ring-sky-500 focus:border-sky-500">
+                            <input type="text" id="committee-houseno" placeholder="บ้านเลขที่" class="p-2 border border-slate-300 rounded-md focus:ring-sky-500 focus:border-sky-500">
+                            <button id="add-committee-btn" class="bg-sky-600 text-white font-bold py-2 px-4 rounded-md hover:bg-sky-700 transition-colors">เพิ่มกรรมการ</button>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">คำแนะนำ: คลิกที่ชื่อหรือบ้านเลขที่เพื่อแก้ไขได้โดยตรง ใช้แบบฟอร์มนี้เพื่อเพิ่มกรรมการในตำแหน่งที่ว่าง</p>
+                    </div>
+                </div>
+            </section>
+            
+            
+            <section id="agenda6" class="agenda-card p-6 rounded-lg shadow-md">
+                 <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 6: เรื่องอื่นๆ (ถ้ามี)</h3>
+                 <p class="text-slate-700">เปิดโอกาสให้สมาชิกเสนอเรื่องอื่นๆ เพื่อพิจารณาและหารือร่วมกัน</p>
+            </section>
+        </main>
+
+        
+        <footer class="text-center text-slate-500 pt-8 mt-12 border-t border-slate-200">
+            <p class="font-bold text-lg text-slate-700">สอบถามข้อมูลเพิ่มเติม</p>
+            <p>นิติบุคคลหมู่บ้านจัดสรร ภูริ ประตูน้ำพระอินทร์</p>
+            <p>โทร: 094-230-6062 | Line ID: @995sqcsj | อีเมล: Puriestate249@gmail.com</p>
+            <p class="mt-4 text-xs">บริหารงานโดย บริษัท ไพรม์ พร็อพเพอร์ตี้ กรุ๊ป จำกัด</p>
+        </footer>
+
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- Sticky Nav Logic ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-60px 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Chart Config ---
+        Chart.defaults.font.family = "'Kanit', sans-serif";
+        
+        // Electric Chart
+        const ctxElectric = document.getElementById('electricChart');
+        if (ctxElectric) {
+            new Chart(ctxElectric, {
+                type: 'bar',
+                data: {
+                    labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.'],
+                    datasets: [{
+                        label: 'ค่าไฟฟ้า (บาท)',
+                        data: [14877.11, 12928.93, 13726.45, 12972.00, 12972.00, 21168.04, 24270.42, 23909.11],
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'กราฟแสดงค่าไฟฟ้าส่วนกลางปี 2568'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return value.toLocaleString('th-TH') + ' บาท';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Water Chart
+        const ctxWater = document.getElementById('waterChart');
+        if (ctxWater) {
+             new Chart(ctxWater, {
+                type: 'bar',
+                data: {
+                    labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.'],
+                    datasets: [{
+                        label: 'ค่าน้ำประปา (บาท)',
+                        data: [0, 0, 0, 0, 0, 0, 2715.66, 1377.09],
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                     responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'กราฟแสดงค่าน้ำประปาสโมสรปี 2568'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return value.toLocaleString('th-TH') + ' บาท';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+        // --- Org Chart Logic ---
+        const committeeData = [
+            { name: 'นายชาญวิทย์ แทนค่ำ', houseNo: '', position: 'ประธานกรรมการ', status: 'active' },
+            { name: 'นายสุรศักดิ์ ศรีสุวรรณ', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'ว่าที่ ร.ต.อัตถกิตติ์ บุญถิน', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'นายสุริยา แสงตะวัน', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'นายพิชานนท์ อึ่งเส็ง', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'ว่าที่ ร.ต.สุรชัย ไพรีรณ', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'นางสาวนิตยาพร นนนอก', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'นายภัทรพล อินทร์คล้าย', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'นางสาวพิกุล เสริฐศรี', houseNo: '', position: 'กรรมการ', status: 'active' },
+            { name: 'นางอุ่นเรือน กิ่งมะลิ', houseNo: '', position: 'กรรมการ', status: 'resigned' },
+            { name: 'นางสาวอรนุช นุ่มแน่น', houseNo: '', position: 'กรรมการ', status: 'resigned' }
+        ];
+
+        const maxCommitteeMembers = 11; // 1 President + 10 Members
+        const orgChartContainer = document.getElementById('org-chart-container');
+        const nameInput = document.getElementById('committee-name');
+        const houseNoInput = document.getElementById('committee-houseno');
+        const addButton = document.getElementById('add-committee-btn');
+
+        function renderOrgChart() {
+            orgChartContainer.innerHTML = '';
+            
+            // Render President
+            const president = committeeData[0];
+            const presidentCard = createMemberCard(president, 0);
+            const presidentContainer = document.createElement('div');
+            presidentContainer.className = 'flex justify-center mb-4';
+            presidentContainer.innerHTML = `
+                <div class="relative">
+                    ${presidentCard}
+                    <div class="absolute bottom-[-10px] left-1/2 w-0.5 h-[10px] bg-slate-400"></div>
+                </div>`;
+            orgChartContainer.appendChild(presidentContainer);
+
+            // Connector
+            const connector = document.createElement('div');
+            connector.className = 'mx-auto w-1/2 md:w-3/4 h-0.5 bg-slate-400 relative';
+            orgChartContainer.appendChild(connector);
+
+
+            // Render Members
+            const membersContainer = document.createElement('div');
+            membersContainer.className = 'grid grid-cols-2 md:grid-cols-5 gap-4 mt-4';
+            
+            for (let i = 1; i < maxCommitteeMembers; i++) {
+                const member = committeeData[i] || { name: '', houseNo: '', position: 'กรรมการ', status: 'empty' };
+                const memberCardHTML = createMemberCard(member, i);
+                const memberWrapper = document.createElement('div');
+                memberWrapper.className = 'relative flex justify-center';
+                memberWrapper.innerHTML = `
+                    <div class="absolute top-[-14px] left-1/2 w-0.5 h-[14px] bg-slate-400"></div>
+                    ${memberCardHTML}
+                `;
+                membersContainer.appendChild(memberWrapper);
+            }
+            orgChartContainer.appendChild(membersContainer);
+        }
+
+        function createMemberCard(member, index) {
+            let cardClasses = 'p-3 rounded-lg shadow-md text-center min-h-[110px] flex flex-col justify-center w-full max-w-[180px] relative';
+            let contentHTML = '';
+
+            switch (member.status) {
+                case 'active':
+                    cardClasses += ' bg-white border-l-4 border-sky-600';
+                    contentHTML = `
+                        <p class="font-bold text-sky-800">${member.position}</p>
+                        <p contenteditable="true" data-index="${index}" data-field="name" class="font-semibold text-slate-700 text-sm editable-field p-1 my-1 rounded hover:bg-slate-100 focus:bg-slate-200 outline-none">${member.name}</p>
+                        <p class="text-xs text-slate-500">บ้านเลขที่ 
+                           <span contenteditable="true" data-index="${index}" data-field="houseNo" class="editable-field p-1 rounded hover:bg-slate-100 focus:bg-slate-200 outline-none">${member.houseNo || '...'}</span>
+                        </p>`;
+                    break;
+                case 'resigned':
+                    cardClasses += ' bg-amber-100 border-l-4 border-amber-500';
+                    contentHTML = `
+                        <p class="font-bold text-amber-800">${member.position}</p>
+                        <p class="font-semibold text-slate-500 text-sm line-through">${member.name}</p>
+                        <p class="text-xs text-amber-700">(ลาออก)</p>`;
+                    break;
+                default: // empty
+                    cardClasses += ' bg-slate-200 border-dashed border-2 border-slate-400 flex items-center justify-center';
+                    contentHTML = '<p class="text-slate-500 text-sm">ตำแหน่งว่าง</p>';
+                    break;
+            }
+
+            return `<div class="${cardClasses}">${contentHTML}</div>`;
+        }
+
+        function addCommitteeMember() {
+            const name = nameInput.value.trim();
+            const houseNo = houseNoInput.value.trim();
+
+            if (!name) {
+                alert('กรุณากรอกชื่อ-นามสกุล');
+                return;
+            }
+
+            // Find first empty or resigned slot
+            let emptyIndex = committeeData.findIndex(m => m.status === 'empty' || m.status === 'resigned');
+            if (emptyIndex === -1) {
+                if (committeeData.length < maxCommitteeMembers) {
+                    emptyIndex = committeeData.length;
+                } else {
+                    alert('คณะกรรมการเต็มจำนวนแล้ว');
+                    return;
+                }
+            }
+            
+            // Cannot replace president (index 0)
+            if(emptyIndex === 0) {
+                 emptyIndex = committeeData.findIndex((m, idx) => (m.status === 'empty' || m.status === 'resigned') && idx > 0);
+                 if (emptyIndex === -1) {
+                     alert('ตำแหน่งกรรมการเต็มแล้ว');
+                     return;
+                 }
+            }
+
+
+            committeeData[emptyIndex] = {
+                name: name,
+                houseNo: houseNo,
+                position: 'กรรมการ',
+                status: 'active'
+            };
+            
+            nameInput.value = '';
+            houseNoInput.value = '';
+            renderOrgChart();
+        }
+
+        addButton.addEventListener('click', addCommitteeMember);
+
+        orgChartContainer.addEventListener('focusout', function(event) {
+            const target = event.target;
+            if (target.classList.contains('editable-field')) {
+                const index = parseInt(target.dataset.index, 10);
+                const field = target.dataset.field;
+                const newText = target.innerText.trim();
+
+                if (index >= 0 && committeeData[index]) {
+                    if (field === 'name' && newText === '') {
+                        if (index === 0) {
+                            alert('ไม่สามารถลบชื่อประธานได้');
+                            renderOrgChart();
+                            return;
+                        }
+                        committeeData[index] = { name: '', houseNo: '', position: 'กรรมการ', status: 'empty' };
+                        renderOrgChart();
+                    } else {
+                        committeeData[index][field] = newText;
+                    }
+                }
+            }
+        });
+        
+        orgChartContainer.addEventListener('keydown', function(event) {
+            if (event.target.classList.contains('editable-field') && event.key === 'Enter') {
+                event.preventDefault();
+                event.target.blur();
+            }
+        });
+
+
+        // Initial render
+        // Pad array to max size with empty slots
+        while(committeeData.length < maxCommitteeMembers) {
+            committeeData.push({ name: '', houseNo: '', position: 'กรรมการ', status: 'empty' });
+        }
+        renderOrgChart();
+    });
+</script>
+
+</body>
+</html>
+
