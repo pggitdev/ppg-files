@@ -67,6 +67,42 @@
             font-weight: 600;
             border-bottom: 2px solid #0284c7;
         }
+
+        /* Lightbox Styles */
+        #lightbox-modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #lightbox-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #lightbox-modal .lightbox-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        #lightbox-modal.show .lightbox-content {
+            transform: scale(1);
+        }
+        .compare-tray-thumb {
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border-color 0.2s;
+            height: 60px;
+            width: auto;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .compare-tray-thumb.active {
+            border-color: #0284c7; /* sky-600 */
+        }
+        #lightbox-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: all 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -74,12 +110,12 @@
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-md">
         <div class="container mx-auto px-4">
             <ul class="flex flex-wrap justify-center items-center gap-x-4 md:gap-x-8 py-2">
-                <li><a href="#agenda1" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 1</a></li>
-                <li><a href="#agenda2" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 2</a></li>
-                <li><a href="#agenda3" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 3</a></li>
-                <li><a href="#agenda4" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 4</a></li>
-                <li><a href="#agenda5" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 5</a></li>
-                <li><a href="#agenda6" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 6</a></li>
+                <li><a href="#p1" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 1</a></li>
+                <li><a href="#p2" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 2</a></li>
+                <li><a href="#p3" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 3</a></li>
+                <li><a href="#p4" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 4</a></li>
+                <li><a href="#p5" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 5</a></li>
+                <li><a href="#p6" class="nav-link text-slate-600 hover:text-sky-600 font-medium transition-colors py-2">วาระที่ 6</a></li>
             </ul>
         </div>
     </nav>
@@ -112,13 +148,13 @@
         
         <main class="space-y-12">
             
-            <section id="agenda1" class="agenda-card p-6 rounded-lg shadow-md">
+            <section id="p1" class="agenda-card p-6 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 1: แจ้งเพื่อทราบ</h3>
                 <p class="text-slate-700">ประธานแจ้งให้ที่ประชุมทราบว่า "นิติบุคคลหมู่บ้านจัดสรร ภูริ ประตูน้ำพระอินทร์" ได้รับการจดทะเบียนจัดตั้งอย่างเป็นทางการเมื่อวันที่ 23 เมษายน 2568 โดยมีวัตถุประสงค์เพื่อบริหารจัดการและดูแลบำรุงรักษาสาธารณูปโภคและบริการสาธารณะเพื่อประโยชน์ของสมาชิกทุกท่าน</p>
             </section>
 
             
-            <section id="agenda2" class="agenda-card p-6 rounded-lg shadow-md">
+            <section id="p2" class="agenda-card p-6 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 2: เรื่องเพื่อรับรอง</h3>
                 <div class="space-y-4">
                     <div>
@@ -236,7 +272,7 @@
             </section>
 
             
-            <section id="agenda3" class="agenda-card p-6 rounded-lg shadow-md">
+            <section id="p3" class="agenda-card p-6 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 3: รายงานผลการดำเนินงาน ปี 2568</h3>
                 <div class="space-y-4">
                     <details class="bg-slate-100 rounded-lg">
@@ -453,7 +489,7 @@
             </section>
 
             
-            <section id="agenda4" class="agenda-card p-6 rounded-lg shadow-md">
+            <section id="p4" class="agenda-card p-6 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 4: เรื่องเพื่อพิจารณาอนุมัติ</h3>
                 <div class="space-y-4 text-slate-700">
                     <div class="p-4 bg-slate-100 rounded-lg">
@@ -487,6 +523,42 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Quotation View Section -->
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <h5 class="font-semibold text-slate-700 mb-2">ดูใบเสนอราคา</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">บจก. ตรวจสอบบัญชี เอ็นวาย พลัส</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://lh5.googleusercontent.com/d/1_ph5XXOpZihhmk1q6HggQ-YLzw7fE4J_"
+                                            data-alt="ใบเสนอราคา บจก. ตรวจสอบบัญชี เอ็นวาย พลัส"
+                                            data-group="accountants">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">บจก. อินโฟล แอคเคาน์ติ้ง</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://lh5.googleusercontent.com/d/1_ph5XXOpZihhmk1q6HggQ-YLzw7fE4J_"
+                                            data-alt="ใบเสนอราคา บจก. อินโฟล แอคเคาน์ติ้ง"
+                                            data-group="accountants">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">บจก. แอท แอนด์ แอสโซซิเอท</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://lh5.googleusercontent.com/d/1_ph5XXOpZihhmk1q6HggQ-YLzw7fE4J_"
+                                            data-alt="ใบเสนอราคา บจก. แอท แอนด์ แอสโซซิเอท"
+                                            data-group="accountants">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </details>
                     </div>
                     <div class="p-4 bg-slate-100 rounded-lg">
@@ -511,6 +583,42 @@
                                 </table>
                                 <p class="text-xs mt-2">*หมายเหตุ: งบประมาณที่ขออนุมัติในเอกสารวาระการประชุมคือ 150,000 บาท ซึ่งอาจต้องมีการพิจารณาปรับลดขนาดหรือรูปแบบตามใบเสนอราคา</p>
                             </div>
+                             <!-- Quotation View Section -->
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <h5 class="font-semibold text-slate-700 mb-2">ดูใบเสนอราคา</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">นาย อรรถพันธ์ คำชู</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.5.1"
+                                            data-alt="ใบเสนอราคา นาย อรรถพันธ์ คำชู"
+                                            data-group="garage">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">นาย ปรีดา สุขขีรี</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                         <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.5.2"
+                                            data-alt="ใบเสนอราคา นาย ปรีดา สุขขีรี"
+                                            data-group="garage">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">นางสาว อภิรักษ์ คนซื่อ</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                         <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.5.3"
+                                            data-alt="ใบเสนอราคา นางสาว อภิรักษ์ คนซื่อ"
+                                            data-group="garage">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </details>
                     </div>
                      <div class="p-4 bg-slate-100 rounded-lg">
@@ -533,6 +641,42 @@
                                         <tr><td>JT SOLUTIONS</td><td class="text-right">156,113.00</td><td>2 ปี (MA ปีละ 18,000)</td></tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <!-- Quotation View Section -->
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <h5 class="font-semibold text-slate-700 mb-2">ดูใบเสนอราคา</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">AUTOPASS</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.6.1"
+                                            data-alt="ใบเสนอราคา AUTOPASS"
+                                            data-group="lpr">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">DAIP</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.6.2"
+                                            data-alt="ใบเสนอราคา DAIP"
+                                            data-group="lpr">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">JT SOLUTIONS</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.6.3"
+                                            data-alt="ใบเสนอราคา JT SOLUTIONS"
+                                            data-group="lpr">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </details>
                     </div>
@@ -557,13 +701,49 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Quotation View Section -->
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <h5 class="font-semibold text-slate-700 mb-2">ดูใบเสนอราคา</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">บจก. อำนวยการดับเพลิง</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.7.1"
+                                            data-alt="ใบเสนอราคา บจก. อำนวยการดับเพลิง"
+                                            data-group="fire">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">หจก. สมบูรณ์พาณิช</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.7.2"
+                                            data-alt="ใบเสนอราคา หจก. สมบูรณ์พาณิช"
+                                            data-group="fire">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-center mb-1 truncate">PACIFIC PLAN INTERNATIONAL</p>
+                                        <!-- TODO: ใส่ลิงก์รูปใบเสนอราคาจริงใน attribute "data-src" -->
+                                        <button class="open-lightbox-btn block w-full text-center cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 rounded-lg transition-colors"
+                                            data-src="https://placehold.co/800x1100/e2e8f0/334155?text=ใบเสนอราคา+4.7.3"
+                                            data-alt="ใบเสนอราคา PACIFIC PLAN INTERNATIONAL"
+                                            data-group="fire">
+                                            เปิดภาพ
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </details>
                     </div>
                 </div>
             </section>
 
             
-            <section id="agenda5" class="agenda-card p-6 rounded-lg shadow-md">
+            <section id="p5" class="agenda-card p-6 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 5: พิจารณาแต่งตั้งคณะกรรมการ (เพิ่มเติม)</h3>
                 <div class="space-y-6">
                     <details class="bg-slate-100 rounded-lg">
@@ -600,7 +780,7 @@
             </section>
             
             
-            <section id="agenda6" class="agenda-card p-6 rounded-lg shadow-md">
+            <section id="p6" class="agenda-card p-6 rounded-lg shadow-md">
                  <h3 class="text-2xl font-bold text-sky-800 mb-3 section-title">วาระที่ 6: เรื่องอื่นๆ (ถ้ามี)</h3>
                  <p class="text-slate-700">เปิดโอกาสให้สมาชิกเสนอเรื่องอื่นๆ เพื่อพิจารณาและหารือร่วมกัน</p>
             </section>
@@ -615,6 +795,27 @@
         </footer>
 
     </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black bg-opacity-80 z-[100] hidden items-center justify-center p-4 md:p-8">
+        <div class="lightbox-content bg-white rounded-lg shadow-2xl w-full h-full max-w-7xl max-h-[95vh] flex flex-col relative">
+            <button id="lightbox-close" class="absolute -top-4 -right-4 bg-white rounded-full p-2 text-slate-800 hover:bg-red-500 hover:text-white z-10 shadow-lg transition-transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="lightbox-image-container" class="flex-grow flex items-center justify-center gap-2 p-2 md:p-4 overflow-hidden">
+                <!-- Images will be injected here by JS -->
+            </div>
+            <div class="flex-shrink-0 bg-slate-100 p-2 border-t">
+                <h4 class="text-sm font-semibold text-center mb-2 text-slate-700">เลือกภาพเพื่อเปรียบเทียบ (สูงสุด 3 ภาพ)</h4>
+                <div id="lightbox-compare-tray" class="flex justify-center items-center gap-2 flex-wrap">
+                    <!-- Comparison thumbnails will be injected here by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -754,25 +955,17 @@
         function renderOrgChart() {
             orgChartContainer.innerHTML = '';
             
-            // Render President
             const president = committeeData[0];
             const presidentCard = createMemberCard(president, 0);
             const presidentContainer = document.createElement('div');
             presidentContainer.className = 'flex justify-center mb-4';
-            presidentContainer.innerHTML = `
-                <div class="relative">
-                    ${presidentCard}
-                    <div class="absolute bottom-[-10px] left-1/2 w-0.5 h-[10px] bg-slate-400"></div>
-                </div>`;
+            presidentContainer.innerHTML = `<div class="relative">${presidentCard}<div class="absolute bottom-[-10px] left-1/2 w-0.5 h-[10px] bg-slate-400"></div></div>`;
             orgChartContainer.appendChild(presidentContainer);
 
-            // Connector
             const connector = document.createElement('div');
             connector.className = 'mx-auto w-1/2 md:w-3/4 h-0.5 bg-slate-400 relative';
             orgChartContainer.appendChild(connector);
 
-
-            // Render Members
             const membersContainer = document.createElement('div');
             membersContainer.className = 'grid grid-cols-2 md:grid-cols-5 gap-4 mt-4';
             
@@ -781,10 +974,7 @@
                 const memberCardHTML = createMemberCard(member, i);
                 const memberWrapper = document.createElement('div');
                 memberWrapper.className = 'relative flex justify-center';
-                memberWrapper.innerHTML = `
-                    <div class="absolute top-[-14px] left-1/2 w-0.5 h-[14px] bg-slate-400"></div>
-                    ${memberCardHTML}
-                `;
+                memberWrapper.innerHTML = `<div class="absolute top-[-14px] left-1/2 w-0.5 h-[14px] bg-slate-400"></div>${memberCardHTML}`;
                 membersContainer.appendChild(memberWrapper);
             }
             orgChartContainer.appendChild(membersContainer);
@@ -797,110 +987,145 @@
             switch (member.status) {
                 case 'active':
                     cardClasses += ' bg-white border-l-4 border-sky-600';
-                    contentHTML = `
-                        <p class="font-bold text-sky-800">${member.position}</p>
-                        <p contenteditable="true" data-index="${index}" data-field="name" class="font-semibold text-slate-700 text-sm editable-field p-1 my-1 rounded hover:bg-slate-100 focus:bg-slate-200 outline-none">${member.name}</p>
-                        <p class="text-xs text-slate-500">บ้านเลขที่ 
-                           <span contenteditable="true" data-index="${index}" data-field="houseNo" class="editable-field p-1 rounded hover:bg-slate-100 focus:bg-slate-200 outline-none">${member.houseNo || '...'}</span>
-                        </p>`;
+                    contentHTML = `<p class="font-bold text-sky-800">${member.position}</p><p contenteditable="true" data-index="${index}" data-field="name" class="font-semibold text-slate-700 text-sm editable-field p-1 my-1 rounded hover:bg-slate-100 focus:bg-slate-200 outline-none">${member.name}</p><p class="text-xs text-slate-500">บ้านเลขที่ <span contenteditable="true" data-index="${index}" data-field="houseNo" class="editable-field p-1 rounded hover:bg-slate-100 focus:bg-slate-200 outline-none">${member.houseNo || '...'}</span></p>`;
                     break;
                 case 'resigned':
                     cardClasses += ' bg-amber-100 border-l-4 border-amber-500';
-                    contentHTML = `
-                        <p class="font-bold text-amber-800">${member.position}</p>
-                        <p class="font-semibold text-slate-500 text-sm line-through">${member.name}</p>
-                        <p class="text-xs text-amber-700">(ลาออก)</p>`;
+                    contentHTML = `<p class="font-bold text-amber-800">${member.position}</p><p class="font-semibold text-slate-500 text-sm line-through">${member.name}</p><p class="text-xs text-amber-700">(ลาออก)</p>`;
                     break;
-                default: // empty
+                default:
                     cardClasses += ' bg-slate-200 border-dashed border-2 border-slate-400 flex items-center justify-center';
                     contentHTML = '<p class="text-slate-500 text-sm">ตำแหน่งว่าง</p>';
                     break;
             }
-
             return `<div class="${cardClasses}">${contentHTML}</div>`;
         }
 
         function addCommitteeMember() {
             const name = nameInput.value.trim();
             const houseNo = houseNoInput.value.trim();
+            if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
 
-            if (!name) {
-                alert('กรุณากรอกชื่อ-นามสกุล');
-                return;
-            }
-
-            // Find first empty or resigned slot
-            let emptyIndex = committeeData.findIndex(m => m.status === 'empty' || m.status === 'resigned');
+            let emptyIndex = committeeData.findIndex((m, idx) => (m.status === 'empty' || m.status === 'resigned') && idx > 0);
             if (emptyIndex === -1) {
-                if (committeeData.length < maxCommitteeMembers) {
-                    emptyIndex = committeeData.length;
-                } else {
-                    alert('คณะกรรมการเต็มจำนวนแล้ว');
-                    return;
-                }
-            }
-            
-            // Cannot replace president (index 0)
-            if(emptyIndex === 0) {
-                 emptyIndex = committeeData.findIndex((m, idx) => (m.status === 'empty' || m.status === 'resigned') && idx > 0);
-                 if (emptyIndex === -1) {
-                     alert('ตำแหน่งกรรมการเต็มแล้ว');
-                     return;
-                 }
+                if (committeeData.length < maxCommitteeMembers) emptyIndex = committeeData.length;
+                else { alert('คณะกรรมการเต็มจำนวนแล้ว'); return; }
             }
 
-
-            committeeData[emptyIndex] = {
-                name: name,
-                houseNo: houseNo,
-                position: 'กรรมการ',
-                status: 'active'
-            };
-            
+            committeeData[emptyIndex] = { name, houseNo, position: 'กรรมการ', status: 'active' };
             nameInput.value = '';
             houseNoInput.value = '';
             renderOrgChart();
         }
 
-        addButton.addEventListener('click', addCommitteeMember);
+        if(addButton) addButton.addEventListener('click', addCommitteeMember);
 
-        orgChartContainer.addEventListener('focusout', function(event) {
-            const target = event.target;
-            if (target.classList.contains('editable-field')) {
-                const index = parseInt(target.dataset.index, 10);
-                const field = target.dataset.field;
-                const newText = target.innerText.trim();
+        if(orgChartContainer) {
+            orgChartContainer.addEventListener('focusout', (event) => {
+                const target = event.target;
+                if (target.classList.contains('editable-field')) {
+                    const index = parseInt(target.dataset.index, 10);
+                    const field = target.dataset.field;
+                    const newText = target.innerText.trim();
 
-                if (index >= 0 && committeeData[index]) {
-                    if (field === 'name' && newText === '') {
-                        if (index === 0) {
-                            alert('ไม่สามารถลบชื่อประธานได้');
+                    if (index >= 0 && committeeData[index]) {
+                        if (field === 'name' && newText === '') {
+                            if (index === 0) { alert('ไม่สามารถลบชื่อประธานได้'); renderOrgChart(); return; }
+                            committeeData[index] = { name: '', houseNo: '', position: 'กรรมการ', status: 'empty' };
                             renderOrgChart();
-                            return;
-                        }
-                        committeeData[index] = { name: '', houseNo: '', position: 'กรรมการ', status: 'empty' };
-                        renderOrgChart();
-                    } else {
-                        committeeData[index][field] = newText;
+                        } else { committeeData[index][field] = newText; }
                     }
                 }
-            }
-        });
-        
-        orgChartContainer.addEventListener('keydown', function(event) {
-            if (event.target.classList.contains('editable-field') && event.key === 'Enter') {
-                event.preventDefault();
-                event.target.blur();
-            }
-        });
-
-
-        // Initial render
-        // Pad array to max size with empty slots
-        while(committeeData.length < maxCommitteeMembers) {
-            committeeData.push({ name: '', houseNo: '', position: 'กรรมการ', status: 'empty' });
+            });
+            orgChartContainer.addEventListener('keydown', (event) => {
+                if (event.target.classList.contains('editable-field') && event.key === 'Enter') {
+                    event.preventDefault();
+                    event.target.blur();
+                }
+            });
         }
+        
+        while(committeeData.length < maxCommitteeMembers) committeeData.push({ name: '', houseNo: '', position: 'กรรมการ', status: 'empty' });
         renderOrgChart();
+
+        // --- Lightbox Logic ---
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxCloseBtn = document.getElementById('lightbox-close');
+        const imageContainer = document.getElementById('lightbox-image-container');
+        const compareTray = document.getElementById('lightbox-compare-tray');
+        const openButtons = document.querySelectorAll('.open-lightbox-btn');
+
+        let currentGroup = [];
+        let activeImages = [];
+
+        function renderLightbox() {
+            imageContainer.innerHTML = '';
+            compareTray.innerHTML = '';
+
+            // Render main images
+            activeImages.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'rounded-md shadow-md';
+                imageContainer.appendChild(img);
+            });
+
+            // Render compare tray
+            currentGroup.forEach(item => {
+                const thumb = document.createElement('img');
+                thumb.src = item.src;
+                thumb.alt = item.alt;
+                thumb.className = 'compare-tray-thumb';
+                if (activeImages.includes(item.src)) {
+                    thumb.classList.add('active');
+                }
+                thumb.addEventListener('click', () => toggleCompareImage(item.src));
+                compareTray.appendChild(thumb);
+            });
+        }
+
+        function toggleCompareImage(src) {
+            const index = activeImages.indexOf(src);
+            if (index > -1) {
+                // Remove if not the last image
+                if (activeImages.length > 1) {
+                    activeImages.splice(index, 1);
+                }
+            } else {
+                // Add if less than 3 images
+                if (activeImages.length < 3) {
+                    activeImages.push(src);
+                }
+            }
+            renderLightbox();
+        }
+
+        function openLightbox(e) {
+            const btn = e.currentTarget;
+            const groupName = btn.dataset.group;
+            
+            currentGroup = Array.from(document.querySelectorAll(`.open-lightbox-btn[data-group="${groupName}"]`))
+                                .map(b => ({ src: b.dataset.src, alt: b.dataset.alt }));
+
+            activeImages = [btn.dataset.src];
+            
+            renderLightbox();
+            lightboxModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        openButtons.forEach(btn => btn.addEventListener('click', openLightbox));
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                closeLightbox();
+            }
+        });
     });
 </script>
 
