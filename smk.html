@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สรุปผลประกอบการ นิติบุคคลหมู่บ้านจัดสรร สัมมากรนนทบุรี 2567</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details > summary::before {
+            content: '▶';
+            margin-right: 0.5rem;
+            font-size: 0.8em;
+            transition: transform 0.2s;
+        }
+        details[open] > summary::before {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">สรุปผลประกอบการ ปี 2567</h1>
+            <p class="text-lg text-gray-500 mt-2">นิติบุคคลหมู่บ้านจัดสรร สัมมากรนนทบุรี (พระราม5)</p>
+        </header>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Revenue Card -->
+            <div class="card flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-gray-500">รายรับรวม</h3>
+                    <p class="text-3xl font-bold text-blue-600 mt-2">฿6.11 ล้าน</p>
+                </div>
+                <p class="text-sm text-gray-400 mt-4">ใกล้เคียงกับปีก่อน (6.11 ล้าน)</p>
+            </div>
+            <!-- Total Expenses Card -->
+            <div class="card flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-gray-500">รายจ่ายรวม</h3>
+                    <p class="text-3xl font-bold text-orange-500 mt-2">฿6.19 ล้าน</p>
+                </div>
+                <p class="text-sm text-red-500 mt-4">▲ เพิ่มขึ้น 15% จากปีก่อน (5.39 ล้าน)</p>
+            </div>
+            <!-- Net Profit/Loss Card -->
+            <div class="card flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-gray-500">กำไร/ขาดทุนสุทธิ</h3>
+                    <p class="text-3xl font-bold text-red-600 mt-2">(฿80,733)</p>
+                </div>
+                <p class="text-sm text-gray-400 mt-4">ปีก่อนมีกำไร 7.2 แสนบาท</p>
+            </div>
+            <!-- Total Assets Card -->
+            <div class="card flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-gray-500">สินทรัพย์รวม</h3>
+                    <p class="text-3xl font-bold text-green-600 mt-2">฿6.80 ล้าน</p>
+                </div>
+                <p class="text-sm text-red-500 mt-4">▼ ลดลงจากปีก่อน (8.56 ล้าน)</p>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- Bar Chart: Income vs Expenses -->
+            <div class="card lg:col-span-2">
+                <h3 class="text-xl font-bold text-gray-700 mb-4">เปรียบเทียบรายรับ-รายจ่าย (2566 vs 2567)</h3>
+                <div class="chart-container">
+                    <canvas id="incomeExpenseChart"></canvas>
+                </div>
+            </div>
+            <!-- Doughnut Chart: Expense Breakdown -->
+            <div class="card">
+                <h3 class="text-xl font-bold text-gray-700 mb-4">สัดส่วนรายจ่ายปี 2567</h3>
+                <div class="chart-container" style="height:320px; margin-top: 1.5rem;">
+                    <canvas id="expenseDoughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Table & Asset Comparison Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+             <!-- Financial Summary Table -->
+            <div class="card">
+                <h3 class="text-xl font-bold text-gray-700 mb-4">ตารางสรุปข้อมูล</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b-2 border-gray-200">
+                                <th class="py-3 pr-2 font-semibold text-gray-600">รายการ</th>
+                                <th class="py-3 px-2 font-semibold text-gray-600 text-right">ปี 2567 (บาท)</th>
+                                <th class="py-3 pl-2 font-semibold text-gray-600 text-right">ปี 2566 (บาท)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 pr-2">รายรับค่าส่วนกลาง</td>
+                                <td class="py-3 px-2 text-right">6,070,411.20</td>
+                                <td class="py-3 pl-2 text-right">6,070,411.20</td>
+                            </tr>
+                             <tr class="border-b border-gray-100">
+                                <td class="py-3 pr-2">รายรับอื่น ๆ</td>
+                                <td class="py-3 px-2 text-right">39,707.60</td>
+                                <td class="py-3 pl-2 text-right">40,960.29</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 bg-blue-50">
+                                <td class="py-3 pr-2 font-semibold">รวมรายรับ</td>
+                                <td class="py-3 px-2 font-semibold text-right">6,110,118.80</td>
+                                <td class="py-3 pl-2 font-semibold text-right">6,111,371.49</td>
+                            </tr>
+                             <tr class="border-b border-gray-100">
+                                <td class="py-3 pr-2">รวมรายจ่าย</td>
+                                <td class="py-3 px-2 text-right">(6,190,852.07)</td>
+                                <td class="py-3 pl-2 text-right">(5,386,522.49)</td>
+                            </tr>
+                            <tr class="bg-gray-100">
+                                <td class="py-3 pr-2 font-bold text-lg">กำไร (ขาดทุน) สุทธิ</td>
+                                <td class="py-3 px-2 font-bold text-lg text-right text-red-600">(80,733.27)</td>
+                                <td class="py-3 pl-2 font-bold text-lg text-right text-green-600">724,849.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Line Chart: Assets vs Liabilities -->
+            <div class="card">
+                <h3 class="text-xl font-bold text-gray-700 mb-4">เปรียบเทียบสินทรัพย์-หนี้สิน</h3>
+                <div class="chart-container">
+                     <canvas id="assetsLiabilitiesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Reports Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <!-- Detailed Income -->
+            <div class="card">
+                <details>
+                    <summary class="cursor-pointer text-xl font-bold text-gray-700 mb-4 hover:text-blue-600 transition-colors">
+                        รายละเอียดรายรับปี 2567
+                    </summary>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="py-3 pr-2 font-semibold text-gray-600">รายการ</th>
+                                    <th class="py-3 pl-2 font-semibold text-gray-600 text-right">จำนวนเงิน (บาท)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2 pr-2">รายรับค่าส่วนกลาง</td>
+                                    <td class="py-2 pl-2 text-right">6,070,411.20</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2 pr-2">ดอกเบี้ยรับ</td>
+                                    <td class="py-2 pl-2 text-right">9,531.35</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2 pr-2">รับเงินรางวัลวัสดุรีไซเคิล</td>
+                                    <td class="py-2 pl-2 text-right">8,400.00</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2 pr-2">รายรับอื่น</td>
+                                    <td class="py-2 pl-2 text-right">21,776.25</td>
+                                </tr>
+                                <tr class="bg-blue-50">
+                                    <td class="py-3 pr-2 font-bold">รวมรายรับ</td>
+                                    <td class="py-3 pl-2 font-bold text-right">6,110,118.80</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Detailed Expenses -->
+            <div class="card">
+                <details>
+                    <summary class="cursor-pointer text-xl font-bold text-gray-700 mb-4 hover:text-orange-600 transition-colors">
+                        รายละเอียดรายจ่ายปี 2567
+                    </summary>
+                    <div class="overflow-x-auto mt-4 space-y-4">
+                        <!-- Expenses by contract -->
+                        <h4 class="font-semibold text-gray-600 mt-2">รายจ่ายตามสัญญา</h4>
+                        <table class="w-full text-left text-sm">
+                            <tbody>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าบริการจัดการ</td><td class="py-2 pl-2 text-right">597,500.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าบริการรักษาความปลอดภัย</td><td class="py-2 pl-2 text-right">3,054,407.45</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าบริการทำความสะอาด</td><td class="py-2 pl-2 text-right">36,000.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าบริการดูแลสระว่ายน้ำ</td><td class="py-2 pl-2 text-right">61,200.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าบริการดูแลสวนและกวาดถนน</td><td class="py-2 pl-2 text-right">1,044,000.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าบริการเก็บขยะ</td><td class="py-2 pl-2 text-right">83,520.00</td></tr>
+                                <tr class="bg-gray-50"><td class="py-2 pr-2 font-medium">รวม</td><td class="py-2 pl-2 text-right font-medium">4,876,627.45</td></tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Utilities -->
+                         <h4 class="font-semibold text-gray-600 mt-4">รายจ่ายค่าสาธารณูปโภค</h4>
+                        <table class="w-full text-left text-sm">
+                            <tbody>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าไฟฟ้า</td><td class="py-2 pl-2 text-right">205,581.89</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าน้ำประปา</td><td class="py-2 pl-2 text-right">67,619.74</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าโทรศัพท์</td><td class="py-2 pl-2 text-right">1,350.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าธรรมเนียมแอพพลิเคชั่นออนไลน์</td><td class="py-2 pl-2 text-right">15,065.00</td></tr>
+                                 <tr class="bg-gray-50"><td class="py-2 pr-2 font-medium">รวม</td><td class="py-2 pl-2 text-right font-medium">289,616.63</td></tr>
+                            </tbody>
+                        </table>
+
+                         <!-- Operations and Office -->
+                         <h4 class="font-semibold text-gray-600 mt-4">รายจ่ายในการดำเนินงานและสำนักงาน</h4>
+                        <table class="w-full text-left text-sm">
+                            <tbody>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าใช้จ่ายทางกฎหมาย</td><td class="py-2 pl-2 text-right">394,887.47</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าใช้จ่ายวันสำคัญและกิจกรรม</td><td class="py-2 pl-2 text-right">23,479.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าใช้จ่ายเบ็ดเตล็ด</td><td class="py-2 pl-2 text-right">23,965.17</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">ค่าสอบบัญชี</td><td class="py-2 pl-2 text-right">10,000.00</td></tr>
+                                <tr class="border-b border-gray-100"><td class="py-2 pr-2">อื่นๆ</td><td class="py-2 pl-2 text-right">32,861.88</td></tr>
+                                 <tr class="bg-gray-50"><td class="py-2 pr-2 font-medium">รวม</td><td class="py-2 pl-2 text-right font-medium">485,193.52</td></tr>
+                            </tbody>
+                        </table>
+                        
+                        <h4 class="font-semibold text-gray-600 mt-4">รายจ่ายค่าซ่อมแซมและบำรุงรักษา</h4>
+                         <table class="w-full text-left text-sm">
+                            <tbody>
+                                <tr class="bg-gray-50"><td class="py-2 pr-2 font-medium">รวม</td><td class="py-2 pl-2 text-right font-medium">437,789.19</td></tr>
+                            </tbody>
+                        </table>
+                        
+                         <h4 class="font-semibold text-gray-600 mt-4">ค่าเสื่อมราคาทรัพย์สิน</h4>
+                         <table class="w-full text-left text-sm">
+                            <tbody>
+                                 <tr class="bg-gray-50"><td class="py-2 pr-2 font-medium">รวม</td><td class="py-2 pl-2 text-right font-medium">101,625.28</td></tr>
+                            </tbody>
+                        </table>
+
+                         <table class="w-full text-left mt-4">
+                            <tr class="bg-orange-50">
+                                <td class="py-3 pr-2 font-bold">รวมรายจ่ายทั้งหมด</td>
+                                <td class="py-3 pl-2 font-bold text-right">6,190,852.07</td>
+                            </tr>
+                         </table>
+                    </div>
+                </details>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const formatCurrency = (value) => new Intl.NumberFormat('th-TH').format(value);
+
+        // Chart 1: Income vs Expenses Bar Chart
+        const ctxBar = document.getElementById('incomeExpenseChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['ปี 2566', 'ปี 2567'],
+                datasets: [{
+                    label: 'รายรับรวม',
+                    data: [6111371.49, 6110118.80],
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6,
+                }, {
+                    label: 'รายจ่ายรวม',
+                    data: [5386522.49, 6190852.07],
+                    backgroundColor: 'rgba(249, 115, 22, 0.7)',
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return (value / 1000000).toFixed(1) + ' ล้าน';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += formatCurrency(context.parsed.y.toFixed(2)) + ' บาท';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Expense Breakdown Doughnut Chart
+        const ctxDoughnut = document.getElementById('expenseDoughnutChart').getContext('2d');
+        new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: ['รักษาความปลอดภัย', 'ดูแลสวน', 'บริหารจัดการ', 'ดำเนินงาน/สำนักงาน', 'ซ่อมบำรุง', 'สาธารณูปโภค', 'อื่น ๆ'],
+                datasets: [{
+                    label: 'สัดส่วนค่าใช้จ่าย',
+                    data: [3054407.45, 1044000, 597500, 485193.52, 437789.19, 289616.63, 282345.28],
+                    backgroundColor: [
+                        '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444', '#6B7280', '#EC4899'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+             options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            boxWidth: 12,
+                        }
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                let value = context.parsed || 0;
+                                let total = context.chart.getDataObjects()[0].data.reduce((a, b) => a + b, 0);
+                                let percentage = ((value / total) * 100).toFixed(2) + '%';
+                                return `${label}: ${formatCurrency(value.toFixed(2))} บาท (${percentage})`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Chart 3: Assets vs Liabilities
+        const ctxLine = document.getElementById('assetsLiabilitiesChart').getContext('2d');
+        new Chart(ctxLine, {
+            type: 'bar',
+            data: {
+                labels: ['ปี 2566', 'ปี 2567'],
+                datasets: [{
+                    label: 'สินทรัพย์รวม',
+                    data: [8563448.41, 6797318.55],
+                    backgroundColor: 'rgba(22, 163, 74, 0.7)',
+                    borderColor: 'rgba(22, 163, 74, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6,
+                }, {
+                    label: 'หนี้สินรวม',
+                    data: [2281605.58, 596208.99],
+                    backgroundColor: 'rgba(220, 38, 38, 0.7)',
+                    borderColor: 'rgba(220, 38, 38, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return (value / 1000000).toFixed(1) + ' ล้าน';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += formatCurrency(context.parsed.y.toFixed(2)) + ' บาท';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
