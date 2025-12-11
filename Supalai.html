@@ -1,419 +1,415 @@
-import React, { useState } from 'react';
-import { Wallet, CreditCard, Building2, TrendingUp, TrendingDown, FileText, PieChart, Activity, ChevronRight } from 'lucide-react';
-
-const FinancialStatement = () => {
-  const [activeTab, setActiveTab] = useState('balance'); // 'balance', 'income', 'notes'
-
-  // ข้อมูล Header กลาง
-  const headerData = {
-    orgName: "นิติบุคคลหมู่บ้านจัดสรร ศุภาลัย พรีม่า วิลล่า เพชรเกษม-พุทธมณฑลสาย 1",
-    date: "ณ วันที่ 31 ธันวาคม 2567",
-    unit: "หน่วย : บาท"
-  };
-
-  // 1. ข้อมูล งบแสดงฐานะการเงิน (Balance Sheet) - หน้า 18
-  const balanceSheetData = {
-    assets: {
-      title: "สินทรัพย์",
-      items: [
-        { name: "สินทรัพย์หมุนเวียน", isHeader: true },
-        { name: "เงินสดและรายการเทียบเท่าเงินสด", note: "4", year2567: "1,115,435.31", year2566: "1,091,121.30" },
-        { name: "ลูกหนี้สมาชิก", note: "5", year2567: "-", year2566: "16,117.00" },
-        { name: "รวมสินทรัพย์หมุนเวียน", isTotal: true, year2567: "1,115,435.31", year2566: "1,107,238.30" },
-        { name: "รวมสินทรัพย์", isGrandTotal: true, year2567: "1,115,435.31", year2566: "1,107,238.30" },
-      ]
-    },
-    liabilities: {
-      title: "หนี้สินและส่วนของสมาชิก",
-      items: [
-        { name: "หนี้สินหมุนเวียน", isHeader: true },
-        { name: "เช็คค้างจ่าย", note: "", year2567: "85,554.56", year2566: "83,200.00" },
-        { name: "รายจ่ายค้างจ่าย", note: "6", year2567: "21,163.70", year2566: "18,919.30" },
-        { name: "รวมหนี้สินหมุนเวียน", isTotal: true, year2567: "106,718.26", year2566: "102,119.30" },
-        { name: "หนี้สินไม่หมุนเวียน", isHeader: true },
-        { name: "เงินค้ำประกันต่อเติม", note: "", year2567: "-", year2566: "20,000.00" },
-        { name: "รวมหนี้สินไม่หมุนเวียน", isTotal: true, year2567: "-", year2566: "20,000.00" },
-        { name: "รวมหนี้สิน", isGrandTotal: true, year2567: "106,718.26", year2566: "122,119.30" },
-      ]
-    },
-    equity: {
-      title: "ส่วนของสมาชิก",
-      items: [
-        { name: "เงินกองทุนสาธารณูปโภค", note: "", year2567: "682,391.00", year2566: "682,391.00" },
-        { name: "รายรับสูงกว่า(ต่ำกว่า)รายจ่ายสะสม", note: "", year2567: "326,326.05", year2566: "302,728.00" },
-        { name: "รวมส่วนของสมาชิก", isTotal: true, year2567: "1,008,717.05", year2566: "985,119.00" },
-        { name: "รวมหนี้สินและส่วนของสมาชิก", isGrandTotal: true, year2567: "1,115,435.31", year2566: "1,107,238.30" },
-      ]
-    }
-  };
-
-  // 2. ข้อมูล งบรายรับและรายจ่าย (Income Statement) - หน้า 19
-  const incomeStatementData = {
-    revenue: {
-      title: "รายรับ (Revenues)",
-      items: [
-        { name: "รายรับ - ค่าบริการสาธารณะ", note: "", year2567: "1,746,855.60", year2566: "1,746,855.60" },
-        { name: "รายรับ - คีย์การ์ด", note: "", year2567: "-", year2566: "4,000.00" },
-        { name: "รายรับ - ค่าระบบรักษาความปลอดภัย", note: "", year2567: "100,000.00", year2566: "-" },
-        { name: "ดอกเบี้ยรับ", note: "", year2567: "9,859.45", year2566: "2,305.40" },
-        { name: "รายรับอื่น", note: "", year2567: "840.72", year2566: "200,000.00" },
-        { name: "รวมรายรับ", isGrandTotal: true, year2567: "1,857,555.77", year2566: "1,953,161.00", color: "emerald" },
-      ]
-    },
-    expense: {
-      title: "รายจ่าย (Expenses)",
-      items: [
-        { name: "รายจ่ายค่าบริหารจัดการ", note: "7", year2567: "1,550,300.46", year2566: "1,528,320.00" },
-        { name: "รายจ่ายค่าสาธารณูปโภค", note: "8", year2567: "96,009.43", year2566: "98,761.58" },
-        { name: "รายจ่ายในการดำเนินงานและสำนักงาน", note: "9", year2567: "17,100.00", year2566: "27,045.53" },
-        { name: "รายจ่ายค่าซ่อมแซมและบำรุงรักษา", note: "10", year2567: "170,547.83", year2566: "7,545.00" },
-        { name: "รวมรายจ่าย", isGrandTotal: true, year2567: "1,833,957.72", year2566: "1,661,672.11", color: "rose" },
-      ]
-    },
-    net: {
-      items: [
-        { name: "รายรับสูงกว่า(ต่ำกว่า)รายจ่ายสุทธิ", isGrandTotal: true, year2567: "23,598.05", year2566: "291,488.89", color: "blue" }
-      ]
-    }
-  };
-
-  // 3. ข้อมูล รายละเอียดประกอบงบ (Notes) - หน้า 22-23
-  const notesData = [
-    {
-      id: "7",
-      title: "หมายเหตุ 7: รายจ่ายค่าบริหารจัดการ",
-      total2567: "1,550,300.46",
-      items: [
-        { name: "ค่าบริหารจัดการ", year2567: "256,800.00", year2566: "256,800.00" },
-        { name: "ค่าบริการรักษาความปลอดภัย", year2567: "1,053,847.28", year2566: "1,027,200.00", highlight: true },
-        { name: "ค่าบริการทำความสะอาดและกวาดถนน", year2567: "235,333.18", year2566: "240,000.00" },
-        { name: "ค่าบริการเก็บขยะ", year2567: "4,320.00", year2566: "4,320.00" },
-      ]
-    },
-    {
-      id: "10",
-      title: "หมายเหตุ 10: ค่าซ่อมแซมและบำรุงรักษา",
-      total2567: "170,547.83",
-      items: [
-        { name: "ค่าซ่อมแซมพื้นที่ส่วนกลาง", year2567: "3,422.00", year2566: "2,810.00" },
-        { name: "ค่าซ่อมแซมระบบไฟฟ้า", year2567: "-", year2566: "4,735.00" },
-        { name: "ค่าซ่อมแซมงานสวนและปรับปรุงภูมิทัศน์", year2567: "165,609.33", year2566: "-", highlight: true },
-        { name: "ค่าซ่อมแซมระบบวงจรปิด", year2567: "1,016.50", year2566: "-" },
-        { name: "ค่าซ่อมแซมระบบเข้าออกหมู่บ้าน", year2567: "500.00", year2566: "-" },
-      ]
-    },
-    {
-      id: "8",
-      title: "หมายเหตุ 8: ค่าสาธารณูปโภค",
-      total2567: "96,009.43",
-      items: [
-        { name: "ค่าไฟฟ้า", year2567: "66,484.91", year2566: "78,995.90" },
-        { name: "ค่าน้ำประปา", year2567: "20,549.36", year2566: "9,956.57" },
-        { name: "ค่าโทรศัพท์และอินเตอร์เน็ต", year2567: "8,975.16", year2566: "9,809.11" },
-      ]
-    },
-    {
-        id: "6",
-        title: "หมายเหตุ 6: รายจ่ายค้างจ่าย (หนี้สิน)",
-        total2567: "21,163.70",
-        items: [
-          { name: "ค่าไฟฟ้าค้างจ่าย", year2567: "3,702.25", year2566: "5,097.84" },
-          { name: "ค่าน้ำประปาค้างจ่าย", year2567: "1,745.60", year2566: "493.53" },
-          { name: "ค่าโทรศัพท์ค้างจ่าย", year2567: "747.93", year2566: "747.93" },
-          { name: "ค่าธรรมเนียมเก็บขยะมูลฝอยค้างจ่าย", year2567: "5,400.00", year2566: "1,080.00" },
-          { name: "ค่าขนย้ายขยะมูลฝอยค้างจ่าย", year2567: "500.00", year2566: "500.00" },
-          { name: "ค่าตรวจสอบบัญชีค้างจ่าย", year2567: "6,000.00", year2566: "8,000.00" },
-          { name: "ภาษีเงินหัก ณ ที่จ่ายรอนำส่ง", year2567: "3,067.92", year2566: "3,000.00" },
-        ]
-    }
-  ];
-
-  const TableRow = ({ item, colorTheme }) => {
-    let rowClass = "border-b border-gray-100 hover:bg-gray-50 transition-colors";
-    let nameClass = "py-3 px-4 text-gray-700";
-    let numClass = "py-3 px-4 text-right font-medium text-gray-700 tabular-nums";
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานทางการเงิน - ศุภาลัย พรีม่า วิลล่า</title>
     
-    if (item.isHeader) {
-      return (
-        <tr className="bg-gray-50/50">
-          <td colSpan="4" className={`py-2 px-4 text-sm font-semibold ${colorTheme.text} italic`}>
-            {item.name}
-          </td>
-        </tr>
-      );
-    }
+    <!-- Google Fonts: Sarabun for Thai support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    if (item.isTotal) {
-      rowClass = `border-t-2 border-${colorTheme.border} bg-${colorTheme.bg} bg-opacity-10`;
-      nameClass = `py-3 px-4 font-bold ${colorTheme.text}`;
-      numClass = `py-3 px-4 text-right font-bold ${colorTheme.text} tabular-nums`;
-    }
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
 
-    if (item.isGrandTotal) {
-      // Use dynamic color if specified in item, else fallback to theme
-      const bgClass = item.color ? `bg-${item.color}-600` : `bg-${colorTheme.bg}`;
-      rowClass = `${bgClass} text-white shadow-sm`;
-      nameClass = "py-4 px-4 font-bold text-white";
-      numClass = "py-4 px-4 text-right font-bold text-white tabular-nums text-lg";
-    }
-
-    return (
-      <tr className={rowClass}>
-        <td className={nameClass}>
-            {item.name}
-            {item.highlight && <span className="ml-2 inline-block px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded-full">สูงสุด</span>}
-        </td>
-        <td className="py-3 px-2 text-center text-gray-400 text-xs">{item.note}</td>
-        <td className={numClass}>{item.year2567}</td>
-        <td className={`${numClass} ${item.isGrandTotal ? 'text-white' : 'text-gray-500'}`}>{item.year2566}</td>
-      </tr>
-    );
-  };
-
-  const TabButton = ({ id, label, icon: Icon }) => (
-    <button
-      onClick={() => setActiveTab(id)}
-      className={`flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 ${
-        activeTab === id 
-          ? 'border-amber-500 text-amber-600 bg-amber-50' 
-          : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-      }`}
-    >
-      <Icon size={18} />
-      <span>{label}</span>
-    </button>
-  );
-
-  return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col min-h-[800px]">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col min-h-[800px]">
         
-        {/* Header Section */}
-        <div className="bg-slate-800 text-white p-6 md:p-8 relative overflow-hidden flex-shrink-0">
-          <div className="absolute top-0 right-0 p-4 opacity-10">
-            <Building2 size={120} />
-          </div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-2 h-8 bg-amber-500 rounded-full"></div>
-              <h2 className="text-sm md:text-base text-amber-400 font-semibold tracking-wide uppercase">รายงานทางการเงิน</h2>
+        <!-- Header Section -->
+        <div class="bg-slate-800 text-white p-6 md:p-8 relative overflow-hidden flex-shrink-0">
+            <div class="absolute top-0 right-0 p-4 opacity-10">
+                <i data-lucide="building-2" width="120" height="120"></i>
             </div>
-            <h1 className="text-xl md:text-2xl font-bold leading-tight mb-2">{headerData.orgName}</h1>
-            <p className="text-sm text-gray-400 mt-1">{headerData.date}</p>
-          </div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-2 h-8 bg-amber-500 rounded-full"></div>
+                    <h2 class="text-sm md:text-base text-amber-400 font-semibold tracking-wide uppercase">รายงานทางการเงิน</h2>
+                </div>
+                <h1 class="text-xl md:text-2xl font-bold leading-tight mb-2" id="orgName"></h1>
+                <p class="text-sm text-gray-400 mt-1" id="date"></p>
+            </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex border-b border-gray-200 bg-white sticky top-0 z-20">
-          <TabButton id="balance" label="งบดุล" icon={Wallet} />
-          <TabButton id="income" label="งบรายรับ-รายจ่าย" icon={Activity} />
-          <TabButton id="notes" label="รายละเอียด" icon={FileText} />
+        <!-- Tabs Navigation -->
+        <div class="flex border-b border-gray-200 bg-white sticky top-0 z-20">
+            <button onclick="switchTab('balance')" id="tab-balance" class="flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-amber-500 text-amber-600 bg-amber-50">
+                <i data-lucide="wallet" width="18"></i>
+                <span>งบดุล</span>
+            </button>
+            <button onclick="switchTab('income')" id="tab-income" class="flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50">
+                <i data-lucide="activity" width="18"></i>
+                <span>งบรายรับ-รายจ่าย</span>
+            </button>
+            <button onclick="switchTab('notes')" id="tab-notes" class="flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50">
+                <i data-lucide="file-text" width="18"></i>
+                <span>รายละเอียด</span>
+            </button>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-grow bg-white">
+        <!-- Content Area -->
+        <div class="flex-grow bg-white">
             
-            {/* Currency Badge */}
-            <div className="bg-gray-50 border-b border-gray-200 px-6 py-2 flex justify-end">
-                <span className="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-1 rounded">
-                {headerData.unit}
-                </span>
+            <!-- Currency Badge -->
+            <div class="bg-gray-50 border-b border-gray-200 px-6 py-2 flex justify-end">
+                <span class="text-xs font-semibold text-gray-500 bg-gray-200 px-2 py-1 rounded" id="unit"></span>
             </div>
 
-            {/* TAB: BALANCE SHEET */}
-            {activeTab === 'balance' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                    <div className="p-6">
-                        <div className="flex items-center gap-2 mb-4 text-emerald-700">
-                            <Wallet className="w-6 h-6" />
-                            <h2 className="text-xl font-bold">{balanceSheetData.assets.title}</h2>
-                        </div>
-                        <div className="overflow-x-auto rounded-lg border border-gray-200 mb-8">
-                            <table className="w-full text-sm md:text-base">
-                                <thead>
-                                    <tr className="bg-emerald-50 text-emerald-800 border-b border-emerald-100">
-                                        <th className="py-3 px-4 text-left w-5/12">รายการ</th>
-                                        <th className="py-3 px-2 text-center w-1/12">หมายเหตุ</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2567</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2566</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {balanceSheetData.assets.items.map((item, idx) => (
-                                        <TableRow key={idx} item={item} colorTheme={{ text: 'text-emerald-700', bg: 'emerald-600', border: 'emerald-200' }} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="flex items-center gap-2 mb-4 text-rose-700">
-                            <CreditCard className="w-6 h-6" />
-                            <h2 className="text-xl font-bold">{balanceSheetData.liabilities.title}</h2>
-                        </div>
-                        <div className="overflow-x-auto rounded-lg border border-gray-200 mb-8">
-                            <table className="w-full text-sm md:text-base">
-                                <thead>
-                                    <tr className="bg-rose-50 text-rose-800 border-b border-rose-100">
-                                        <th className="py-3 px-4 text-left w-5/12">รายการ</th>
-                                        <th className="py-3 px-2 text-center w-1/12">หมายเหตุ</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2567</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2566</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {balanceSheetData.liabilities.items.map((item, idx) => (
-                                        <TableRow key={idx} item={item} colorTheme={{ text: 'text-rose-700', bg: 'rose-600', border: 'rose-200' }} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                         <div className="flex items-center gap-2 mb-4 text-blue-700">
-                            <PieChart className="w-6 h-6" />
-                            <h2 className="text-xl font-bold">{balanceSheetData.equity.title}</h2>
-                        </div>
-                        <div className="overflow-x-auto rounded-lg border border-gray-200">
-                            <table className="w-full text-sm md:text-base">
-                                <thead>
-                                    <tr className="bg-blue-50 text-blue-800 border-b border-blue-100">
-                                        <th className="py-3 px-4 text-left w-5/12">รายการ</th>
-                                        <th className="py-3 px-2 text-center w-1/12">หมายเหตุ</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2567</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2566</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {balanceSheetData.equity.items.map((item, idx) => (
-                                        <TableRow key={idx} item={item} colorTheme={{ text: 'text-blue-700', bg: 'slate-800', border: 'blue-200' }} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* TAB: INCOME STATEMENT */}
-            {activeTab === 'income' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                    <div className="p-6">
-                        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 text-sm">
-                            <h3 className="font-bold mb-1">💡 สรุปผลการดำเนินงาน</h3>
-                            <p>ปี 2567 มีรายรับสูงกว่ารายจ่ายสุทธิ <span className="font-bold text-emerald-600">23,598.05 บาท</span> (ลดลงจากปีก่อน)</p>
-                        </div>
-
-                        <div className="flex items-center gap-2 mb-4 text-emerald-700">
-                            <TrendingUp className="w-6 h-6" />
-                            <h2 className="text-xl font-bold">{incomeStatementData.revenue.title}</h2>
-                        </div>
-                        <div className="overflow-x-auto rounded-lg border border-gray-200 mb-8">
-                            <table className="w-full text-sm md:text-base">
-                                <thead>
-                                    <tr className="bg-emerald-50 text-emerald-800 border-b border-emerald-100">
-                                        <th className="py-3 px-4 text-left w-5/12">รายการ</th>
-                                        <th className="py-3 px-2 text-center w-1/12">หมายเหตุ</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2567</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2566</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {incomeStatementData.revenue.items.map((item, idx) => (
-                                        <TableRow key={idx} item={item} colorTheme={{ text: 'text-emerald-700', bg: 'emerald-600', border: 'emerald-200' }} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="flex items-center gap-2 mb-4 text-rose-700">
-                            <TrendingDown className="w-6 h-6" />
-                            <h2 className="text-xl font-bold">{incomeStatementData.expense.title}</h2>
-                        </div>
-                        <div className="overflow-x-auto rounded-lg border border-gray-200 mb-8">
-                            <table className="w-full text-sm md:text-base">
-                                <thead>
-                                    <tr className="bg-rose-50 text-rose-800 border-b border-rose-100">
-                                        <th className="py-3 px-4 text-left w-5/12">รายการ</th>
-                                        <th className="py-3 px-2 text-center w-1/12">หมายเหตุ</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2567</th>
-                                        <th className="py-3 px-4 text-right w-3/12">ปี 2566</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {incomeStatementData.expense.items.map((item, idx) => (
-                                        <TableRow key={idx} item={item} colorTheme={{ text: 'text-rose-700', bg: 'rose-600', border: 'rose-200' }} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                         <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
-                            <table className="w-full text-sm md:text-base">
-                                <tbody>
-                                    {incomeStatementData.net.items.map((item, idx) => (
-                                        <TableRow key={idx} item={item} colorTheme={{ text: 'text-blue-700', bg: 'blue-600', border: 'blue-200' }} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* TAB: NOTES */}
-            {activeTab === 'notes' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                    <div className="p-6 grid gap-8">
-                        {notesData.map((note, idx) => (
-                            <div key={idx} className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                                    <h3 className="font-bold text-gray-800 flex items-center gap-2">
-                                        <ChevronRight size={16} className="text-amber-500" />
-                                        {note.title}
-                                    </h3>
-                                    <span className="text-sm font-semibold text-gray-600 bg-white px-2 py-1 rounded border border-gray-200">
-                                        รวม: {note.total2567}
-                                    </span>
-                                </div>
-                                <table className="w-full text-sm">
-                                    <thead>
-                                         <tr className="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
-                                            <th className="py-2 px-4 text-left">รายการ</th>
-                                            <th className="py-2 px-4 text-right">ปี 2567</th>
-                                            <th className="py-2 px-4 text-right hidden md:table-cell">ปี 2566</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-100">
-                                        {note.items.map((subItem, sIdx) => (
-                                            <tr key={sIdx} className="hover:bg-gray-50">
-                                                <td className="py-2 px-4 text-gray-700">
-                                                    {subItem.name}
-                                                    {subItem.highlight && <span className="ml-2 text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded">สูง</span>}
-                                                </td>
-                                                <td className="py-2 px-4 text-right font-medium text-gray-900">{subItem.year2567}</td>
-                                                <td className="py-2 px-4 text-right text-gray-400 hidden md:table-cell">{subItem.year2566}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
+            <!-- Tab Content Containers -->
+            <div id="content-balance" class="fade-in"></div>
+            <div id="content-income" class="hidden fade-in"></div>
+            <div id="content-notes" class="hidden fade-in"></div>
             
         </div>
 
-        {/* Footer */}
-        <div className="bg-gray-50 p-6 text-center border-t border-gray-200 mt-auto">
-             <div className="flex justify-center items-center gap-2 mb-2">
-                <p className="text-sm text-gray-500">หมายเหตุประกอบงบการเงิน เป็นส่วนหนึ่งของงบการเงินนี้</p>
+        <!-- Footer -->
+        <div class="bg-gray-50 p-6 text-center border-t border-gray-200 mt-auto">
+             <div class="flex justify-center items-center gap-2 mb-2">
+                <p class="text-sm text-gray-500">หมายเหตุประกอบงบการเงิน เป็นส่วนหนึ่งของงบการเงินนี้</p>
              </div>
              <p className="text-xs text-gray-400">ขอรับรองว่าถูกต้อง (ประธานกรรมการนิติบุคคลฯ)</p>
         </div>
 
-      </div>
     </div>
-  );
-};
 
-export default FinancialStatement;
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA (Same as React Component) ---
+        const headerData = {
+            orgName: "นิติบุคคลหมู่บ้านจัดสรร ศุภาลัย พรีม่า วิลล่า เพชรเกษม-พุทธมณฑลสาย 1",
+            date: "ณ วันที่ 31 ธันวาคม 2567",
+            unit: "หน่วย : บาท"
+        };
+
+        const balanceSheetData = {
+            assets: {
+                title: "สินทรัพย์",
+                items: [
+                    { name: "สินทรัพย์หมุนเวียน", isHeader: true },
+                    { name: "เงินสดและรายการเทียบเท่าเงินสด", note: "4", year2567: "1,115,435.31", year2566: "1,091,121.30" },
+                    { name: "ลูกหนี้สมาชิก", note: "5", year2567: "-", year2566: "16,117.00" },
+                    { name: "รวมสินทรัพย์หมุนเวียน", isTotal: true, year2567: "1,115,435.31", year2566: "1,107,238.30" },
+                    { name: "รวมสินทรัพย์", isGrandTotal: true, year2567: "1,115,435.31", year2566: "1,107,238.30" },
+                ]
+            },
+            liabilities: {
+                title: "หนี้สินและส่วนของสมาชิก",
+                items: [
+                    { name: "หนี้สินหมุนเวียน", isHeader: true },
+                    { name: "เช็คค้างจ่าย", note: "", year2567: "85,554.56", year2566: "83,200.00" },
+                    { name: "รายจ่ายค้างจ่าย", note: "6", year2567: "21,163.70", year2566: "18,919.30" },
+                    { name: "รวมหนี้สินหมุนเวียน", isTotal: true, year2567: "106,718.26", year2566: "102,119.30" },
+                    { name: "หนี้สินไม่หมุนเวียน", isHeader: true },
+                    { name: "เงินค้ำประกันต่อเติม", note: "", year2567: "-", year2566: "20,000.00" },
+                    { name: "รวมหนี้สินไม่หมุนเวียน", isTotal: true, year2567: "-", year2566: "20,000.00" },
+                    { name: "รวมหนี้สิน", isGrandTotal: true, year2567: "106,718.26", year2566: "122,119.30" },
+                ]
+            },
+            equity: {
+                title: "ส่วนของสมาชิก",
+                items: [
+                    { name: "เงินกองทุนสาธารณูปโภค", note: "", year2567: "682,391.00", year2566: "682,391.00" },
+                    { name: "รายรับสูงกว่า(ต่ำกว่า)รายจ่ายสะสม", note: "", year2567: "326,326.05", year2566: "302,728.00" },
+                    { name: "รวมส่วนของสมาชิก", isTotal: true, year2567: "1,008,717.05", year2566: "985,119.00" },
+                    { name: "รวมหนี้สินและส่วนของสมาชิก", isGrandTotal: true, year2567: "1,115,435.31", year2566: "1,107,238.30" },
+                ]
+            }
+        };
+
+        const incomeStatementData = {
+            revenue: {
+                title: "รายรับ (Revenues)",
+                items: [
+                    { name: "รายรับ - ค่าบริการสาธารณะ", note: "", year2567: "1,746,855.60", year2566: "1,746,855.60" },
+                    { name: "รายรับ - คีย์การ์ด", note: "", year2567: "-", year2566: "4,000.00" },
+                    { name: "รายรับ - ค่าระบบรักษาความปลอดภัย", note: "", year2567: "100,000.00", year2566: "-" },
+                    { name: "ดอกเบี้ยรับ", note: "", year2567: "9,859.45", year2566: "2,305.40" },
+                    { name: "รายรับอื่น", note: "", year2567: "840.72", year2566: "200,000.00" },
+                    { name: "รวมรายรับ", isGrandTotal: true, year2567: "1,857,555.77", year2566: "1,953,161.00", color: "emerald" },
+                ]
+            },
+            expense: {
+                title: "รายจ่าย (Expenses)",
+                items: [
+                    { name: "รายจ่ายค่าบริหารจัดการ", note: "7", year2567: "1,550,300.46", year2566: "1,528,320.00" },
+                    { name: "รายจ่ายค่าสาธารณูปโภค", note: "8", year2567: "96,009.43", year2566: "98,761.58" },
+                    { name: "รายจ่ายในการดำเนินงานและสำนักงาน", note: "9", year2567: "17,100.00", year2566: "27,045.53" },
+                    { name: "รายจ่ายค่าซ่อมแซมและบำรุงรักษา", note: "10", year2567: "170,547.83", year2566: "7,545.00" },
+                    { name: "รวมรายจ่าย", isGrandTotal: true, year2567: "1,833,957.72", year2566: "1,661,672.11", color: "rose" },
+                ]
+            },
+            net: {
+                items: [
+                    { name: "รายรับสูงกว่า(ต่ำกว่า)รายจ่ายสุทธิ", isGrandTotal: true, year2567: "23,598.05", year2566: "291,488.89", color: "blue" }
+                ]
+            }
+        };
+
+        const notesData = [
+            {
+                id: "7",
+                title: "หมายเหตุ 7: รายจ่ายค่าบริหารจัดการ",
+                total2567: "1,550,300.46",
+                items: [
+                    { name: "ค่าบริหารจัดการ", year2567: "256,800.00", year2566: "256,800.00" },
+                    { name: "ค่าบริการรักษาความปลอดภัย", year2567: "1,053,847.28", year2566: "1,027,200.00", highlight: true },
+                    { name: "ค่าบริการทำความสะอาดและกวาดถนน", year2567: "235,333.18", year2566: "240,000.00" },
+                    { name: "ค่าบริการเก็บขยะ", year2567: "4,320.00", year2566: "4,320.00" },
+                ]
+            },
+            {
+                id: "10",
+                title: "หมายเหตุ 10: ค่าซ่อมแซมและบำรุงรักษา",
+                total2567: "170,547.83",
+                items: [
+                    { name: "ค่าซ่อมแซมพื้นที่ส่วนกลาง", year2567: "3,422.00", year2566: "2,810.00" },
+                    { name: "ค่าซ่อมแซมระบบไฟฟ้า", year2567: "-", year2566: "4,735.00" },
+                    { name: "ค่าซ่อมแซมงานสวนและปรับปรุงภูมิทัศน์", year2567: "165,609.33", year2566: "-", highlight: true },
+                    { name: "ค่าซ่อมแซมระบบวงจรปิด", year2567: "1,016.50", year2566: "-" },
+                    { name: "ค่าซ่อมแซมระบบเข้าออกหมู่บ้าน", year2567: "500.00", year2566: "-" },
+                ]
+            },
+            {
+                id: "8",
+                title: "หมายเหตุ 8: ค่าสาธารณูปโภค",
+                total2567: "96,009.43",
+                items: [
+                    { name: "ค่าไฟฟ้า", year2567: "66,484.91", year2566: "78,995.90" },
+                    { name: "ค่าน้ำประปา", year2567: "20,549.36", year2566: "9,956.57" },
+                    { name: "ค่าโทรศัพท์และอินเตอร์เน็ต", year2567: "8,975.16", year2566: "9,809.11" },
+                ]
+            },
+            {
+                id: "6",
+                title: "หมายเหตุ 6: รายจ่ายค้างจ่าย (หนี้สิน)",
+                total2567: "21,163.70",
+                items: [
+                    { name: "ค่าไฟฟ้าค้างจ่าย", year2567: "3,702.25", year2566: "5,097.84" },
+                    { name: "ค่าน้ำประปาค้างจ่าย", year2567: "1,745.60", year2566: "493.53" },
+                    { name: "ค่าโทรศัพท์ค้างจ่าย", year2567: "747.93", year2566: "747.93" },
+                    { name: "ค่าธรรมเนียมเก็บขยะมูลฝอยค้างจ่าย", year2567: "5,400.00", year2566: "1,080.00" },
+                    { name: "ค่าขนย้ายขยะมูลฝอยค้างจ่าย", year2567: "500.00", year2566: "500.00" },
+                    { name: "ค่าตรวจสอบบัญชีค้างจ่าย", year2567: "6,000.00", year2566: "8,000.00" },
+                    { name: "ภาษีเงินหัก ณ ที่จ่ายรอนำส่ง", year2567: "3,067.92", year2566: "3,000.00" },
+                ]
+            }
+        ];
+
+        // --- RENDER HELPERS ---
+
+        function renderTableRow(item, colorTheme) {
+            let rowClass = "border-b border-gray-100 hover:bg-gray-50 transition-colors";
+            let nameClass = "py-3 px-4 text-gray-700";
+            let numClass = "py-3 px-4 text-right font-medium text-gray-700 tabular-nums";
+            
+            if (item.isHeader) {
+                return `
+                    <tr class="bg-gray-50/50">
+                        <td colSpan="4" class="py-2 px-4 text-sm font-semibold ${colorTheme.text} italic">
+                            ${item.name}
+                        </td>
+                    </tr>
+                `;
+            }
+
+            if (item.isTotal) {
+                rowClass = `border-t-2 border-${colorTheme.border} bg-${colorTheme.bg} bg-opacity-10`;
+                nameClass = `py-3 px-4 font-bold ${colorTheme.text}`;
+                numClass = `py-3 px-4 text-right font-bold ${colorTheme.text} tabular-nums`;
+            }
+
+            if (item.isGrandTotal) {
+                const bgClass = item.color ? `bg-${item.color}-600` : `bg-${colorTheme.bg}`;
+                rowClass = `${bgClass} text-white shadow-sm`;
+                nameClass = "py-4 px-4 font-bold text-white";
+                numClass = "py-4 px-4 text-right font-bold text-white tabular-nums text-lg";
+            }
+
+            const highlightBadge = item.highlight ? `<span class="ml-2 inline-block px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded-full">สูงสุด</span>` : '';
+            const year2566Class = item.isGrandTotal ? 'text-white' : 'text-gray-500';
+
+            return `
+                <tr class="${rowClass}">
+                    <td class="${nameClass}">
+                        ${item.name} ${highlightBadge}
+                    </td>
+                    <td class="py-3 px-2 text-center text-gray-400 text-xs">${item.note}</td>
+                    <td class="${numClass}">${item.year2567}</td>
+                    <td class="${numClass} ${year2566Class}">${item.year2566}</td>
+                </tr>
+            `;
+        }
+
+        function createTableSection(title, iconName, items, theme) {
+            return `
+                <div class="flex items-center gap-2 mb-4 ${theme.text}">
+                    <i data-lucide="${iconName}" width="24" height="24"></i>
+                    <h2 class="text-xl font-bold">${title}</h2>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-gray-200 mb-8">
+                    <table class="w-full text-sm md:text-base">
+                        <thead>
+                            <tr class="bg-${theme.bgBase}-50 text-${theme.textBase}-800 border-b border-${theme.bgBase}-100">
+                                <th class="py-3 px-4 text-left w-5/12">รายการ</th>
+                                <th class="py-3 px-2 text-center w-1/12">หมายเหตุ</th>
+                                <th class="py-3 px-4 text-right w-3/12">ปี 2567</th>
+                                <th class="py-3 px-4 text-right w-3/12">ปี 2566</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${items.map(item => renderTableRow(item, theme)).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // --- RENDER FUNCTIONS FOR TABS ---
+
+        function renderBalanceSheet() {
+            const container = document.getElementById('content-balance');
+            container.innerHTML = `
+                <div class="p-6">
+                    ${createTableSection(balanceSheetData.assets.title, 'wallet', balanceSheetData.assets.items, { 
+                        text: 'text-emerald-700', bg: 'emerald-600', border: 'emerald-200', bgBase: 'emerald', textBase: 'emerald' 
+                    })}
+                    ${createTableSection(balanceSheetData.liabilities.title, 'credit-card', balanceSheetData.liabilities.items, { 
+                        text: 'text-rose-700', bg: 'rose-600', border: 'rose-200', bgBase: 'rose', textBase: 'rose'
+                    })}
+                    ${createTableSection(balanceSheetData.equity.title, 'pie-chart', balanceSheetData.equity.items, { 
+                        text: 'text-blue-700', bg: 'slate-800', border: 'blue-200', bgBase: 'blue', textBase: 'blue'
+                    })}
+                </div>
+            `;
+        }
+
+        function renderIncomeStatement() {
+            const container = document.getElementById('content-income');
+            container.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 text-sm">
+                        <h3 class="font-bold mb-1">💡 สรุปผลการดำเนินงาน</h3>
+                        <p>ปี 2567 มีรายรับสูงกว่ารายจ่ายสุทธิ <span class="font-bold text-emerald-600">23,598.05 บาท</span> (ลดลงจากปีก่อน)</p>
+                    </div>
+
+                    ${createTableSection(incomeStatementData.revenue.title, 'trending-up', incomeStatementData.revenue.items, { 
+                        text: 'text-emerald-700', bg: 'emerald-600', border: 'emerald-200', bgBase: 'emerald', textBase: 'emerald' 
+                    })}
+                    ${createTableSection(incomeStatementData.expense.title, 'trending-down', incomeStatementData.expense.items, { 
+                        text: 'text-rose-700', bg: 'rose-600', border: 'rose-200', bgBase: 'rose', textBase: 'rose'
+                    })}
+                    
+                    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+                        <table class="w-full text-sm md:text-base">
+                            <tbody>
+                                ${incomeStatementData.net.items.map(item => renderTableRow(item, { text: 'text-blue-700', bg: 'blue-600', border: 'blue-200' })).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('content-notes');
+            const itemsHtml = notesData.map(note => `
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="chevron-right" class="text-amber-500" width="16"></i>
+                            ${note.title}
+                        </h3>
+                        <span class="text-sm font-semibold text-gray-600 bg-white px-2 py-1 rounded border border-gray-200">
+                            รวม: ${note.total2567}
+                        </span>
+                    </div>
+                    <table class="w-full text-sm">
+                        <thead>
+                                <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
+                                <th class="py-2 px-4 text-left">รายการ</th>
+                                <th class="py-2 px-4 text-right">ปี 2567</th>
+                                <th class="py-2 px-4 text-right hidden md:table-cell">ปี 2566</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            ${note.items.map(subItem => `
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-2 px-4 text-gray-700">
+                                        ${subItem.name}
+                                        ${subItem.highlight ? '<span class="ml-2 text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded">สูง</span>' : ''}
+                                    </td>
+                                    <td class="py-2 px-4 text-right font-medium text-gray-900">${subItem.year2567}</td>
+                                    <td class="py-2 px-4 text-right text-gray-400 hidden md:table-cell">${subItem.year2566}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `).join('');
+
+            container.innerHTML = `<div class="p-6 grid gap-8">${itemsHtml}</div>`;
+        }
+
+        // --- TAB SWITCHING LOGIC ---
+
+        function switchTab(tabId) {
+            // Hide all contents
+            document.getElementById('content-balance').classList.add('hidden');
+            document.getElementById('content-income').classList.add('hidden');
+            document.getElementById('content-notes').classList.add('hidden');
+
+            // Show selected content
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+
+            // Reset tab styles
+            const tabs = ['balance', 'income', 'notes'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                btn.className = "flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50";
+            });
+
+            // Set active tab style
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.className = "flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-amber-500 text-amber-600 bg-amber-50";
+
+            // Re-initialize icons because content was re-rendered (if we were re-rendering entire body, but here we just hide/show divs, so icons inside those divs persist. However, newly rendered HTML strings need lucide to scan them)
+            // Since we render once at load, we don't strictly need to re-scan unless we generate HTML dynamically on click. 
+            // In this implementation, we will render all tabs on load.
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set Header Info
+            document.getElementById('orgName').textContent = headerData.orgName;
+            document.getElementById('date').textContent = headerData.date;
+            document.getElementById('unit').textContent = headerData.unit;
+
+            // Render all sections once
+            renderBalanceSheet();
+            renderIncomeStatement();
+            renderNotes();
+
+            // Initialize Icons
+            lucide.createIcons();
+        });
+
+    </script>
+</body>
+</html>
