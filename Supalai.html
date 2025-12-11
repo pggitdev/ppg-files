@@ -27,6 +27,16 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Highlight animation for targeted note */
+        @keyframes highlightPulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); border-color: #F59E0B; }
+            70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); border-color: #F59E0B; }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); border-color: #e5e7eb; }
+        }
+        .target-highlight {
+            animation: highlightPulse 2s ease-out;
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen p-4 md:p-8">
@@ -49,7 +59,7 @@
         </div>
 
         <!-- Tabs Navigation -->
-        <div class="flex border-b border-gray-200 bg-white sticky top-0 z-20">
+        <div class="flex border-b border-gray-200 bg-white sticky top-0 z-20 shadow-sm">
             <button onclick="switchTab('balance')" id="tab-balance" class="flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-amber-500 text-amber-600 bg-amber-50">
                 <i data-lucide="wallet" width="18"></i>
                 <span>งบดุล</span>
@@ -65,7 +75,7 @@
         </div>
 
         <!-- Content Area -->
-        <div class="flex-grow bg-white">
+        <div class="flex-grow bg-white relative">
             
             <!-- Currency Badge -->
             <div class="bg-gray-50 border-b border-gray-200 px-6 py-2 flex justify-end">
@@ -77,14 +87,6 @@
             <div id="content-income" class="hidden fade-in"></div>
             <div id="content-notes" class="hidden fade-in"></div>
             
-        </div>
-
-        <!-- Footer -->
-        <div class="bg-gray-50 p-6 text-center border-t border-gray-200 mt-auto">
-             <div class="flex justify-center items-center gap-2 mb-2">
-                <p class="text-sm text-gray-500">หมายเหตุประกอบงบการเงิน เป็นส่วนหนึ่งของงบการเงินนี้</p>
-             </div>
-             <p className="text-xs text-gray-400">ขอรับรองว่าถูกต้อง (ประธานกรรมการนิติบุคคลฯ)</p>
         </div>
 
     </div>
@@ -245,12 +247,25 @@
             const highlightBadge = item.highlight ? `<span class="ml-2 inline-block px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded-full">สูงสุด</span>` : '';
             const year2566Class = item.isGrandTotal ? 'text-white' : 'text-gray-500';
 
+            // Logic to make note clickable
+            let noteContent = item.note || '';
+            if (item.note) {
+                 noteContent = `
+                    <button onclick="goToNote('${item.note}')" class="group relative inline-flex items-center justify-center">
+                        <span class="underline text-amber-600 font-bold hover:text-amber-800 transition-colors">${item.note}</span>
+                        <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                            ดูรายละเอียด
+                        </span>
+                    </button>
+                 `;
+            }
+
             return `
                 <tr class="${rowClass}">
                     <td class="${nameClass}">
                         ${item.name} ${highlightBadge}
                     </td>
-                    <td class="py-3 px-2 text-center text-gray-400 text-xs">${item.note}</td>
+                    <td class="py-3 px-2 text-center text-gray-400 text-xs">${noteContent}</td>
                     <td class="${numClass}">${item.year2567}</td>
                     <td class="${numClass} ${year2566Class}">${item.year2566}</td>
                 </tr>
@@ -329,8 +344,9 @@
 
         function renderNotes() {
             const container = document.getElementById('content-notes');
+            // scroll-mt-24 ensures the sticky header doesn't hide the note title when scrolling
             const itemsHtml = notesData.map(note => `
-                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div id="note-${note.id}" class="scroll-mt-24 bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
                         <h3 class="font-bold text-gray-800 flex items-center gap-2">
                             <i data-lucide="chevron-right" class="text-amber-500" width="16"></i>
@@ -367,7 +383,7 @@
             container.innerHTML = `<div class="p-6 grid gap-8">${itemsHtml}</div>`;
         }
 
-        // --- TAB SWITCHING LOGIC ---
+        // --- TAB & NAVIGATION LOGIC ---
 
         function switchTab(tabId) {
             // Hide all contents
@@ -388,10 +404,24 @@
             // Set active tab style
             const activeBtn = document.getElementById(`tab-${tabId}`);
             activeBtn.className = "flex-1 flex items-center justify-center gap-2 py-4 px-2 text-sm md:text-base font-medium transition-all border-b-4 border-amber-500 text-amber-600 bg-amber-50";
+        }
 
-            // Re-initialize icons because content was re-rendered (if we were re-rendering entire body, but here we just hide/show divs, so icons inside those divs persist. However, newly rendered HTML strings need lucide to scan them)
-            // Since we render once at load, we don't strictly need to re-scan unless we generate HTML dynamically on click. 
-            // In this implementation, we will render all tabs on load.
+        function goToNote(noteId) {
+            // 1. Switch to notes tab
+            switchTab('notes');
+            
+            // 2. Wait for rendering to settle then find and scroll
+            setTimeout(() => {
+                const element = document.getElementById(`note-${noteId}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // 3. Add temporary highlight class
+                    element.classList.remove('target-highlight'); // reset if already there
+                    void element.offsetWidth; // trigger reflow
+                    element.classList.add('target-highlight');
+                }
+            }, 50);
         }
 
         // --- INITIALIZATION ---
