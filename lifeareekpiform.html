@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>cแบบประเมินบริษัทคู่สัญญา</title>
+    <title>ประเมิน KPI บริษัทคู่สัญญา</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -706,7 +706,8 @@
 
             try {
                 // Send to backend (GAS)
-                const response = await fetch(window.location.href, {
+                const gasUrl = 'https://script.google.com/macros/s/AKfycbzCA6H4uWEkrL08FRSAVFpHPI7Vo2W3RBkUn7oGGlCthu8SyKhUFrTDXYzTwVg_KBTY/exec';
+                const response = await fetch(gasUrl, {
                     method: 'POST',
                     body: JSON.stringify(formData)
                 });
