@@ -718,11 +718,11 @@
         const evaluatorInput = document.getElementById('evaluatorName');
 
         // Populate building numbers inside datalist
-        buildingNumbers.forEach(num => {
-            const option = document.createElement('option');
-            option.value = num;
-            buildingList.appendChild(option);
-        });
+        // buildingNumbers.forEach(num => {
+        //     const option = document.createElement('option');
+        //     option.value = num;
+        //     buildingList.appendChild(option);
+        // });
 
         // Set today's date
         document.getElementById('evaluationDate').valueAsDate = new Date();
@@ -760,10 +760,10 @@
             }
 
             // Optional: ตรวจสอบเพิ่มเติมว่าบ้านเลขที่ที่กรอก มีอยู่ในระบบจริงหรือไม่
-            if (!buildingNumbers.includes(inputVal)) {
-                showAlert('❌ ไม่พบข้อมูลบ้านเลขที่นี้ในระบบ กรุณาเลือกจากรายการค้นหา', 'error');
-                return;
-            }
+            // if (!buildingNumbers.includes(inputVal)) {
+            //     showAlert('❌ ไม่พบข้อมูลบ้านเลขที่นี้ในระบบ กรุณาเลือกจากรายการค้นหา', 'error');
+            //     return;
+            // }
 
             // Validate all items are scored
             const allScored = document.querySelectorAll('.rating-options').length === document.querySelectorAll('.rating-option.selected').length;
