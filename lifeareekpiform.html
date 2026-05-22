@@ -73,12 +73,14 @@
             line-height: 1.5;
         }
 
-.progress-container {
-    position: sticky;      /* ติดอยู่ด้านบน */
-    top: 0;               /* ระยะห่างจากบน */
-    z-index: 100;         /* อยู่เหนือเนื้อหา */
-    box-shadow: ...       /* shadow เบาๆ */
-}
+        .progress-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
 
         .progress-bar {
             background: #e8e8f0;
@@ -101,7 +103,6 @@
             font-size: 12px;
             font-weight: 500;
         }
-        
 
         .alert {
             padding: 14px 16px;
@@ -321,7 +322,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Success Modal Styles */
         .success-overlay {
             display: none;
             position: fixed;
@@ -514,9 +514,8 @@
             <p>ประเมินคุณภาพการให้บริการของบริษัทคู่สัญญา</p>
         </div>
 
+        <div id="alert" class="alert"></div>
 
-
-        <!-- Success Modal -->
         <div id="successOverlay" class="success-overlay"></div>
         <div id="successModal" class="success-modal">
             <span class="success-icon">✓</span>
@@ -535,12 +534,11 @@
         </div>
 
         <form id="kpiForm">
-            <!-- ข้อมูลทั่วไป -->
             <div class="form-group">
                 <label for="evaluatorName">บ้านเลขที่ *</label>
-                <select id="evaluatorName" required>
-                    <option value="">-- เลือกบ้านเลขที่ --</option>
-                </select>
+                <input type="text" id="evaluatorName" list="buildingList" placeholder="-- พิมพ์ค้นหาบ้านเลขที่ เช่น 300/001 --" autocomplete="off" required>
+                <datalist id="buildingList">
+                    </datalist>
             </div>
 
             <div class="form-group">
@@ -548,7 +546,6 @@
                 <input type="date" id="evaluationDate" required>
             </div>
 
-            <!-- งานบริหารจัดการ -->
             <div class="section-title">📋 งานบริหารจัดการ</div>
 
             <div class="evaluation-item">
@@ -596,7 +593,6 @@
                 </div>
             </div>
 
-            <!-- งานรักษาความปลอดภัย -->
             <div class="section-title">🔒 งานรักษาความปลอดภัย</div>
 
             <div class="evaluation-item">
@@ -644,7 +640,6 @@
                 </div>
             </div>
 
-            <!-- งานทำความสะอาด -->
             <div class="section-title">🧹 งานทำความสะอาด</div>
 
             <div class="evaluation-item">
@@ -692,7 +687,6 @@
                 </div>
             </div>
 
-            <!-- ข้อเสนอแนะ -->
             <div class="form-group">
                 <label for="comments">ข้อเสนอแนะเพิ่มเติม (ไม่บังคับ)</label>
                 <textarea id="comments" placeholder="ระบุข้อเสนอแนะ..."></textarea>
@@ -720,14 +714,14 @@
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
         const submitBtn = document.getElementById('submitBtn');
-        const selectUnit = document.getElementById('evaluatorName');
+        const buildingList = document.getElementById('buildingList');
+        const evaluatorInput = document.getElementById('evaluatorName');
 
-        // Populate building numbers
+        // Populate building numbers inside datalist
         buildingNumbers.forEach(num => {
             const option = document.createElement('option');
             option.value = num;
-            option.textContent = num;
-            selectUnit.appendChild(option);
+            buildingList.appendChild(option);
         });
 
         // Set today's date
@@ -758,18 +752,16 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Validate required fields
-            const requiredInputs = form.querySelectorAll('select[required]');
-            let isValid = true;
-            for (let input of requiredInputs) {
-                if (!input.value.trim()) {
-                    isValid = false;
-                    break;
-                }
+            // Validate required inputs (including text input)
+            const inputVal = evaluatorInput.value.trim();
+            if (!inputVal) {
+                showAlert('❌ กรุณากรอกข้อมูลบ้านเลขที่ให้ครบถ้วน', 'error');
+                return;
             }
 
-            if (!isValid) {
-                showAlert('❌ กรุณากรอกข้อมูลที่บังคับให้ครบ', 'error');
+            // Optional: ตรวจสอบเพิ่มเติมว่าบ้านเลขที่ที่กรอก มีอยู่ในระบบจริงหรือไม่
+            if (!buildingNumbers.includes(inputVal)) {
+                showAlert('❌ ไม่พบข้อมูลบ้านเลขที่นี้ในระบบ กรุณาเลือกจากรายการค้นหา', 'error');
                 return;
             }
 
@@ -782,7 +774,7 @@
 
             // Collect form data
             const formData = {
-                evaluatorName: document.getElementById('evaluatorName').value,
+                evaluatorName: inputVal,
                 evaluationDate: document.getElementById('evaluationDate').value,
                 timestamp: new Date().toISOString(),
                 
@@ -852,6 +844,16 @@
                 loadingDiv.classList.remove('show');
                 submitBtn.disabled = false;
             }
+        });
+
+        // เพิ่มฟังก์ชันดักจับปุ่ม Reset ให้เคลียร์คลาส selected และ progress bar ด้วย
+        form.addEventListener('reset', function() {
+            setTimeout(() => {
+                document.querySelectorAll('.rating-option').forEach(btn => btn.classList.remove('selected'));
+                progressFill.style.width = '0%';
+                progressText.textContent = '0%';
+                document.getElementById('evaluationDate').valueAsDate = new Date();
+            }, 10);
         });
 
         function showAlert(message, type) {
