@@ -317,6 +317,103 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Success Modal Styles */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .success-overlay.show {
+            display: block;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .success-modal.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .success-modal h2 {
+            color: #51cf66;
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .success-modal p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .success-modal .btn-ok {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Kanit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .success-modal .btn-ok:active {
+            transform: scale(0.98);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 16px;
@@ -414,6 +511,15 @@
         </div>
 
 
+
+        <!-- Success Modal -->
+        <div id="successOverlay" class="success-overlay"></div>
+        <div id="successModal" class="success-modal">
+            <span class="success-icon">✓</span>
+            <h2>ส่งสำเร็จ!</h2>
+            <p>ขอบคุณที่ประเมินผลการทำงาน<br>ข้อมูลของท่านได้ถูกบันทึกเรียบร้อยแล้ว</p>
+            <button type="button" class="btn-ok" onclick="closeSuccessModal()">ตกลง</button>
+        </div>
 
         <div class="progress-container">
             <div class="progress-bar">
@@ -587,7 +693,7 @@
                 <label for="comments">ข้อเสนอแนะเพิ่มเติม (ไม่บังคับ)</label>
                 <textarea id="comments" placeholder="ระบุข้อเสนอแนะ..."></textarea>
             </div>
- 
+
             <div id="loading" class="loading">
                 <div class="spinner"></div>
                 <p>💾 กำลังบันทึก...</p>
@@ -724,14 +830,15 @@
                 });
 
                 if (response.ok) {
-                    showAlert('✅ บันทึกสำเร็จ!', 'success');
+                    showSuccessModal();
                     setTimeout(() => {
                         form.reset();
                         document.querySelectorAll('.rating-option').forEach(btn => btn.classList.remove('selected'));
                         progressFill.style.width = '0%';
                         progressText.textContent = '0%';
                         document.getElementById('evaluationDate').valueAsDate = new Date();
-                    }, 1500);
+                        closeSuccessModal();
+                    }, 3000);
                 } else {
                     showAlert('❌ เกิดข้อผิดพลาด', 'error');
                 }
@@ -749,6 +856,16 @@
             setTimeout(() => {
                 alertDiv.classList.remove('show');
             }, 4000);
+        }
+
+        function showSuccessModal() {
+            document.getElementById('successOverlay').classList.add('show');
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successOverlay').classList.remove('show');
+            document.getElementById('successModal').classList.remove('show');
         }
 
         // Initialize
