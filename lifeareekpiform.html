@@ -212,7 +212,7 @@
 
         .rating-options {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
         }
 
@@ -241,15 +241,6 @@
             color: white;
             border-color: #667eea;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .rating-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: clamp(11px, 2vw, 12px);
-            color: #aaa;
-            font-weight: 300;
-            margin-top: 8px;
         }
 
         .button-group {
@@ -443,16 +434,6 @@
                 <label for="evaluatorName">บ้านเลขที่ *</label>
                 <select id="evaluatorName" required>
                     <option value="">-- เลือกบ้านเลขที่ --</option>
-                    <option value="บ้านเลขที่ 1">บ้านเลขที่ 1</option>
-                    <option value="บ้านเลขที่ 2">บ้านเลขที่ 2</option>
-                    <option value="บ้านเลขที่ 3">บ้านเลขที่ 3</option>
-                    <option value="บ้านเลขที่ 4">บ้านเลขที่ 4</option>
-                    <option value="บ้านเลขที่ 5">บ้านเลขที่ 5</option>
-                    <option value="บ้านเลขที่ 6">บ้านเลขที่ 6</option>
-                    <option value="บ้านเลขที่ 7">บ้านเลขที่ 7</option>
-                    <option value="บ้านเลขที่ 8">บ้านเลขที่ 8</option>
-                    <option value="บ้านเลขที่ 9">บ้านเลขที่ 9</option>
-                    <option value="บ้านเลขที่ 10">บ้านเลขที่ 10</option>
                 </select>
             </div>
 
@@ -465,57 +446,38 @@
             <div class="section-title">📋 งานบริหารจัดการ</div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">ความสุภาพและการให้บริการของพนักงาน</label>
-                <div class="rating-options" data-kpi="admin_politeness">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การเก็บค่าส่วนกลางและจัดการงบประมาณ</label>
+                <div class="rating-options" data-kpi="admin_fee_collection">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">ความถี่และความทั่วถึงในการตรวจตรา</label>
-                <div class="rating-options" data-kpi="admin_frequency">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">ความพึงพอใจของลูกบ้านต่อการบริหารจัดการ</label>
+                <div class="rating-options" data-kpi="admin_satisfaction">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">การจัดการเมื่อเกิดเหตุฉุกเฉิน</label>
-                <div class="rating-options" data-kpi="admin_emergency">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การควบคุมมาตรฐานการทำงานของบริษัทคู่สัญญา</label>
+                <div class="rating-options" data-kpi="admin_outsource_control">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">การควบคุมการเข้า-ออกของบุคคลภายนอก</label>
-                <div class="rating-options" data-kpi="admin_access">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
-                </div>
-            </div>
-
-            <div class="evaluation-item">
-                <label class="evaluation-label">ความคุ้มค่าเมื่อเทียบกับราคาที่จ่าย</label>
-                <div class="rating-options" data-kpi="admin_value">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การปฏิบัติตามกฎหมายและข้อบังคับ</label>
+                <div class="rating-options" data-kpi="admin_compliance">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
@@ -523,57 +485,47 @@
             <div class="section-title">🔒 งานรักษาความปลอดภัย</div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">ความสุภาพและการให้บริการของพนักงาน</label>
-                <div class="rating-options" data-kpi="security_politeness">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การป้องกันและการจัดการเหตุฉุกเฉิน</label>
+                <div class="rating-options" data-kpi="security_incident">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">ความถี่และความทั่วถึงในการตรวจตรา</label>
-                <div class="rating-options" data-kpi="security_frequency">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การปฏิบัติหน้าที่ตรวจตรา และการบันทึกข้อมูลเข้า-ออก</label>
+                <div class="rating-options" data-kpi="security_patrol">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">การจัดการเมื่อเกิดเหตุฉุกเฉิน</label>
-                <div class="rating-options" data-kpi="security_emergency">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การจัดการปัญหาจราจรและการจอดรถ</label>
+                <div class="rating-options" data-kpi="security_traffic">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">การควบคุมการเข้า-ออกของบุคคลภายนอก</label>
-                <div class="rating-options" data-kpi="security_access">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">ความสุภาพและการให้บริการของพนักงาน รปภ.</label>
+                <div class="rating-options" data-kpi="security_service">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
                 <label class="evaluation-label">ความคุ้มค่าเมื่อเทียบกับราคาที่จ่าย</label>
                 <div class="rating-options" data-kpi="security_value">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
@@ -581,57 +533,47 @@
             <div class="section-title">🧹 งานทำความสะอาด</div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">ความสุภาพและการให้บริการของพนักงาน</label>
-                <div class="rating-options" data-kpi="cleaning_politeness">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">ความสะอาดและทัศนียภาพของพื้นที่ส่วนกลาง</label>
+                <div class="rating-options" data-kpi="cleaning_cleanliness">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">ความถี่และความทั่วถึงในการตรวจตรา</label>
-                <div class="rating-options" data-kpi="cleaning_frequency">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การจัดการและการใช้วัสดุทำความสะอาดอย่างเหมาะสม</label>
+                <div class="rating-options" data-kpi="cleaning_chemical">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">การจัดการเมื่อเกิดเหตุฉุกเฉิน</label>
-                <div class="rating-options" data-kpi="cleaning_emergency">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">การดูแลรักษาพื้นที่สีเขียวและสิ่งอำนวยความสะดวก</label>
+                <div class="rating-options" data-kpi="cleaning_landscape">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
-                <label class="evaluation-label">การควบคุมการเข้า-ออกของบุคคลภายนอก</label>
-                <div class="rating-options" data-kpi="cleaning_access">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                <label class="evaluation-label">ความสุภาพและการให้บริการของพนักงานแม่บ้าน</label>
+                <div class="rating-options" data-kpi="cleaning_service">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
             <div class="evaluation-item">
                 <label class="evaluation-label">ความคุ้มค่าเมื่อเทียบกับราคาที่จ่าย</label>
                 <div class="rating-options" data-kpi="cleaning_value">
-                    <button type="button" class="rating-option" data-value="1">แย่มาก</button>
-                    <button type="button" class="rating-option" data-value="2">ไม่ดี</button>
-                    <button type="button" class="rating-option" data-value="3">พอใช้</button>
-                    <button type="button" class="rating-option" data-value="4">ดี</button>
-                    <button type="button" class="rating-option" data-value="5">ดีเยี่ยม</button>
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
                 </div>
             </div>
 
@@ -649,12 +591,24 @@
     </div>
 
     <script>
+        // Building numbers from Excel file
+        const buildingNumbers = ["300/001", "300/002", "300/003", "300/004", "300/005", "300/006", "300/007", "300/008", "300/009", "300/010", "300/011", "300/012", "300/013", "300/014", "300/015", "300/016", "300/017", "300/018", "300/019", "300/020", "300/021", "300/022", "300/023", "300/024", "300/025", "300/026", "300/027", "300/028", "300/029", "300/030", "300/031", "300/032", "300/033", "300/034", "300/035", "300/036", "300/037", "300/038", "300/039", "300/040", "300/041", "300/042", "300/043", "300/044", "300/045", "300/046", "300/047", "300/048", "300/049", "300/050", "300/051", "300/052", "300/053", "300/054", "300/055", "300/056", "300/057", "300/058", "300/059", "300/060", "300/061", "300/062", "300/063", "300/064", "300/065", "300/066", "300/067", "300/068", "300/069", "300/070", "300/071", "300/072", "300/073", "300/074", "300/075", "300/076", "300/077", "300/078", "300/079", "300/080", "300/081", "300/082", "300/083", "300/084", "300/085", "300/086", "300/087", "300/088", "300/089", "300/090", "300/091", "300/092", "300/093", "300/094", "300/095", "300/096", "300/097", "300/098", "300/099", "300/100"];
+
         const form = document.getElementById('kpiForm');
         const alertDiv = document.getElementById('alert');
         const loadingDiv = document.getElementById('loading');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
         const submitBtn = document.getElementById('submitBtn');
+        const selectUnit = document.getElementById('evaluatorName');
+
+        // Populate building numbers
+        buildingNumbers.forEach(num => {
+            const option = document.createElement('option');
+            option.value = num;
+            option.textContent = num;
+            selectUnit.appendChild(option);
+        });
 
         // Set today's date
         document.getElementById('evaluationDate').valueAsDate = new Date();
@@ -715,21 +669,20 @@
                 // งานบริหารจัดการ
                 admin: {
                     scores: {
-                        politeness: document.querySelector('[data-kpi="admin_politeness"] .rating-option.selected')?.dataset.value || '',
-                        frequency: document.querySelector('[data-kpi="admin_frequency"] .rating-option.selected')?.dataset.value || '',
-                        emergency: document.querySelector('[data-kpi="admin_emergency"] .rating-option.selected')?.dataset.value || '',
-                        access: document.querySelector('[data-kpi="admin_access"] .rating-option.selected')?.dataset.value || '',
-                        value: document.querySelector('[data-kpi="admin_value"] .rating-option.selected')?.dataset.value || ''
+                        feeCollection: document.querySelector('[data-kpi="admin_fee_collection"] .rating-option.selected')?.dataset.value || '',
+                        satisfaction: document.querySelector('[data-kpi="admin_satisfaction"] .rating-option.selected')?.dataset.value || '',
+                        outsourceControl: document.querySelector('[data-kpi="admin_outsource_control"] .rating-option.selected')?.dataset.value || '',
+                        compliance: document.querySelector('[data-kpi="admin_compliance"] .rating-option.selected')?.dataset.value || ''
                     }
                 },
                 
                 // งานรักษาความปลอดภัย
                 security: {
                     scores: {
-                        politeness: document.querySelector('[data-kpi="security_politeness"] .rating-option.selected')?.dataset.value || '',
-                        frequency: document.querySelector('[data-kpi="security_frequency"] .rating-option.selected')?.dataset.value || '',
-                        emergency: document.querySelector('[data-kpi="security_emergency"] .rating-option.selected')?.dataset.value || '',
-                        access: document.querySelector('[data-kpi="security_access"] .rating-option.selected')?.dataset.value || '',
+                        incident: document.querySelector('[data-kpi="security_incident"] .rating-option.selected')?.dataset.value || '',
+                        patrol: document.querySelector('[data-kpi="security_patrol"] .rating-option.selected')?.dataset.value || '',
+                        traffic: document.querySelector('[data-kpi="security_traffic"] .rating-option.selected')?.dataset.value || '',
+                        service: document.querySelector('[data-kpi="security_service"] .rating-option.selected')?.dataset.value || '',
                         value: document.querySelector('[data-kpi="security_value"] .rating-option.selected')?.dataset.value || ''
                     }
                 },
@@ -737,10 +690,10 @@
                 // งานทำความสะอาด
                 cleaning: {
                     scores: {
-                        politeness: document.querySelector('[data-kpi="cleaning_politeness"] .rating-option.selected')?.dataset.value || '',
-                        frequency: document.querySelector('[data-kpi="cleaning_frequency"] .rating-option.selected')?.dataset.value || '',
-                        emergency: document.querySelector('[data-kpi="cleaning_emergency"] .rating-option.selected')?.dataset.value || '',
-                        access: document.querySelector('[data-kpi="cleaning_access"] .rating-option.selected')?.dataset.value || '',
+                        cleanliness: document.querySelector('[data-kpi="cleaning_cleanliness"] .rating-option.selected')?.dataset.value || '',
+                        chemical: document.querySelector('[data-kpi="cleaning_chemical"] .rating-option.selected')?.dataset.value || '',
+                        landscape: document.querySelector('[data-kpi="cleaning_landscape"] .rating-option.selected')?.dataset.value || '',
+                        service: document.querySelector('[data-kpi="cleaning_service"] .rating-option.selected')?.dataset.value || '',
                         value: document.querySelector('[data-kpi="cleaning_value"] .rating-option.selected')?.dataset.value || ''
                     }
                 },
