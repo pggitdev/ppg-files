@@ -481,6 +481,15 @@
                 </div>
             </div>
 
+            <div class="evaluation-item">
+                <label class="evaluation-label">ความคุ้มค่าเมื่อเทียบกับราคาที่จ่าย</label>
+                <div class="rating-options" data-kpi="admin_value">
+                    <button type="button" class="rating-option" data-value="1">ปรับปรุง</button>
+                    <button type="button" class="rating-option" data-value="2">พอใช้</button>
+                    <button type="button" class="rating-option" data-value="3">ดี</button>
+                </div>
+            </div>
+
             <!-- งานรักษาความปลอดภัย -->
             <div class="section-title">🔒 งานรักษาความปลอดภัย</div>
 
@@ -587,6 +596,11 @@
                 <button type="submit" class="btn-submit" id="submitBtn">ส่งแบบฟอร์ม</button>
                 <button type="reset" class="btn-reset">ล้างข้อมูล</button>
             </div>
+
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>💾 กำลังบันทึก...</p>
+            </div>
         </form>
     </div>
 
@@ -672,7 +686,8 @@
                         feeCollection: document.querySelector('[data-kpi="admin_fee_collection"] .rating-option.selected')?.dataset.value || '',
                         satisfaction: document.querySelector('[data-kpi="admin_satisfaction"] .rating-option.selected')?.dataset.value || '',
                         outsourceControl: document.querySelector('[data-kpi="admin_outsource_control"] .rating-option.selected')?.dataset.value || '',
-                        compliance: document.querySelector('[data-kpi="admin_compliance"] .rating-option.selected')?.dataset.value || ''
+                        compliance: document.querySelector('[data-kpi="admin_compliance"] .rating-option.selected')?.dataset.value || '',
+                        value: document.querySelector('[data-kpi="admin_value"] .rating-option.selected')?.dataset.value || ''
                     }
                 },
                 
