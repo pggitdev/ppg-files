@@ -73,9 +73,12 @@
             line-height: 1.5;
         }
 
-        .progress-container {
-            margin-bottom: 24px;
-        }
+.progress-container {
+    position: sticky;      /* ติดอยู่ด้านบน */
+    top: 0;               /* ระยะห่างจากบน */
+    z-index: 100;         /* อยู่เหนือเนื้อหา */
+    box-shadow: ...       /* shadow เบาๆ */
+}
 
         .progress-bar {
             background: #e8e8f0;
@@ -98,6 +101,7 @@
             font-size: 12px;
             font-weight: 500;
         }
+        
 
         .alert {
             padding: 14px 16px;
