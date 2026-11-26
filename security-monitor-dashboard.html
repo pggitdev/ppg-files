@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ศูนย์ควบคุมและสั่งการ — HRMIND Platform</title>
+<style>
+  :root{
+    --bg:#070d18;
+    --bg2:#0b1626;
+    --panel:#0e1b2e;
+    --panel2:#13243b;
+    --line:#1d3350;
+    --txt:#d8e6f5;
+    --txt2:#8aa3c4;
+    --txt3:#5b728f;
+    --green:#22e08a;
+    --amber:#ffb020;
+    --red:#ff4d5e;
+    --blue:#3da5ff;
+    --cyan:#22e0d8;
+    --purple:#9b8cff;
+    --grad1:linear-gradient(135deg,#0e1b2e 0%,#13243b 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Segoe UI','Sarabun','Noto Sans Thai',-apple-system,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%,rgba(61,165,255,.08),transparent 60%),
+      radial-gradient(900px 500px at -10% 110%,rgba(34,224,138,.06),transparent 55%),
+      var(--bg);
+    color:var(--txt);
+    font-size:14px;
+    line-height:1.45;
+    overflow-x:hidden;
+  }
+  /* ===== Header ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:18px;
+    padding:10px 18px;
+    background:linear-gradient(180deg,rgba(11,22,38,.96),rgba(11,22,38,.88));
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:12px;min-width:240px}
+  .logo{
+    width:42px;height:42px;border-radius:10px;
+    background:linear-gradient(135deg,#22e08a,#3da5ff);
+    display:grid;place-items:center;color:#06121f;font-weight:800;font-size:20px;
+    box-shadow:0 0 18px rgba(34,224,138,.4);
+  }
+  .brand h1{font-size:15px;font-weight:700;letter-spacing:.3px;line-height:1.1}
+  .brand p{font-size:11px;color:var(--txt2);letter-spacing:1.5px;text-transform:uppercase}
+  .topnav{display:flex;gap:4px;flex:1}
+  .topnav a{
+    padding:8px 14px;border-radius:8px;color:var(--txt2);text-decoration:none;font-size:13px;
+    transition:.2s;cursor:pointer;
+  }
+  .topnav a:hover{background:var(--panel2);color:var(--txt)}
+  .topnav a.active{background:var(--panel2);color:var(--green);box-shadow:inset 0 -2px 0 var(--green)}
+  .clock{display:flex;flex-direction:column;align-items:flex-end;min-width:170px}
+  .clock .time{font-size:20px;font-weight:700;color:var(--txt);font-variant-numeric:tabular-nums;letter-spacing:1px}
+  .clock .date{font-size:11px;color:var(--txt2)}
+  .alertpill{
+    display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:20px;
+    background:rgba(255,77,94,.12);border:1px solid rgba(255,77,94,.35);color:var(--red);
+    font-size:12px;font-weight:600;cursor:pointer;
+  }
+  .alertpill .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,77,94,.7);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,77,94,.7)}70%{box-shadow:0 0 0 8px rgba(255,77,94,0)}100%{box-shadow:0 0 0 0 rgba(255,77,94,0)}}
+  .userchip{display:flex;align-items:center;gap:9px;padding:6px 10px;border-radius:20px;background:var(--panel2);border:1px solid var(--line)}
+  .userchip .av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#9b8cff,#3da5ff);display:grid;place-items:center;font-size:12px;font-weight:700;color:#06121f}
+  .userchip .nm{font-size:12px;line-height:1.1}
+  .userchip .rl{font-size:10px;color:var(--txt2)}
+
+  /* ===== Layout ===== */
+  .wrap{padding:16px;max-width:1700px;margin:0 auto}
+  .grid{display:grid;gap:14px}
+  .row-kpi{grid-template-columns:repeat(5,1fr)}
+  .row-main{grid-template-columns:2fr 1fr}
+  .row-mid{grid-template-columns:1.2fr 1fr 1fr}
+  .row-low{grid-template-columns:1fr 1fr}
+  @media(max-width:1100px){.row-kpi{grid-template-columns:repeat(2,1fr)} .row-main,.row-mid,.row-low{grid-template-columns:1fr}}
+
+  .card{
+    background:var(--grad1);border:1px solid var(--line);border-radius:14px;
+    padding:14px 16px;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.5}
+  .card h3{
+    font-size:13px;font-weight:600;color:var(--txt);letter-spacing:.4px;
+    display:flex;align-items:center;gap:9px;margin-bottom:12px;text-transform:uppercase;
+  }
+  .card h3 .ico{width:22px;height:22px;border-radius:6px;background:var(--panel2);display:grid;place-items:center;color:var(--cyan)}
+  .card h3 .badge{margin-left:auto;font-size:10px;padding:3px 9px;border-radius:10px;background:var(--panel2);color:var(--txt2);text-transform:none;letter-spacing:0;font-weight:600}
+  .card h3 .badge.live{background:rgba(34,224,138,.15);color:var(--green)}
+  .card h3 .badge.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:middle;animation:pulse2 1.4s infinite}
+  @keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ===== KPI ===== */
+  .kpi{display:flex;flex-direction:column;gap:8px}
+  .kpi .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .kpi .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px}
+  .kpi .ico.g{background:rgba(34,224,138,.13);color:var(--green)}
+  .kpi .ico.b{background:rgba(61,165,255,.13);color:var(--blue)}
+  .kpi .ico.a{background:rgba(255,176,32,.13);color:var(--amber)}
+  .kpi .ico.r{background:rgba(255,77,94,.13);color:var(--red)}
+  .kpi .ico.p{background:rgba(155,140,255,.13);color:var(--purple)}
+  .kpi .val{font-size:30px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+  .kpi .lab{font-size:12px;color:var(--txt2)}
+  .kpi .foot{display:flex;align-items:center;gap:6px;font-size:11px}
+  .kpi .foot .up{color:var(--green)} .kpi .foot .dn{color:var(--red)}
+  .kpi .spark{height:30px;margin-top:2px}
+
+  /* ===== Site status ===== */
+  .sitegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .site{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 12px;
+    display:flex;flex-direction:column;gap:7px;transition:.2s;cursor:pointer;
+  }
+  .site:hover{border-color:var(--blue);transform:translateY(-2px)}
+  .site .sh{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .site .nm{font-size:13px;font-weight:600;line-height:1.2}
+  .site .st{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:.3px;white-space:nowrap}
+  .st.ok{background:rgba(34,224,138,.15);color:var(--green)}
+  .st.warn{background:rgba(255,176,32,.15);color:var(--amber)}
+  .st.crit{background:rgba(255,77,94,.15);color:var(--red);animation:pulse2 1.4s infinite}
+  .st.off{background:rgba(91,114,143,.18);color:var(--txt3)}
+  .site .meta{display:flex;justify-content:space-between;font-size:11px;color:var(--txt2)}
+  .site .meta b{color:var(--txt);font-weight:600}
+  .site .bar{height:4px;border-radius:3px;background:var(--bg2);overflow:hidden}
+  .site .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan))}
+  .site .bar.warn i{background:linear-gradient(90deg,var(--amber),#ff8a3d)}
+  .site .bar.crit i{background:linear-gradient(90deg,var(--red),#ff7d8a)}
+
+  /* ===== Map ===== */
+  .mapwrap{position:relative;height:340px;border-radius:10px;overflow:hidden;background:linear-gradient(160deg,#081020,#0d1a2e);border:1px solid var(--line)}
+  .mapbg{
+    position:absolute;inset:0;opacity:.5;
+    background-image:
+      linear-gradient(rgba(61,165,255,.08) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(61,165,255,.08) 1px,transparent 1px);
+    background-size:40px 40px;
+  }
+  .mapring{position:absolute;border:1px solid rgba(61,165,255,.18);border-radius:50%}
+  .mapring.r1{inset:20%;}
+  .mapring.r2{inset:35%;}
+  .mapring.r3{inset:48%;}
+  .mapcenter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(61,165,255,.2),0 0 18px rgba(61,165,255,.7)}
+  .pin{position:absolute;transform:translate(-50%,-100%);cursor:pointer}
+  .pin .dot{width:12px;height:12px;border-radius:50%;border:2px solid #06121f}
+  .pin.ok .dot{background:var(--green);box-shadow:0 0 10px rgba(34,224,138,.7)}
+  .pin.warn .dot{background:var(--amber);box-shadow:0 0 10px rgba(255,176,32,.7)}
+  .pin.crit .dot{background:var(--red);box-shadow:0 0 10px rgba(255,77,94,.8);animation:pulse2 1.2s infinite}
+  .pin .lbl{position:absolute;left:50%;transform:translateX(-50%);top:14px;font-size:10px;background:rgba(7,13,24,.9);padding:2px 6px;border-radius:5px;white-space:nowrap;border:1px solid var(--line);color:var(--txt2)}
+  .pin .ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;border:2px solid currentColor;opacity:.6}
+  .pin.crit .ring{animation:radar 1.6s infinite}
+  .pin.warn .ring{animation:radar 2s infinite}
+  @keyframes radar{0%{transform:translate(-50%,-50%) scale(1);opacity:.7}100%{transform:translate(-50%,-50%) scale(4);opacity:0}}
+  .mappanel{position:absolute;left:10px;top:10px;background:rgba(7,13,24,.85);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:11px;display:flex;flex-direction:column;gap:4px}
+  .mappanel .lg{display:flex;align-items:center;gap:6px;color:var(--txt2)}
+  .mappanel .lg .d{width:9px;height:9px;border-radius:50%}
+  .mapstat{position:absolute;right:10px;bottom:10px;background:rgba(7,13,24,.85);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--txt2)}
+  .mapstat b{color:var(--txt);font-size:15px;display:block}
+
+  /* ===== Incident feed ===== */
+  .feed{display:flex;flex-direction:column;gap:8px;max-height:340px;overflow-y:auto;padding-right:4px}
+  .feed::-webkit-scrollbar{width:6px}
+  .feed::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+  .item{display:flex;gap:10px;padding:9px 10px;border-radius:8px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue)}
+  .item.crit{border-left-color:var(--red)}
+  .item.warn{border-left-color:var(--amber)}
+  .item.ok{border-left-color:var(--green)}
+  .item .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:14px;flex-shrink:0}
+  .item.crit .ic{background:rgba(255,77,94,.13);color:var(--red)}
+  .item.warn .ic{background:rgba(255,176,32,.13);color:var(--amber)}
+  .item.ok .ic{background:rgba(34,224,138,.13);color:var(--green)}
+  .item .ic{background:rgba(61,165,255,.13);color:var(--blue)}
+  .item .bd{flex:1;min-width:0}
+  .item .bd .t1{font-size:13px;font-weight:600;line-height:1.2}
+  .item .bd .t2{font-size:11px;color:var(--txt2);margin-top:2px}
+  .item .tm{font-size:10px;color:var(--txt3);white-space:nowrap;align-self:flex-start}
+
+  /* ===== Shift table ===== */
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--txt2);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px;background:var(--panel2)}
+  tbody tr:hover{background:var(--panel2)}
+  td .per{display:flex;align-items:center;gap:8px}
+  td .per .av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#3da5ff,#9b8cff);display:grid;place-items:center;font-size:11px;font-weight:700;color:#06121f;flex-shrink:0}
+  td .nm{font-weight:600}
+  td .sb{font-size:10px;color:var(--txt2)}
+  .pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap}
+  .pill.g{background:rgba(34,224,138,.15);color:var(--green)}
+  .pill.b{background:rgba(61,165,255,.15);color:var(--blue)}
+  .pill.a{background:rgba(255,176,32,.15);color:var(--amber)}
+  .pill.r{background:rgba(255,77,94,.15);color:var(--red)}
+  .pill.p{background:rgba(155,140,255,.15);color:var(--purple)}
+  .tblwrap{max-height:300px;overflow:auto;border-radius:8px;border:1px solid var(--line)}
+  .tblwrap::-webkit-scrollbar{width:6px}
+  .tblwrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+
+  /* ===== Charts (CSS bar) ===== */
+  .bars{display:flex;align-items:flex-end;gap:8px;height:130px;padding-top:10px}
+  .barc{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
+  .barc .v{font-size:10px;color:var(--txt2)}
+  .barc .b{width:100%;max-width:34px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--cyan),var(--blue));min-height:4px;transition:.6s}
+  .barc .x{font-size:10px;color:var(--txt3)}
+  .donutwrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .donut{width:130px;height:130px;border-radius:50%;flex-shrink:0;position:relative}
+  .donut .hole{position:absolute;inset:18px;border-radius:50%;background:var(--panel);display:grid;place-items:center;text-align:center}
+  .donut .hole .n{font-size:22px;font-weight:700}
+  .donut .hole .l{font-size:10px;color:var(--txt2)}
+  .legend{display:flex;flex-direction:column;gap:7px;flex:1;min-width:140px}
+  .legend .li{display:flex;align-items:center;gap:8px;font-size:12px}
+  .legend .li .d{width:10px;height:10px;border-radius:3px}
+  .legend .li .v{margin-left:auto;color:var(--txt2);font-variant-numeric:tabular-nums}
+
+  /* ===== Vehicles ===== */
+  .vlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px}
+  .vcard{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:10px}
+  .vcard .vh{display:flex;justify-content:space-between;align-items:center}
+  .vcard .plate{font-size:12px;font-weight:700;letter-spacing:.5px}
+  .vcard .vt{font-size:10px;color:var(--txt2);margin-top:1px}
+  .vcard .row{display:flex;justify-content:space-between;font-size:11px;color:var(--txt2);margin-top:6px}
+  .vcard .row b{color:var(--txt)}
+
+  /* ===== Footer ticker ===== */
+  .ticker{display:flex;align-items:center;gap:14px;padding:9px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+  .ticker .lab{font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;white-space:nowrap;display:flex;align-items:center;gap:7px}
+  .ticker .lab::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse2 1.2s infinite}
+  .ticker .track{flex:1;overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+  .ticker .track span{display:inline-block;padding-left:100%;animation:scroll 38s linear infinite;font-size:12px;color:var(--txt2)}
+  .ticker .track span b{color:var(--amber);margin:0 4px}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+  .footnote{margin-top:12px;font-size:11px;color:var(--txt3);text-align:center}
+
+  @media(max-width:640px){
+    .topnav{display:none}
+    .clock{min-width:auto}
+    .clock .time{font-size:16px}
+    .clock .date{font-size:10px}
+    .brand{min-width:auto}
+    .brand h1{font-size:13px}
+    .brand p{font-size:10px}
+    .topbar{flex-wrap:wrap;gap:10px}
+    .alertpill span.txt{display:none}
+    .userchip .nm,.userchip .rl{display:none}
+    .kpi .val{font-size:22px}
+    .kpi .ico{width:32px;height:32px;font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">HR</div>
+    <div>
+      <h1>HRMIND Platform</h1>
+      <p>ศูนย์ควบคุมและสั่งการรักษาความปลอดภัย</p>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a class="active">ภาพรวม</a>
+    <a>หน่วยงาน</a>
+    <a>กำลังพล</a>
+    <a>ยานพาหนะ</a>
+    <a>การแจ้งเหตุ</a>
+    <a>รายงาน</a>
+    <a>ตั้งค่า</a>
+  </nav>
+  <div class="clock">
+    <span class="time" id="time">--:--:--</span>
+    <span class="date" id="date">กำลังโหลด...</span>
+  </div>
+  <div class="alertpill" title="การแจ้งเหตุรอดำเนินการ">
+    <span class="dot"></span><span class="txt">แจ้งเหตุด่วน</span><b id="alertCount">3</b>
+  </div>
+  <div class="userchip">
+    <div class="av">ว</div>
+    <div><div class="nm">วุฒิ บัญชาการ</div><div class="rl">หน้าที่ประจำเวร</div></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== KPI Row ===== -->
+  <section class="grid row-kpi">
+    <div class="card kpi">
+      <div class="top">
+        <div><div class="val" id="kpiSite">42</div><div class="lab">หน่วยงานที่ดูแล</div></div>
+        <div class="ico g">⌖</div>
+      </div>
+      <div class="foot"><span class="up">▲ 2</span> <span style="color:var(--txt3)">เพิ่มจากสัปดาห์ก่อน</span></div>
+      <canvas class="spark" data-c="green"></canvas>
+    </div>
+    <div class="card kpi">
+      <div class="top">
+        <div><div class="val" id="kpiMan">318</div><div class="lab">กำลังพลปฏิบัติงาน</div></div>
+        <div class="ico b">🛡</div>
+      </div>
+      <div class="foot"><span class="up">94%</span> <span style="color:var(--txt3)">ของเป้าหมาย 340 นาย</span></div>
+      <canvas class="spark" data-c="blue"></canvas>
+    </div>
+    <div class="card kpi">
+      <div class="top">
+        <div><div class="val" id="kpiInc">7</div><div class="lab">เหตุการณ์วันนี้</div></div>
+        <div class="ico a">⚠</div>
+      </div>
+      <div class="foot"><span class="dn">▲ 2</span> <span style="color:var(--txt3)">เทียบเมื่อวาน 5 เหตุ</span></div>
+      <canvas class="spark" data-c="amber"></canvas>
+    </div>
+    <div class="card kpi">
+      <div class="top">
+        <div><div class="val">4.2<span style="font-size:16px;color:var(--txt2)"> นาที</span></div><div class="lab">เวลาตอบสนองเฉลี่ย</div></div>
+        <div class="ico p">⚡</div>
+      </div>
+      <div class="foot"><span class="up">▼ 0.8 นาที</span> <span style="color:var(--txt3)">เร็วกว่ามาตรฐาน 5 นาที</span></div>
+      <canvas class="spark" data-c="purple"></canvas>
+    </div>
+    <div class="card kpi">
+      <div class="top">
+        <div><div class="val" style="color:var(--green)">99.2%</div><div class="lab">อัตราการปฏิบัติตามแผน</div></div>
+        <div class="ico g">✓</div>
+      </div>
+      <div class="foot"><span class="up">▲ 0.4%</span> <span style="color:var(--txt3)">รอบตรวจ 1,284/1,295 ครั้ง</span></div>
+      <canvas class="spark" data-c="green"></canvas>
+    </div>
+  </section>
+
+  <!-- ===== Main Row: Map + Incident Feed ===== -->
+  <section class="grid row-main" style="margin-top:14px">
+    <div class="card">
+      <h3><span class="ico">📍</span> แผนที่จัดตั้งหน่วยงานและสถานะรักษาความปลอดภัย <span class="badge live">LIVE</span><span class="badge">เขตกรุงเทพฯและปริมณฑล</span></h3>
+      <div class="mapwrap" id="map">
+        <div class="mapbg"></div>
+        <div class="mapring r1"></div>
+        <div class="mapring r2"></div>
+        <div class="mapring r3"></div>
+        <div class="mapcenter"></div>
+        <!-- pins injected by JS -->
+        <div class="mappanel">
+          <div class="lg"><span class="d" style="background:var(--green)"></span> ปกติ</div>
+          <div class="lg"><span class="d" style="background:var(--amber)"></span> เฝ้าระวัง</div>
+          <div class="lg"><span class="d" style="background:var(--red)"></span> เหตุด่วน</div>
+        </div>
+        <div class="mapstat">
+          <span>หน่วยงานออนไลน์</span>
+          <b id="mapOnline">40 / 42</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="ico">🔔</span> สายตรวจเหตุการณ์ล่าสุด <span class="badge live">เรียลไทม์</span></h3>
+      <div class="feed" id="feed"></div>
+    </div>
+  </section>
+
+  <!-- ===== Mid Row: Sites + Vehicles + Shift ===== -->
+  <section class="grid row-mid" style="margin-top:14px">
+    <div class="card">
+      <h3><span class="ico">🏢</span> สถานะหน่วยงานที่ดูแล <span class="badge">42 หน่วย</span></h3>
+      <div class="sitegrid" id="sites"></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="ico">🚐</span> สถานะยานพาหนะ/รถตรวจการณ์ <span class="badge">18 คัน</span></h3>
+      <div class="vlist" id="vehicles"></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="ico">🕒</span> ตารางเวรประจำวัน <span class="badge" id="shiftNow">เวรกลางวัน</span></h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>เจ้าหน้าที่</th><th>หน่วยงาน</th><th>เวร</th><th>สถานะ</th></tr></thead>
+          <tbody id="shiftBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Low Row: Charts ===== -->
+  <section class="grid row-low" style="margin-top:14px">
+    <div class="card">
+      <h3><span class="ico">📊</span> สถิติเหตุการณ์รายสัปดาห์ (จำแนกตามประเภท)</h3>
+      <div class="bars" id="bars"></div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:11px">
+        <span style="color:var(--txt2)"><span style="display:inline-block;width:9px;height:9px;background:var(--cyan);border-radius:2px;margin-right:5px"></span>บุกรุก</span>
+        <span style="color:var(--txt2)"><span style="display:inline-block;width:9px;height:9px;background:var(--amber);border-radius:2px;margin-right:5px"></span>ระบบขัดข้อง</span>
+        <span style="color:var(--txt2)"><span style="display:inline-block;width:9px;height:9px;background:var(--red);border-radius:2px;margin-right:5px"></span>อาชญากรรม</span>
+        <span style="color:var(--txt2)"><span style="display:inline-block;width:9px;height:9px;background:var(--purple);border-radius:2px;margin-right:5px"></span>ผู้บุกรุก-ผิดพลาด</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="ico">🍩</span> สัดส่วนประเภทเหตุการณ์รวมเดือน</h3>
+      <div class="donutwrap">
+        <div class="donut" id="donut">
+          <div class="hole"><div><div class="n">186</div><div class="l">เหตุการณ์ทั้งหมด</div></div></div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Ticker ===== -->
+  <div class="ticker">
+    <span class="lab">แจ้งเตือนด่วน</span>
+    <div class="track"><span id="tickerText">ระบบกล้องวงจรปิด อาคารสำนักงานใหญ่ เชื่อมต่อปกติ<b>•</b>หน่วยรถตรวจการณ์ รถที่ 07 รายงานตำแหน่ง ลาดพร้าว<b>•</b>เจ้าหน้าที่เวร 03 ปิดรอบตรวจ คลังสินค้าบางนา<b>•</b>เหตุคนเข้าพื้นที่ผิด ธนาคารสีลม กำลังส่งทีมสนับสนุน<b>•</b>อุปกรณ์ RFID ประตู 1 สามย่าน ออนไลน์<b>•</b>สรุปรอบตรวจ 01:00 น. ครบทุกเส้นทาง</span></div>
+  </div>
+
+  <p class="footnote">HRMIND Platform • ข้อมูลจำลองเพื่อการออกแบบ UI • อัปเดตล่าสุด <span id="upd">--</span></p>
+</div>
+
+<script>
+/* ============ Clock ============ */
+const THM=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const THW=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+function pad(n){return n<10?'0'+n:n}
+function tick(){
+  const d=new Date();
+  document.getElementById('time').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  document.getElementById('date').textContent='วัน'+THW[d.getDay()]+' '+d.getDate()+' '+THM[d.getMonth()]+' '+(d.getFullYear()+543);
+  document.getElementById('upd').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+}
+tick();setInterval(tick,1000);
+
+/* shift label by hour */
+const h=new Date().getHours();
+let shift='เวรกลางวัน';
+if(h>=6&&h<14)shift='เวรเช้า';else if(h>=14&&h<22)shift='เวรบ่าย';else shift='เวรกลางคืน';
+document.getElementById('shiftNow').textContent=shift;
+
+/* ============ Sparklines ============ */
+document.querySelectorAll('canvas.spark').forEach(cv=>{
+  cv.width=cv.offsetWidth*2;cv.height=cv.offsetHeight*2;
+  const ctx=cv.getContext('2d');ctx.scale(2,2);
+  const c=cv.dataset.c;const colors={green:'#22e08a',blue:'#3da5ff',amber:'#ffb020',purple:'#9b8cff'};
+  const w=cv.offsetWidth,h=cv.offsetHeight;const pts=[];for(let i=0;i<14;i++)pts.push(Math.random()*.7+.2);
+  ctx.strokeStyle=colors[c];ctx.fillStyle=colors[c]+'22';ctx.lineWidth=1.5;
+  ctx.beginPath();pts.forEach((p,i)=>{const x=i/(pts.length-1)*w,y=h-p*h;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+  ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fill();
+});
+
+/* ============ Map pins ============ */
+const sites=[
+  {nm:'สำนักงานใหญ่',st:'ok',x:50,y:48,man:48},
+  {nm:'คลังสินค้าบางนา',st:'ok',x:72,y:62,man:22},
+  {nm:'ธนาคารสีลม',st:'crit',x:38,y:58,man:14},
+  {nm:'โรงงานบางปะอิน',st:'ok',x:62,y:25,man:36},
+  {nm:'ห้างสรรพสินค้าลาดพร้าว',st:'warn',x:58,y:38,man:28},
+  {nm:'อาคารสำนักงานอารีย์',st:'ok',x:42,y:33,man:18},
+  {nm:'ท่าเรือสมุทรปราการ',st:'warn',x:68,y:78,man:24},
+  {nm:'สามย่าน มอลล์',st:'ok',x:46,y:68,man:20},
+  {nm:'สถานทูตสุขุมวิท',st:'ok',x:54,y:52,man:16},
+  {nm:'โรงพยาบาลวัฒนา',st:'ok',x:48,y:42,man:12},
+  {nm:'คอนโดรัชโยธิน',st:'ok',x:52,y:30,man:14},
+  {nm:'อุตสาหกรรมนวนคร',st:'crit',x:74,y:42,man:30},
+  {nm:'มหาวิทยาลัยรังสิต',st:'ok',x:64,y:18,man:26},
+  {nm:'ตลาดไท มอเตอร์เวย์',st:'warn',x:78,y:55,man:18}
+];
+const map=document.getElementById('map');
+sites.forEach(s=>{
+  const p=document.createElement('div');p.className='pin '+s.st;p.style.left=s.x+'%';p.style.top=s.y+'%';
+  p.innerHTML=`<div class="ring"></div><div class="dot"></div><div class="lbl">${s.nm} · ${s.man} นาย</div>`;
+  map.appendChild(p);
+});
+
+/* ============ Site cards ============ */
+const siteData=[
+  {nm:'สำนักงานใหญ่ HRMIND',code:'HQ-01',st:'ok',man:48,pat:12,cam:64,per:99},
+  {nm:'ธนาคารสีลม',code:'BNK-14',st:'crit',man:14,pat:6,cam:28,per:72},
+  {nm:'คลังสินค้าบางนา',code:'WHS-03',st:'ok',man:22,pat:9,cam:32,per:100},
+  {nm:'โรงงานบางปะอิน',code:'FAC-07',st:'ok',man:36,pat:14,cam:48,per:98},
+  {nm:'ห้างสรรพสินค้าลาดพร้าว',code:'MALL-22',st:'warn',man:28,pat:11,cam:56,per:88},
+  {nm:'อาคารสำนักงานอารีย์',code:'OFC-09',st:'ok',man:18,pat:7,cam:24,per:100},
+  {nm:'ท่าเรือสมุทรปราการ',code:'PRT-05',st:'warn',man:24,pat:8,cam:30,per:91},
+  {nm:'สามย่าน มอลล์',code:'MALL-31',st:'ok',man:20,pat:8,cam:34,per:97},
+  {nm:'สถานทูตสุขุมวิท',code:'EMB-02',st:'ok',man:16,pat:5,cam:42,per:100},
+  {nm:'อุตสาหกรรมนวนคร',code:'FAC-18',st:'crit',man:30,pat:10,cam:40,per:68},
+  {nm:'มหาวิทยาลัยรังสิต',code:'EDU-11',st:'ok',man:26,pat:9,cam:38,per:96},
+  {nm:'โรงพยาบาลวัฒนา',code:'HSP-04',st:'ok',man:12,pat:6,cam:22,per:100}
+];
+const stMap={ok:{c:'ok',t:'ปกติ'},warn:{c:'warn',t:'เฝ้าระวัง'},crit:{c:'crit',t:'เหตุด่วน'}};
+document.getElementById('sites').innerHTML=siteData.map(s=>`
+  <div class="site">
+    <div class="sh">
+      <div class="nm">${s.nm}<div style="font-size:10px;color:var(--txt3);font-weight:400;margin-top:1px">${s.code}</div></div>
+      <span class="st ${stMap[s.st].c}">${stMap[s.st].t}</span>
+    </div>
+    <div class="meta"><span>กำลังพล <b>${s.man}</b> นาย</span><span>รอบตรวจ <b>${s.pat}</b> ครั้ง</span></div>
+    <div class="meta"><span>กล้อง <b>${s.cam}</b> ตัว</span><span>พร้อมใช้ <b>${s.per}%</b></span></div>
+    <div class="bar ${s.st==='ok'?'':s.st}"><i style="width:${s.per}%"></i></div>
+  </div>`).join('');
+
+/* ============ Vehicles ============ */
+const vehicles=[
+  {plate:'บม-1234',type:'รถตรวจการณ์',st:'patrol',loc:'ลาดพร้าว',fuel:78},
+  {plate:'บด-5678',type:'รถกะบะด่าน',st:'standby',loc:'สำนักงานใหญ่',fuel:92},
+  {plate:'บก-9012',type:'รถตู้เคลื่อนที่',st:'patrol',loc:'บางนา',fuel:54},
+  {plate:'บห-3456',type:'รถจักรยานยนต์',st:'patrol',loc:'สีลม',fuel:88},
+  {plate:'บม-7890',type:'รถตรวจการณ์',st:'repair',loc:'อู่ซ่อม',fuel:0},
+  {plate:'บต-2345',type:'รถดับเพลิง',st:'standby',loc:'โรงงาน 07',fuel:100},
+  {plate:'บห-6789',type:'รถจักรยานยนต์',st:'patrol',loc:'สุขุมวิท',fuel:62},
+  {plate:'บม-4567',type:'รถตรวจการณ์',st:'patrol',loc:'นวนคร',fuel:41}
+];
+const vMap={patrol:{c:'g',t:'ออกตรวจ'},standby:{c:'b',t:'พร้อมส่ง'},repair:{c:'r',t:'ซ่อมบำรุง'}};
+document.getElementById('vehicles').innerHTML=vehicles.map(v=>`
+  <div class="vcard">
+    <div class="vh"><div><div class="plate">${v.plate}</div><div class="vt">${v.type}</div></div><span class="pill ${vMap[v.st].c}">${vMap[v.st].t}</span></div>
+    <div class="row"><span>ตำแหน่ง</span><b>${v.loc}</b></div>
+    <div class="row"><span>น้ำมัน</span><b>${v.fuel}%</b></div>
+    <div class="bar ${v.fuel<40?'crit':v.fuel<70?'warn':''}"><i style="width:${v.fuel}%"></i></div>
+  </div>`).join('');
+
+/* ============ Shift table ============ */
+const shifts=[
+  {nm:'สมชาย ใจดี',pos:'หัวหน้าเวร',site:'สำนักงานใหญ่',sh:'เวรเช้า',st:'g',stt:'ปฏิบัติงาน'},
+  {nm:'วิชัย รักษ์ดี',pos:'เจ้าหน้าที่',site:'ธนาคารสีลม',sh:'เวรเช้า',st:'r',stt:'กำลังส่งทีม'},
+  {nm:'ประเสริฐ มั่นคง',pos:'เจ้าหน้าที่',site:'คลังสินค้าบางนา',sh:'เวรเช้า',st:'g',stt:'ปฏิบัติงาน'},
+  {nm:'อนุชา ตรวจตรา',pos:'หัวหน้าเวร',site:'โรงงานบางปะอิน',sh:'เวรเช้า',st:'g',stt:'ปฏิบัติงาน'},
+  {nm:'มานพ ศึกษา',pos:'เจ้าหน้าที่',site:'ห้างลาดพร้าว',sh:'เวรเช้า',st:'a',stt:'พักเวร'},
+  {nm:'ธีระ ปลอดภัย',pos:'เจ้าหน้าที่',site:'อุตสาหกรรมนวนคร',sh:'เวรเช้า',st:'r',stt:'รายงานเหตุ'},
+  {nm:'กิตติ ด่านไกล',pos:'เจ้าหน้าที่',site:'ท่าเรือสมุทรปราการ',sh:'เวรบ่าย',st:'b',stt:'รอเข้าเวร'},
+  {nm:'เอนก ตำรวจดี',pos:'เจ้าหน้าที่',site:'สถานทูตสุขุมวิท',sh:'เวรบ่าย',st:'b',stt:'รอเข้าเวร'}
+];
+document.getElementById('shiftBody').innerHTML=shifts.map(s=>{
+  const ini=s.nm[0];
+  return `<tr>
+    <td><div class="per"><div class="av">${ini}</div><div><div class="nm">${s.nm}</div><div class="sb">${s.pos}</div></div></div></td>
+    <td>${s.site}</td>
+    <td><span class="pill p">${s.sh}</span></td>
+    <td><span class="pill ${s.st}">${s.stt}</span></td>
+  </tr>`;}).join('');
+
+/* ============ Incident feed ============ */
+const feed=[
+  {t:'crit',ic:'🚨',t1:'พบผู้บุกรุกพื้นที่',t2:'ธนาคารสีลม — ทีมสนับสนุน 3 นาย กำลังเคลื่อนที่',tm:'2 นาทีที่แล้ว'},
+  {t:'crit',ic:'🔥',t1:'สัญญาณเตือนอุณหภูมิ',t2:'อุตสาหกรรมนวนคร โซน C — ตรวจสอบด่วน',tm:'6 นาทีที่แล้ว'},
+  {t:'warn',ic:'📷',t1:'กล้องวงจรปิดขาดการเชื่อมต่อ',t2:'ห้างลาดพร้าว ชั้น 5 — กล้อง CAM-12',tm:'12 นาทีที่แล้ว'},
+  {t:'ok',ic:'✅',t1:'ปิดรอบตรวจสำเร็จ',t2:'คลังสินค้าบางนา — เส้นทาง A ครบ 12 จุด',tm:'18 นาทีที่แล้ว'},
+  {t:'warn',ic:'🚪',t1:'ประตูเข้าออกไม่ปิด',t2:'ท่าเรือสมุทรปราการ ประตู 3 — เจ้าหน้าที่ตรวจสอบ',tm:'25 นาทีที่แล้ว'},
+  {t:'',ic:'🛰',t1:'รายงานตำแหน่งรถตรวจการณ์',t2:'รถ บม-1234 ลาดพร้าว ความเร็ว 28 กม./ชม.',tm:'31 นาทีที่แล้ว'},
+  {t:'ok',ic:'✅',t1:'เจ้าหน้าที่ลงชื่อเข้าเวร',t2:'เวรเช้า สำนักงานใหญ่ ครบ 48 นาย',tm:'44 นาทีที่แล้ว'},
+  {t:'',ic:'📋',t1:'บันทึกรายงานประจำชั่วโมง',t2:'ทุกหน่วยงานรายงานสถานะปกติ',tm:'1 ชม. ที่แล้ว'}
+];
+document.getElementById('feed').innerHTML=feed.map(f=>`
+  <div class="item ${f.t}">
+    <div class="ic">${f.ic}</div>
+    <div class="bd"><div class="t1">${f.t1}</div><div class="t2">${f.t2}</div></div>
+    <div class="tm">${f.tm}</div>
+  </div>`).join('');
+
+/* ============ Bar chart ============ */
+const weeks=[
+  {d:'จ',a:8,b:5,c:2,d:3},{d:'อ',a:6,b:7,c:1,d:4},{d:'พ',a:9,b:4,c:3,d:2},
+  {d:'พฤ',a:7,b:6,c:2,d:5},{d:'ศ',a:11,b:8,c:4,d:3},{d:'ส',a:5,b:3,c:1,d:2},{d:'อา',a:4,b:2,c:0,d:1}
+];
+const maxV=Math.max(...weeks.map(w=>w.a+w.b+w.c+w.d));
+document.getElementById('bars').innerHTML=weeks.map(w=>{
+  const tot=w.a+w.b+w.c+w.d;
+  const hh=(tot/maxV)*100;
+  return `<div class="barc">
+    <div class="v">${tot}</div>
+    <div class="b" style="height:${hh}%;background:linear-gradient(180deg,var(--cyan),var(--blue))"></div>
+    <div class="x">${w.d}</div>
+  </div>`;}).join('');
+
+/* ============ Donut ============ */
+const dData=[
+  {l:'บุกรุก',v:78,c:'#22e0d8'},
+  {l:'ระบบขัดข้อง',v:52,c:'#ffb020'},
+  {l:'อาชญากรรม',v:24,c:'#ff4d5e'},
+  {l:'ผู้บุกรุก-ผิดพลาด',v:32,c:'#9b8cff'}
+];
+const total=dData.reduce((s,x)=>s+x.v,0);
+let acc=0;const stops=dData.map(x=>{const s=acc/total*100;acc+=x.v;const e=acc/total*100;return x.c+' '+s+'% '+e+'%';}).join(',');
+document.getElementById('donut').style.background=`conic-gradient(${stops})`;
+document.getElementById('legend').innerHTML=dData.map(x=>`
+  <div class="li"><span class="d" style="background:${x.c}"></span> ${x.l} <span class="v">${x.v} (${Math.round(x.v/total*100)}%)</span></div>`).join('');
+
+/* ============ Simulate live updates ============ */
+setInterval(()=>{
+  // tick alert count + kpi minor jitter
+  const el=document.getElementById('alertCount');
+  const cur=parseInt(el.textContent);el.textContent=Math.max(1,cur+(Math.random()<.5?0:(Math.random()<.5?1:-1)));
+  const man=document.getElementById('kpiMan');
+  const m=parseInt(man.textContent);man.textContent=Math.max(300,Math.min(340,m+(Math.random()<.7?0:(Math.random()<.5?1:-1))));
+  // map online jitter
+  const o=document.getElementById('mapOnline');o.textContent=(38+Math.floor(Math.random()*4))+' / 42';
+},4000);
+</script>
+</body>
+</html>
